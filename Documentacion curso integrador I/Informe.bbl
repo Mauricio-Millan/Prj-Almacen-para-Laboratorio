@@ -1,0 +1,555 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/apasortcite//global/global/global}
+    \entry{Alvarado2023BiotecLab}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b09f5c1a44431b0ea2a7cbf4416ec721}{%
+           family={Alvarado\bibnamedelima Leyva},
+           familyi={A\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Henderson\bibnamedelima Miguel},
+           giveni={H\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Privada del Norte}%
+      }
+      \list{location}{1}{%
+        {Lima, Perú}%
+      }
+      \strng{namehash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{fullhash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{fullhashraw}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{bibnamehash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{authorbibnamehash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{authornamehash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{authorfullhash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{authorfullhashraw}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Sistema web para control de inventario en la empresa BIOTEC LAB}
+      \field{type}{Trabajo de suficiencia profesional (Ingeniería de Sistemas Computacionales)}
+      \field{year}{2023}
+      \true{nocite}
+    \endentry
+    \entry{HuarcaInocente2024DrogueriasLima}{thesis}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=da9e36bd6b5996f74173f3bacf3b20f5}{%
+           family={Huarca\bibnamedelima Vivero},
+           familyi={H\bibinitperiod\bibinitdelim V\bibinitperiod},
+           given={Fabricio\bibnamedelima Ismael},
+           giveni={F\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2f455531f802ef4a027c2edca98c31c1}{%
+           family={Inocente\bibnamedelima Cantu},
+           familyi={I\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={Carla\bibnamedelima Meylin},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Privada Norbert Wiener}%
+      }
+      \list{location}{1}{%
+        {Lima, Perú}%
+      }
+      \strng{namehash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{fullhash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{fullhashraw}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{bibnamehash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{authorbibnamehash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{authornamehash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{authorfullhash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{authorfullhashraw}{1bd6b5354723c748590cf99ac12daa48}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Evaluación de cumplimiento de buenas prácticas de almacenamiento para la recertificación de 5 droguerías en Lima–2023}
+      \field{type}{Tesis para optar el Título Profesional de Químico Farmacéutico}
+      \field{year}{2024}
+      \true{nocite}
+    \endentry
+    \entry{Leon2019HCLabs}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=279c1f0bb676aa5915d48386aa00d27b}{%
+           family={León\bibnamedelima Doylet},
+           familyi={L\bibinitperiod\bibinitdelim D\bibinitperiod},
+           given={Andrés\bibnamedelima Alexander},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Católica de Santiago de Guayaquil}%
+      }
+      \list{location}{1}{%
+        {Guayaquil, Ecuador}%
+      }
+      \strng{namehash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{fullhash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{fullhashraw}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{bibnamehash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{authorbibnamehash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{authornamehash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{authorfullhash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{authorfullhashraw}{279c1f0bb676aa5915d48386aa00d27b}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Implementación de un sistema de control para inventario, venta, aplicación web y móvil para consulta de resultados en el laboratorio clínico HCLabs}
+      \field{type}{Proyecto de tesis (Ingeniería en Ciencias de la Computación)}
+      \field{year}{2019}
+      \true{nocite}
+    \endentry
+    \entry{OrdonezBustillo2024LACM}{thesis}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=4e1537bc097945d9eb6f298020f85d8f}{%
+           family={Ordoñez},
+           familyi={O\bibinitperiod},
+           given={Miguel\bibnamedelima Ángel},
+           giveni={M\bibinitperiod\bibinitdelim Á\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ca84b77da01e9c307d36e56f47f48cd3}{%
+           family={Bustillo\bibnamedelima Meléndez},
+           familyi={B\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Cristophert\bibnamedelima Kenneth},
+           giveni={C\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Tecnológica Centroamericana (UNITEC)}%
+      }
+      \list{location}{1}{%
+        {Tegucigalpa, Honduras}%
+      }
+      \strng{namehash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{fullhash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{fullhashraw}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{bibnamehash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{authorbibnamehash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{authornamehash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{authorfullhash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{authorfullhashraw}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Estudio del sistema de gestión y administración de inventarios de laboratorios clínicos LACM en los años 2022–2023, Choluteca}
+      \field{type}{Trabajo final de graduación, Máster en Dirección Empresarial (orientación en Finanzas)}
+      \field{year}{2024}
+      \true{nocite}
+    \endentry
+    \entry{Osorio2025OptimizaReactivos}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=8417fbd1b21ded6974c5ce3970ce5c1e}{%
+           family={Osorio\bibnamedelima Farías},
+           familyi={O\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={Marcela\bibnamedelima Camila},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad de Chile, Facultad de Ciencias Químicas y Farmacéuticas}%
+      }
+      \list{location}{1}{%
+        {Santiago, Chile}%
+      }
+      \strng{namehash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{fullhash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{fullhashraw}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{bibnamehash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{authorbibnamehash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{authornamehash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{authorfullhash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{authorfullhashraw}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Optimización de inventario de reactivos en laboratorio fisicoquímico de control de calidad}
+      \field{type}{Tesis para optar al grado de Magíster en Ciencias Farmacéuticas}
+      \field{year}{2025}
+      \true{nocite}
+    \endentry
+    \entry{Rivera2024InVitroPajan}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=498da2d66962d51412ae0cce84537216}{%
+           family={Rivera\bibnamedelima Silva},
+           familyi={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Jahaira\bibnamedelima Beatriz},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Estatal del Sur de Manabí}%
+      }
+      \list{location}{1}{%
+        {Jipijapa, Ecuador}%
+      }
+      \strng{namehash}{498da2d66962d51412ae0cce84537216}
+      \strng{fullhash}{498da2d66962d51412ae0cce84537216}
+      \strng{fullhashraw}{498da2d66962d51412ae0cce84537216}
+      \strng{bibnamehash}{498da2d66962d51412ae0cce84537216}
+      \strng{authorbibnamehash}{498da2d66962d51412ae0cce84537216}
+      \strng{authornamehash}{498da2d66962d51412ae0cce84537216}
+      \strng{authorfullhash}{498da2d66962d51412ae0cce84537216}
+      \strng{authorfullhashraw}{498da2d66962d51412ae0cce84537216}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Sistema informático para gestión de inventarios de reactivos y facturación de análisis en el laboratorio clínico In Vitro, cantón Paján}
+      \field{type}{Proyecto de titulación (Ingeniería en Tecnologías de la Información)}
+      \field{year}{2024}
+      \true{nocite}
+    \endentry
+    \entry{Saucedo2022GestionInventariosFarmaceuticas}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=dbcc8ea1d83d7050b94a592f468280db}{%
+           family={Saucedo\bibnamedelima Alarcón},
+           familyi={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Mileny\bibnamedelimb de\bibnamedelimb los\bibnamedelima Ángeles},
+           giveni={M\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim l\bibinitperiod\bibinitdelim Á\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Católica Santo Toribio de Mogrovejo}%
+      }
+      \list{location}{1}{%
+        {Chiclayo, Perú}%
+      }
+      \strng{namehash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{fullhash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{fullhashraw}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{bibnamehash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{authorbibnamehash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{authornamehash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{authorfullhash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{authorfullhashraw}{dbcc8ea1d83d7050b94a592f468280db}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Gestión de inventarios: retos para las empresas farmacéuticas}
+      \field{type}{Trabajo de investigación para optar el grado de Bachiller en Contabilidad}
+      \field{year}{2022}
+      \true{nocite}
+    \endentry
+  \enddatalist
+  \datalist[entry]{apa/global//global/global/global}
+    \entry{Alvarado2023BiotecLab}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b09f5c1a44431b0ea2a7cbf4416ec721}{%
+           family={Alvarado\bibnamedelima Leyva},
+           familyi={A\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Henderson\bibnamedelima Miguel},
+           giveni={H\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Privada del Norte}%
+      }
+      \list{location}{1}{%
+        {Lima, Perú}%
+      }
+      \strng{namehash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{fullhash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{fullhashraw}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{bibnamehash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{authorbibnamehash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{authornamehash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{authorfullhash}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \strng{authorfullhashraw}{b09f5c1a44431b0ea2a7cbf4416ec721}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Sistema web para control de inventario en la empresa BIOTEC LAB}
+      \field{type}{Trabajo de suficiencia profesional (Ingeniería de Sistemas Computacionales)}
+      \field{year}{2023}
+      \true{nocite}
+    \endentry
+    \entry{HuarcaInocente2024DrogueriasLima}{thesis}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=da9e36bd6b5996f74173f3bacf3b20f5}{%
+           family={Huarca\bibnamedelima Vivero},
+           familyi={H\bibinitperiod\bibinitdelim V\bibinitperiod},
+           given={Fabricio\bibnamedelima Ismael},
+           giveni={F\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2f455531f802ef4a027c2edca98c31c1}{%
+           family={Inocente\bibnamedelima Cantu},
+           familyi={I\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={Carla\bibnamedelima Meylin},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Privada Norbert Wiener}%
+      }
+      \list{location}{1}{%
+        {Lima, Perú}%
+      }
+      \strng{namehash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{fullhash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{fullhashraw}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{bibnamehash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{authorbibnamehash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{authornamehash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{authorfullhash}{1bd6b5354723c748590cf99ac12daa48}
+      \strng{authorfullhashraw}{1bd6b5354723c748590cf99ac12daa48}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Evaluación de cumplimiento de buenas prácticas de almacenamiento para la recertificación de 5 droguerías en Lima–2023}
+      \field{type}{Tesis para optar el Título Profesional de Químico Farmacéutico}
+      \field{year}{2024}
+      \true{nocite}
+    \endentry
+    \entry{Leon2019HCLabs}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=279c1f0bb676aa5915d48386aa00d27b}{%
+           family={León\bibnamedelima Doylet},
+           familyi={L\bibinitperiod\bibinitdelim D\bibinitperiod},
+           given={Andrés\bibnamedelima Alexander},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Católica de Santiago de Guayaquil}%
+      }
+      \list{location}{1}{%
+        {Guayaquil, Ecuador}%
+      }
+      \strng{namehash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{fullhash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{fullhashraw}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{bibnamehash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{authorbibnamehash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{authornamehash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{authorfullhash}{279c1f0bb676aa5915d48386aa00d27b}
+      \strng{authorfullhashraw}{279c1f0bb676aa5915d48386aa00d27b}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Implementación de un sistema de control para inventario, venta, aplicación web y móvil para consulta de resultados en el laboratorio clínico HCLabs}
+      \field{type}{Proyecto de tesis (Ingeniería en Ciencias de la Computación)}
+      \field{year}{2019}
+      \true{nocite}
+    \endentry
+    \entry{OrdonezBustillo2024LACM}{thesis}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=4e1537bc097945d9eb6f298020f85d8f}{%
+           family={Ordoñez},
+           familyi={O\bibinitperiod},
+           given={Miguel\bibnamedelima Ángel},
+           giveni={M\bibinitperiod\bibinitdelim Á\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ca84b77da01e9c307d36e56f47f48cd3}{%
+           family={Bustillo\bibnamedelima Meléndez},
+           familyi={B\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Cristophert\bibnamedelima Kenneth},
+           giveni={C\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Tecnológica Centroamericana (UNITEC)}%
+      }
+      \list{location}{1}{%
+        {Tegucigalpa, Honduras}%
+      }
+      \strng{namehash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{fullhash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{fullhashraw}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{bibnamehash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{authorbibnamehash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{authornamehash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{authorfullhash}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \strng{authorfullhashraw}{ce9c9fc4cc62441eac2aec46f61bc8d7}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Estudio del sistema de gestión y administración de inventarios de laboratorios clínicos LACM en los años 2022–2023, Choluteca}
+      \field{type}{Trabajo final de graduación, Máster en Dirección Empresarial (orientación en Finanzas)}
+      \field{year}{2024}
+      \true{nocite}
+    \endentry
+    \entry{Osorio2025OptimizaReactivos}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=8417fbd1b21ded6974c5ce3970ce5c1e}{%
+           family={Osorio\bibnamedelima Farías},
+           familyi={O\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={Marcela\bibnamedelima Camila},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad de Chile, Facultad de Ciencias Químicas y Farmacéuticas}%
+      }
+      \list{location}{1}{%
+        {Santiago, Chile}%
+      }
+      \strng{namehash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{fullhash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{fullhashraw}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{bibnamehash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{authorbibnamehash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{authornamehash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{authorfullhash}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \strng{authorfullhashraw}{8417fbd1b21ded6974c5ce3970ce5c1e}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Optimización de inventario de reactivos en laboratorio fisicoquímico de control de calidad}
+      \field{type}{Tesis para optar al grado de Magíster en Ciencias Farmacéuticas}
+      \field{year}{2025}
+      \true{nocite}
+    \endentry
+    \entry{Rivera2024InVitroPajan}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=498da2d66962d51412ae0cce84537216}{%
+           family={Rivera\bibnamedelima Silva},
+           familyi={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Jahaira\bibnamedelima Beatriz},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Estatal del Sur de Manabí}%
+      }
+      \list{location}{1}{%
+        {Jipijapa, Ecuador}%
+      }
+      \strng{namehash}{498da2d66962d51412ae0cce84537216}
+      \strng{fullhash}{498da2d66962d51412ae0cce84537216}
+      \strng{fullhashraw}{498da2d66962d51412ae0cce84537216}
+      \strng{bibnamehash}{498da2d66962d51412ae0cce84537216}
+      \strng{authorbibnamehash}{498da2d66962d51412ae0cce84537216}
+      \strng{authornamehash}{498da2d66962d51412ae0cce84537216}
+      \strng{authorfullhash}{498da2d66962d51412ae0cce84537216}
+      \strng{authorfullhashraw}{498da2d66962d51412ae0cce84537216}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Sistema informático para gestión de inventarios de reactivos y facturación de análisis en el laboratorio clínico In Vitro, cantón Paján}
+      \field{type}{Proyecto de titulación (Ingeniería en Tecnologías de la Información)}
+      \field{year}{2024}
+      \true{nocite}
+    \endentry
+    \entry{Saucedo2022GestionInventariosFarmaceuticas}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=dbcc8ea1d83d7050b94a592f468280db}{%
+           family={Saucedo\bibnamedelima Alarcón},
+           familyi={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Mileny\bibnamedelimb de\bibnamedelimb los\bibnamedelima Ángeles},
+           giveni={M\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim l\bibinitperiod\bibinitdelim Á\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Universidad Católica Santo Toribio de Mogrovejo}%
+      }
+      \list{location}{1}{%
+        {Chiclayo, Perú}%
+      }
+      \strng{namehash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{fullhash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{fullhashraw}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{bibnamehash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{authorbibnamehash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{authornamehash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{authorfullhash}{dbcc8ea1d83d7050b94a592f468280db}
+      \strng{authorfullhashraw}{dbcc8ea1d83d7050b94a592f468280db}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{spanish}
+      \field{title}{Gestión de inventarios: retos para las empresas farmacéuticas}
+      \field{type}{Trabajo de investigación para optar el grado de Bachiller en Contabilidad}
+      \field{year}{2022}
+      \true{nocite}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

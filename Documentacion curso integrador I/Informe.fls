@@ -1,6 +1,6 @@
-PWD c:\Users\micha\Desktop\Integrador I\Document
+PWD c:\Users\micha\Desktop\Curso Integrador\Prj-Almacen-para-Laboratorio\Documentacion curso integrador I
 INPUT C:\Users\micha\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\micha\Desktop\Integrador I\Document\Informe.tex
+INPUT c:\Users\micha\Desktop\Curso Integrador\Prj-Almacen-para-Laboratorio\Documentacion curso integrador I\Informe.tex
 OUTPUT Informe.log
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
@@ -231,6 +231,11 @@ INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\lbx\spanis
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\lbx\spanish.lbx
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\lbx\spanish.lbx
 OUTPUT Informe.bcf
+INPUT Informe.bbl
+INPUT .\Informe.bbl
+INPUT .\Informe.bbl
+INPUT .\Informe.bbl
+INPUT Informe.bbl
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1728.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1728.tfm
 INPUT .\Logo_UTP.png
@@ -254,11 +259,20 @@ INPUT .\Informe.toc
 INPUT .\Informe.toc
 INPUT Informe.toc
 OUTPUT Informe.toc
+INPUT .\Informe.lof
+INPUT .\Informe.lof
+INPUT Informe.lof
+OUTPUT Informe.lof
+INPUT .\Informe.lot
+INPUT .\Informe.lot
+INPUT Informe.lot
+OUTPUT Informe.lot
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1095.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1095.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1440.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1440.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1200.tfm
+INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecti1200.tfm
 INPUT .\Lean Canvas.png
 INPUT .\Lean Canvas.png
 INPUT .\Lean Canvas.png
@@ -271,6 +285,8 @@ INPUT .\Informe.out
 INPUT .\Informe.out
 INPUT Informe.run.xml
 OUTPUT Informe.run.xml
+INPUT C:\Users\micha\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1200.pk
+INPUT C:\Users\micha\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1200.pk
 INPUT C:\Users\micha\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk
 INPUT C:\Users\micha\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk
 INPUT C:\Users\micha\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk
