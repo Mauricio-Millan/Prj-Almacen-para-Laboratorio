@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.8.14)  10 SEP 2025 14:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.8.14)  21 OCT 2025 14:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -637,6 +637,13 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@widthC=\skip124
 \f@nch@widthR=\skip125
 \@temptokenb=\toks29
+) (C:\Users\micha\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count452
+\float@exts=\toks30
+\float@box=\box58
+\@float@everytoks=\toks31
+\@floatcapt=\box59
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
@@ -647,42 +654,139 @@ LaTeX Info: Redefining \. on input line 13.
 LaTeX Info: Redefining \% on input line 13.
 Package babel Info: 'spanish' activates 'spanish' shorthands.
 (babel)             Reported on input line 13.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
+
+LaTeX Warning: Label `fig:imagen_ejemplo' multiply defined.
+
 )
 \openout1 = `Informe.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Info: Redefining \. on input line 80.
-LaTeX Info: Redefining \% on input line 80.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Info: Redefining \. on input line 82.
+LaTeX Info: Redefining \% on input line 82.
  (C:\Users\micha\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count452
+\scratchcounter=\count453
 \scratchdimen=\dimen191
-\scratchbox=\box58
-\nofMPsegments=\count453
-\nofMParguments=\count454
-\everyMPshowfont=\toks30
-\MPscratchCnt=\count455
+\scratchbox=\box60
+\nofMPsegments=\count454
+\nofMParguments=\count455
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count456
 \MPscratchDim=\dimen192
-\MPnumerator=\count456
-\makeMPintoPDFobject=\count457
-\everyMPtoPDFconversion=\toks31
+\MPnumerator=\count457
+\makeMPintoPDFobject=\count458
+\everyMPtoPDFconversion=\toks33
 ) (C:\Users\micha\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -723,7 +827,7 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 80.
+Package hyperref Info: Link coloring OFF on input line 82.
 (Informe.out) (Informe.out)
 \@outlinefile=\write4
 \openout4 = `Informe.out'.
@@ -750,12 +854,12 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Informe.bbl' found.
  (Informe.bbl)
-Package biblatex Info: Reference section=0 on input line 80.
-Package biblatex Info: Reference segment=0 on input line 80.
-<Logo_UTP.png, id=92, 371.88937pt x 134.00063pt>
+Package biblatex Info: Reference section=0 on input line 82.
+Package biblatex Info: Reference segment=0 on input line 82.
+<Logo_UTP.png, id=181, 371.88937pt x 134.00063pt>
 File: Logo_UTP.png Graphic file (type png)
 <use Logo_UTP.png>
-Package pdftex.def Info: Logo_UTP.png  used on input line 83.
+Package pdftex.def Info: Logo_UTP.png  used on input line 85.
 (pdftex.def)             Requested size: 187.89914pt x 67.70555pt.
 
 
@@ -763,11 +867,11 @@ Package pdftex.def Info: Logo_UTP.png  used on input line 83.
 
 {C:/Users/micha/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Logo_UTP.png>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 97.
+(Font)              <12> on input line 99.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 97.
+(Font)              <8> on input line 99.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 97.
+(Font)              <6> on input line 99.
 
 
 
@@ -781,8 +885,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.99 \newpage
-              [1]
+l.101 \newpage
+               [1]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -795,40 +899,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 LaTeX Info: Redefining \sptext on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-)
+
+
+[3])
 \tf@toc=\write5
 \openout5 = `Informe.toc'.
 
 
 
-[3] (Informe.lof
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[4] (Informe.lof
 LaTeX Info: Redefining \sptext on input line 1.
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-)
+
+
+[5])
 \tf@lof=\write6
 \openout6 = `Informe.lof'.
 
-
-
-[4] (Informe.lot
-LaTeX Info: Redefining \sptext on input line 1.
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-)
-\tf@lot=\write7
-\openout7 = `Informe.lot'.
-
-
-
-[5]
-\c@listanexfig=\count458
-\cftbeforelistanexfigskip=\skip126
-\cftlistanexfigindent=\skip127
-\cftlistanexfignumwidth=\skip128
-\c@anxdepth=\count459
-\cftbeforeanxtitleskip=\skip129
-\cftafteranxtitleskip=\skip130
 
 
 
@@ -839,6 +934,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [6]
+\c@listanexfig=\count459
+\cftbeforelistanexfigskip=\skip126
+\cftlistanexfigindent=\skip127
+\cftlistanexfignumwidth=\skip128
+\c@anxdepth=\count460
+\cftbeforeanxtitleskip=\skip129
+\cftafteranxtitleskip=\skip130
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -938,11 +1041,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [17]
-<Lean Canvas.png, id=206, 407.121pt x 283.65974pt>
-File: Lean Canvas.png Graphic file (type png)
-<use Lean Canvas.png>
-Package pdftex.def Info: Lean Canvas.png  used on input line 283.
-(pdftex.def)             Requested size: 469.75502pt x 327.31853pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[18]
+<p21n.jpg, id=379, 963.6pt x 404.26031pt>
+File: p21n.jpg Graphic file (type jpg)
+<use p21n.jpg>
+Package pdftex.def Info: p21n.jpg  used on input line 314.
+(pdftex.def)             Requested size: 375.80544pt x 157.66089pt.
 
 
 
@@ -952,7 +1064,588 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[18 <./Lean Canvas.png>] (Informe.aux
+[19]
+<p22n.jpg, id=384, 963.6pt x 519.44063pt>
+File: p22n.jpg Graphic file (type jpg)
+<use p22n.jpg>
+Package pdftex.def Info: p22n.jpg  used on input line 322.
+(pdftex.def)             Requested size: 375.80544pt x 202.58102pt.
+<p23n.jpg, id=385, 963.6pt x 520.19344pt>
+File: p23n.jpg Graphic file (type jpg)
+<use p23n.jpg>
+Package pdftex.def Info: p23n.jpg  used on input line 329.
+(pdftex.def)             Requested size: 375.80544pt x 202.87462pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[20
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.333 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.333 
+       <./p21n.jpg> <./p22n.jpg>]
+<caso uso integrador1.png, id=390, 708.6475pt x 793.96625pt>
+File: caso uso integrador1.png Graphic file (type png)
+<use caso uso integrador1.png>
+Package pdftex.def Info: caso uso integrador1.png  used on input line 338.
+(pdftex.def)             Requested size: 234.8775pt x 263.14847pt.
+<administrador.png, id=391, 954.56625pt x 794.97pt>
+File: administrador.png Graphic file (type png)
+<use administrador.png>
+Package pdftex.def Info: administrador.png  used on input line 348.
+(pdftex.def)             Requested size: 281.85587pt x 234.72034pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[21
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.352 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.352 
+       <./p23n.jpg> <./caso uso integrador1.png>]
+<empleado.png, id=397, 603.25375pt x 707.64375pt>
+File: empleado.png Graphic file (type png)
+<use empleado.png>
+Package pdftex.def Info: empleado.png  used on input line 355.
+(pdftex.def)             Requested size: 234.8775pt x 275.51566pt.
+<gerente.png, id=398, 995.72pt x 794.97pt>
+File: gerente.png Graphic file (type png)
+<use gerente.png>
+Package pdftex.def Info: gerente.png  used on input line 362.
+(pdftex.def)             Requested size: 328.82707pt x 262.53499pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[22
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.366 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.366 
+       <./administrador.png> <./empleado.png>]
+<diagrama clase integra.jpg, id=405, 963.6pt x 644.4075pt>
+File: diagrama clase integra.jpg Graphic file (type jpg)
+<use diagrama clase integra.jpg>
+Package pdftex.def Info: diagrama clase integra.jpg  used on input line 371.
+(pdftex.def)             Requested size: 328.82707pt x 219.90195pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[23
+pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.387 \newpage
+              
+pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.387 \newpage
+               <./gerente.png> <./diagrama clase integra.jpg>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[24]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[25]
+<Lean Canvas.png, id=427, 407.121pt x 283.65974pt>
+File: Lean Canvas.png Graphic file (type png)
+<use Lean Canvas.png>
+Package pdftex.def Info: Lean Canvas.png  used on input line 408.
+(pdftex.def)             Requested size: 469.75502pt x 327.31853pt.
+<project character.png, id=428, 519.1395pt x 354.123pt>
+File: project character.png Graphic file (type png)
+<use project character.png>
+Package pdftex.def Info: project character.png  used on input line 415.
+(pdftex.def)             Requested size: 469.75502pt x 320.44225pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[26
+pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.420 \begin{landscape}
+                        <./Lean Canvas.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[27
+pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.420 \begin{landscape}
+                        <./project character.png>]
+<ganttIntegrador.png, id=440, 791.95876pt x 296.307pt>
+File: ganttIntegrador.png Graphic file (type png)
+<use ganttIntegrador.png>
+Package pdftex.def Info: ganttIntegrador.png  used on input line 423.
+(pdftex.def)             Requested size: 751.61089pt x 281.21425pt.
+
+Overfull \hbox (49.73131pt too wide) in paragraph at lines 422--424
+[]  []
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[28
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.427 \end{landscape}
+                      <./ganttIntegrador.png>]
+<wbs.jpg, id=446, 1150.5384pt x 769.9164pt>
+File: wbs.jpg Graphic file (type jpg)
+<use wbs.jpg>
+Package pdftex.def Info: wbs.jpg  used on input line 431.
+(pdftex.def)             Requested size: 469.75502pt x 314.34024pt.
+<p1n.jpg, id=447, 963.6pt x 497.60907pt>
+File: p1n.jpg Graphic file (type jpg)
+<use p1n.jpg>
+Package pdftex.def Info: p1n.jpg  used on input line 438.
+(pdftex.def)             Requested size: 281.85587pt x 145.54816pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<p12n.jpg, id=448, 963.6pt x 438.8897pt>
+File: p12n.jpg Graphic file (type jpg)
+<use p12n.jpg>
+Package pdftex.def Info: p12n.jpg  used on input line 445.
+(pdftex.def)             Requested size: 469.75502pt x 213.95953pt.
+<p13n.jpg, id=449, 963.6pt x 395.22656pt>
+File: p13n.jpg Graphic file (type jpg)
+<use p13n.jpg>
+Package pdftex.def Info: p13n.jpg  used on input line 452.
+(pdftex.def)             Requested size: 469.75502pt x 192.67368pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[29
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.456 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.456 
+       <./wbs.jpg> <./p12n.jpg>]
+<p14n.jpg, id=454, 963.6pt x 322.95656pt>
+File: p14n.jpg Graphic file (type jpg)
+<use p14n.jpg>
+Package pdftex.def Info: p14n.jpg  used on input line 459.
+(pdftex.def)             Requested size: 469.75502pt x 157.44191pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[30
+pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.463 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.463 
+       <./p1n.jpg> <./p13n.jpg>]
+<p15n.jpg, id=460, 963.6pt x 339.51843pt>
+File: p15n.jpg Graphic file (type jpg)
+<use p15n.jpg>
+Package pdftex.def Info: p15n.jpg  used on input line 466.
+(pdftex.def)             Requested size: 469.75502pt x 165.51585pt.
+<p16n.jpg, id=461, 963.6pt x 310.91156pt>
+File: p16n.jpg Graphic file (type jpg)
+<use p16n.jpg>
+Package pdftex.def Info: p16n.jpg  used on input line 473.
+(pdftex.def)             Requested size: 469.75502pt x 151.56995pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[31
+pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.477 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.17}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.477 
+       <./p14n.jpg> <./p15n.jpg>]
+File: p21n.jpg Graphic file (type jpg)
+<use p21n.jpg>
+Package pdftex.def Info: p21n.jpg  used on input line 480.
+(pdftex.def)             Requested size: 469.75502pt x 197.07765pt.
+File: p22n.jpg Graphic file (type jpg)
+<use p22n.jpg>
+Package pdftex.def Info: p22n.jpg  used on input line 487.
+(pdftex.def)             Requested size: 469.75502pt x 253.22827pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: p23n.jpg Graphic file (type jpg)
+<use p23n.jpg>
+Package pdftex.def Info: p23n.jpg  used on input line 494.
+(pdftex.def)             Requested size: 469.75502pt x 253.59526pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<p24n.jpg, id=466, 963.6pt x 540.51938pt>
+File: p24n.jpg Graphic file (type jpg)
+<use p24n.jpg>
+Package pdftex.def Info: p24n.jpg  used on input line 501.
+(pdftex.def)             Requested size: 469.75502pt x 263.5042pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<p25n.jpg, id=467, 963.6pt x 441.14813pt>
+File: p25n.jpg Graphic file (type jpg)
+<use p25n.jpg>
+Package pdftex.def Info: p25n.jpg  used on input line 508.
+(pdftex.def)             Requested size: 469.75502pt x 215.06053pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<p31n.jpg, id=468, 963.6pt x 487.06969pt>
+File: p31n.jpg Graphic file (type jpg)
+<use p31n.jpg>
+Package pdftex.def Info: p31n.jpg  used on input line 515.
+(pdftex.def)             Requested size: 469.75502pt x 237.44736pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<p32n.jpg, id=469, 397.485pt x 477.28313pt>
+File: p32n.jpg Graphic file (type jpg)
+<use p32n.jpg>
+Package pdftex.def Info: p32n.jpg  used on input line 522.
+(pdftex.def)             Requested size: 469.75502pt x 564.0777pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<p33n.jpg, id=470, 492.33937pt x 503.63156pt>
+File: p33n.jpg Graphic file (type jpg)
+<use p33n.jpg>
+Package pdftex.def Info: p33n.jpg  used on input line 529.
+(pdftex.def)             Requested size: 281.85587pt x 288.33327pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<p34n.jpg, id=471, 963.6pt x 510.40688pt>
+File: p34n.jpg Graphic file (type jpg)
+<use p34n.jpg>
+Package pdftex.def Info: p34n.jpg  used on input line 536.
+(pdftex.def)             Requested size: 469.75502pt x 248.8243pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<p35n.jpg, id=472, 963.6pt x 488.57532pt>
+File: p35n.jpg Graphic file (type jpg)
+<use p35n.jpg>
+Package pdftex.def Info: p35n.jpg  used on input line 543.
+(pdftex.def)             Requested size: 469.75502pt x 238.18137pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<p36n.jpg, id=473, 963.6pt x 465.99094pt>
+File: p36n.jpg Graphic file (type jpg)
+<use p36n.jpg>
+Package pdftex.def Info: p36n.jpg  used on input line 550.
+(pdftex.def)             Requested size: 469.75502pt x 227.17143pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<evide1.jpg, id=474, 1204.5pt x 1606.0pt>
+File: evide1.jpg Graphic file (type jpg)
+<use evide1.jpg>
+Package pdftex.def Info: evide1.jpg  used on input line 557.
+(pdftex.def)             Requested size: 187.89914pt x 250.5203pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<evide2.jpg, id=475, 1204.5pt x 1606.0pt>
+File: evide2.jpg Graphic file (type jpg)
+<use evide2.jpg>
+Package pdftex.def Info: evide2.jpg  used on input line 564.
+(pdftex.def)             Requested size: 187.89914pt x 250.5203pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<evide3.jpg, id=476, 1204.5pt x 1606.0pt>
+File: evide3.jpg Graphic file (type jpg)
+<use evide3.jpg>
+Package pdftex.def Info: evide3.jpg  used on input line 571.
+(pdftex.def)             Requested size: 187.89914pt x 250.5203pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<evide4.jpg, id=477, 1204.5pt x 1606.0pt>
+File: evide4.jpg Graphic file (type jpg)
+<use evide4.jpg>
+Package pdftex.def Info: evide4.jpg  used on input line 578.
+(pdftex.def)             Requested size: 187.89914pt x 250.5203pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[32
+pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                     <./p16n.jpg>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[33
+pdfTeX warning (ext4): destination with the same identifier (name{figure.20}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                    ]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[34
+pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{figure.23}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                     <./p24n.jpg> <./p25n.jpg>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[35
+pdfTeX warning (ext4): destination with the same identifier (name{figure.24}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                     <./p31n.jpg>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[36
+pdfTeX warning (ext4): destination with the same identifier (name{figure.25}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                     <./p32n.jpg>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[37
+pdfTeX warning (ext4): destination with the same identifier (name{figure.26}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{figure.27}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                     <./p33n.jpg> <./p34n.jpg>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[38
+pdfTeX warning (ext4): destination with the same identifier (name{figure.28}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{figure.29}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                     <./p35n.jpg> <./p36n.jpg>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[39
+pdfTeX warning (ext4): destination with the same identifier (name{figure.30}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{figure.31}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                     <./evide1.jpg> <./evide2.jpg>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[40
+pdfTeX warning (ext4): destination with the same identifier (name{figure.32}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{figure.33}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.590 \end{document}
+                     <./evide3.jpg> <./evide4.jpg>] (Informe.aux
 LaTeX Info: Redefining \sptext on input line 13.
 LaTeX Info: Redefining \. on input line 13.
 LaTeX Info: Redefining \% on input line 13.
@@ -961,24 +1654,28 @@ LaTeX Info: Redefining \% on input line 13.
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `Informe.out' has not changed.
-(rerunfilecheck)             Checksum: F2E9E7C8147817F4B10DDB53544030C0;3322.
+(rerunfilecheck)             Checksum: B23E5B4548B48ED6C440CCA99E875B92;6529.
 Package logreq Info: Writing requests to 'Informe.run.xml'.
 \openout1 = `Informe.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 22090 strings out of 468149
- 391166 string characters out of 5431082
- 1336944 words of memory out of 5000000
- 50376 multiletter control sequences out of 15000+600000
+ 22458 strings out of 468149
+ 396938 string characters out of 5431082
+ 1339373 words of memory out of 5000000
+ 50666 multiletter control sequences out of 15000+600000
  636762 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,1931b,2905s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,1605b,2905s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\micha\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\micha\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\micha\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\micha\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\micha\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\micha\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\micha\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk>
-Output written on Informe.pdf (19 pages, 244868 bytes).
+Output written on Informe.pdf (41 pages, 3593445 bytes).
 PDF statistics:
- 527 PDF objects out of 1000 (max. 8388607)
- 46 named destinations out of 1000 (max. 500000)
- 195 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 845 PDF objects out of 1000 (max. 8388607)
+ 123 named destinations out of 1000 (max. 500000)
+ 516 words of extra memory for PDF output out of 10000 (max. 10000000)
 

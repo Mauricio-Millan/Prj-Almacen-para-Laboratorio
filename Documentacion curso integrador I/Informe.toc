@@ -1,24 +1,46 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {section}{Introducción}{7}{Doc-Start}%
-\contentsline {section}{Capítulo I}{8}{Doc-Start}%
-\contentsline {subsection}{\numberline {1.1}Definición del Problema}{8}{subsection.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.1}Descripción del Problema}{8}{subsubsection.1.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.2}Formulacion del Problema}{9}{subsubsection.1.1.2}%
-\contentsline {paragraph}{\numberline {1.1.2.1}Problema General}{9}{paragraph.1.1.2.1}%
-\contentsline {paragraph}{\numberline {1.1.2.2}Problemas especificos}{9}{paragraph.1.1.2.2}%
-\contentsline {subsection}{\numberline {1.2}Definicion de Objetivos}{10}{subsection.1.2}%
-\contentsline {subsubsection}{\numberline {1.2.1}Objetivo General}{10}{subsubsection.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.2.2}Objetivos Especificos}{10}{subsubsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.3}Alcances y Limitaciones}{10}{subsection.1.3}%
-\contentsline {subsubsection}{\numberline {1.3.1}Alcances}{10}{subsubsection.1.3.1}%
-\contentsline {subsubsection}{\numberline {1.3.2}Limitaciones}{11}{subsubsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.4}Justificación}{11}{subsection.1.4}%
-\contentsline {subsubsection}{\numberline {1.4.1}Economico}{11}{subsubsection.1.4.1}%
-\contentsline {subsubsection}{\numberline {1.4.2}Tecnologico}{12}{subsubsection.1.4.2}%
-\contentsline {subsubsection}{\numberline {1.4.3}Social}{12}{subsubsection.1.4.3}%
-\contentsline {subsubsection}{\numberline {1.4.4}Ambiental}{12}{subsubsection.1.4.4}%
-\contentsline {section}{Capítulo II}{13}{subsubsection.1.4.4}%
-\contentsline {subsection}{\numberline {1.5}Antecedentes}{13}{subsection.1.5}%
-\contentsline {subsubsection}{\numberline {1.5.1}Antecedentes Internacionales}{13}{subsubsection.1.5.1}%
-\contentsline {subsubsection}{\numberline {1.5.2}Antecedentes Nacionales}{15}{subsubsection.1.5.2}%
-\contentsline {section}{Anexos}{18}{subsubsection.1.5.2}%
+\contentsline {section}{Introducción}{8}{Doc-Start}%
+\contentsline {section}{Capítulo I}{9}{Doc-Start}%
+\contentsline {subsection}{\numberline {1.1}Definición del Problema}{9}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Descripción del Problema}{9}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Formulacion del Problema}{10}{subsubsection.1.1.2}%
+\contentsline {paragraph}{\numberline {1.1.2.1}Problema General}{10}{paragraph.1.1.2.1}%
+\contentsline {paragraph}{\numberline {1.1.2.2}Problemas especificos}{10}{paragraph.1.1.2.2}%
+\contentsline {subsection}{\numberline {1.2}Definicion de Objetivos}{11}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Objetivo General}{11}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Objetivos Especificos}{11}{subsubsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.3}Alcances y Limitaciones}{11}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Alcances}{11}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Limitaciones}{12}{subsubsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.4}Justificación}{12}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Economico}{12}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}Tecnologico}{13}{subsubsection.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.4.3}Social}{13}{subsubsection.1.4.3}%
+\contentsline {subsubsection}{\numberline {1.4.4}Ambiental}{13}{subsubsection.1.4.4}%
+\contentsline {section}{Capítulo II}{14}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Antecedentes}{14}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Antecedentes Internacionales}{14}{subsubsection.2.1.1}%
+\contentsline {paragraph}{\numberline {2.1.1.1}Fuente 1 Internacional}{14}{paragraph.2.1.1.1}%
+\contentsline {paragraph}{\numberline {2.1.1.2}Fuente 2 Internacional}{15}{paragraph.2.1.1.2}%
+\contentsline {paragraph}{\numberline {2.1.1.3}Fuente 3 Internacional}{15}{paragraph.2.1.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.2}Antecedentes Nacionales}{16}{subsubsection.2.1.2}%
+\contentsline {paragraph}{\numberline {2.1.2.1}Fuente 1 Nacional}{16}{paragraph.2.1.2.1}%
+\contentsline {paragraph}{\numberline {2.1.2.2}Fuente 2 Nacional}{17}{paragraph.2.1.2.2}%
+\contentsline {paragraph}{\numberline {2.1.2.3}Fuente 3 Nacional}{17}{paragraph.2.1.2.3}%
+\contentsline {subsection}{\numberline {2.2}Marco de Referencia del Sistema}{18}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Vision}{18}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Mision}{18}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Entonrno}{19}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}Estrategias}{19}{subsubsection.2.2.4}%
+\contentsline {subsubsection}{\numberline {2.2.5}Planes de la Empresa}{19}{subsubsection.2.2.5}%
+\contentsline {section}{Capítulo III}{20}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Prototipos}{20}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Diagrama de Caso de Uso}{21}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Diagrama de Secuencia}{22}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Diagrama de Clases}{23}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Modelo de Datos}{24}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Concentual}{24}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}Logico}{24}{subsubsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.3}Fisico}{24}{subsubsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.6}implementación en JAVA}{24}{subsection.3.6}%
+\contentsline {section}{Anexos}{26}{subsection.3.6}%

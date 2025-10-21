@@ -201,6 +201,8 @@ INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.s
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\fancyhdr\fancyhdr.sty
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\fancyhdr\fancyhdr.sty
+INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
 INPUT .\Informe.aux
 INPUT .\Informe.aux
 INPUT Informe.aux
@@ -263,15 +265,67 @@ INPUT .\Informe.lof
 INPUT .\Informe.lof
 INPUT Informe.lof
 OUTPUT Informe.lof
-INPUT .\Informe.lot
-INPUT .\Informe.lot
-INPUT Informe.lot
-OUTPUT Informe.lot
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1095.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1095.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1440.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1440.tfm
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1200.tfm
+INPUT .\p21n.jpg
+INPUT .\p21n.jpg
+INPUT .\p21n.jpg
+INPUT .\p21n.jpg
+INPUT .\p21n.jpg
+INPUT .\p21n.jpg
+INPUT .\p21n.jpg
+INPUT .\p22n.jpg
+INPUT .\p22n.jpg
+INPUT .\p22n.jpg
+INPUT .\p22n.jpg
+INPUT .\p22n.jpg
+INPUT .\p22n.jpg
+INPUT .\p22n.jpg
+INPUT .\p23n.jpg
+INPUT .\p23n.jpg
+INPUT .\p23n.jpg
+INPUT .\p23n.jpg
+INPUT .\p23n.jpg
+INPUT .\p23n.jpg
+INPUT .\p23n.jpg
+INPUT .\caso uso integrador1.png
+INPUT .\caso uso integrador1.png
+INPUT .\caso uso integrador1.png
+INPUT .\caso uso integrador1.png
+INPUT .\caso uso integrador1.png
+INPUT .\caso uso integrador1.png
+INPUT .\caso uso integrador1.png
+INPUT .\administrador.png
+INPUT .\administrador.png
+INPUT .\administrador.png
+INPUT .\administrador.png
+INPUT .\administrador.png
+INPUT .\administrador.png
+INPUT .\administrador.png
+INPUT .\empleado.png
+INPUT .\empleado.png
+INPUT .\empleado.png
+INPUT .\empleado.png
+INPUT .\empleado.png
+INPUT .\empleado.png
+INPUT .\empleado.png
+INPUT .\gerente.png
+INPUT .\gerente.png
+INPUT .\gerente.png
+INPUT .\gerente.png
+INPUT .\gerente.png
+INPUT .\gerente.png
+INPUT .\gerente.png
+INPUT .\diagrama clase integra.jpg
+INPUT .\diagrama clase integra.jpg
+INPUT .\diagrama clase integra.jpg
+INPUT .\diagrama clase integra.jpg
+INPUT .\diagrama clase integra.jpg
+INPUT .\diagrama clase integra.jpg
+INPUT .\diagrama clase integra.jpg
 INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecti1200.tfm
 INPUT .\Lean Canvas.png
 INPUT .\Lean Canvas.png
@@ -280,6 +334,165 @@ INPUT .\Lean Canvas.png
 INPUT .\Lean Canvas.png
 INPUT .\Lean Canvas.png
 INPUT .\Lean Canvas.png
+INPUT .\project character.png
+INPUT .\project character.png
+INPUT .\project character.png
+INPUT .\project character.png
+INPUT .\project character.png
+INPUT .\project character.png
+INPUT .\project character.png
+INPUT .\ganttIntegrador.png
+INPUT .\ganttIntegrador.png
+INPUT .\ganttIntegrador.png
+INPUT .\ganttIntegrador.png
+INPUT .\ganttIntegrador.png
+INPUT .\ganttIntegrador.png
+INPUT .\ganttIntegrador.png
+INPUT .\wbs.jpg
+INPUT .\wbs.jpg
+INPUT .\wbs.jpg
+INPUT .\wbs.jpg
+INPUT .\wbs.jpg
+INPUT .\wbs.jpg
+INPUT .\wbs.jpg
+INPUT .\p1n.jpg
+INPUT .\p1n.jpg
+INPUT .\p1n.jpg
+INPUT .\p1n.jpg
+INPUT .\p1n.jpg
+INPUT .\p1n.jpg
+INPUT .\p1n.jpg
+INPUT .\p12n.jpg
+INPUT .\p12n.jpg
+INPUT .\p12n.jpg
+INPUT .\p12n.jpg
+INPUT .\p12n.jpg
+INPUT .\p12n.jpg
+INPUT .\p12n.jpg
+INPUT .\p13n.jpg
+INPUT .\p13n.jpg
+INPUT .\p13n.jpg
+INPUT .\p13n.jpg
+INPUT .\p13n.jpg
+INPUT .\p13n.jpg
+INPUT .\p13n.jpg
+INPUT .\p14n.jpg
+INPUT .\p14n.jpg
+INPUT .\p14n.jpg
+INPUT .\p14n.jpg
+INPUT .\p14n.jpg
+INPUT .\p14n.jpg
+INPUT .\p14n.jpg
+INPUT .\p15n.jpg
+INPUT .\p15n.jpg
+INPUT .\p15n.jpg
+INPUT .\p15n.jpg
+INPUT .\p15n.jpg
+INPUT .\p15n.jpg
+INPUT .\p15n.jpg
+INPUT .\p16n.jpg
+INPUT .\p16n.jpg
+INPUT .\p16n.jpg
+INPUT .\p16n.jpg
+INPUT .\p16n.jpg
+INPUT .\p16n.jpg
+INPUT .\p16n.jpg
+INPUT .\p21n.jpg
+INPUT .\p21n.jpg
+INPUT .\p21n.jpg
+INPUT .\p21n.jpg
+INPUT .\p22n.jpg
+INPUT .\p22n.jpg
+INPUT .\p22n.jpg
+INPUT .\p22n.jpg
+INPUT .\p23n.jpg
+INPUT .\p23n.jpg
+INPUT .\p23n.jpg
+INPUT .\p23n.jpg
+INPUT .\p24n.jpg
+INPUT .\p24n.jpg
+INPUT .\p24n.jpg
+INPUT .\p24n.jpg
+INPUT .\p24n.jpg
+INPUT .\p24n.jpg
+INPUT .\p24n.jpg
+INPUT .\p25n.jpg
+INPUT .\p25n.jpg
+INPUT .\p25n.jpg
+INPUT .\p25n.jpg
+INPUT .\p25n.jpg
+INPUT .\p25n.jpg
+INPUT .\p25n.jpg
+INPUT .\p31n.jpg
+INPUT .\p31n.jpg
+INPUT .\p31n.jpg
+INPUT .\p31n.jpg
+INPUT .\p31n.jpg
+INPUT .\p31n.jpg
+INPUT .\p31n.jpg
+INPUT .\p32n.jpg
+INPUT .\p32n.jpg
+INPUT .\p32n.jpg
+INPUT .\p32n.jpg
+INPUT .\p32n.jpg
+INPUT .\p32n.jpg
+INPUT .\p32n.jpg
+INPUT .\p33n.jpg
+INPUT .\p33n.jpg
+INPUT .\p33n.jpg
+INPUT .\p33n.jpg
+INPUT .\p33n.jpg
+INPUT .\p33n.jpg
+INPUT .\p33n.jpg
+INPUT .\p34n.jpg
+INPUT .\p34n.jpg
+INPUT .\p34n.jpg
+INPUT .\p34n.jpg
+INPUT .\p34n.jpg
+INPUT .\p34n.jpg
+INPUT .\p34n.jpg
+INPUT .\p35n.jpg
+INPUT .\p35n.jpg
+INPUT .\p35n.jpg
+INPUT .\p35n.jpg
+INPUT .\p35n.jpg
+INPUT .\p35n.jpg
+INPUT .\p35n.jpg
+INPUT .\p36n.jpg
+INPUT .\p36n.jpg
+INPUT .\p36n.jpg
+INPUT .\p36n.jpg
+INPUT .\p36n.jpg
+INPUT .\p36n.jpg
+INPUT .\p36n.jpg
+INPUT .\evide1.jpg
+INPUT .\evide1.jpg
+INPUT .\evide1.jpg
+INPUT .\evide1.jpg
+INPUT .\evide1.jpg
+INPUT .\evide1.jpg
+INPUT .\evide1.jpg
+INPUT .\evide2.jpg
+INPUT .\evide2.jpg
+INPUT .\evide2.jpg
+INPUT .\evide2.jpg
+INPUT .\evide2.jpg
+INPUT .\evide2.jpg
+INPUT .\evide2.jpg
+INPUT .\evide3.jpg
+INPUT .\evide3.jpg
+INPUT .\evide3.jpg
+INPUT .\evide3.jpg
+INPUT .\evide3.jpg
+INPUT .\evide3.jpg
+INPUT .\evide3.jpg
+INPUT .\evide4.jpg
+INPUT .\evide4.jpg
+INPUT .\evide4.jpg
+INPUT .\evide4.jpg
+INPUT .\evide4.jpg
+INPUT .\evide4.jpg
+INPUT .\evide4.jpg
 INPUT Informe.aux
 INPUT .\Informe.out
 INPUT .\Informe.out

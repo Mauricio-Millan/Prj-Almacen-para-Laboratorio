@@ -32,6 +32,7 @@
 % Define estilo para títulos de subsección: tamaño normal y negrita
 \titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
 
+\titleformat{\paragraph}[block]{\normalfont\normalsize\bfseries}{}{0em}{}
 % Define interlineado doble, que es requerido por APA
 \doublespacing
 
@@ -54,6 +55,7 @@
 
 %para anexo
 \usepackage{tocloft}
+\usepackage{float}
 
 %espaciado
 %\usepackage{setspace}
@@ -119,8 +121,9 @@
 \listoffigures
 \newpage
 
-\listoftables
-\newpage
+%por si se quiere poner tablas en un futuro activar
+%\listoftables
+%\newpage
 
 \newlistof{listanexfig}{anx}{Índice de anexos de imágenes}
 
@@ -141,8 +144,8 @@
 
 
 % Inicio del primer Capítulo
-\section*{\makebox[\linewidth][c]{Capítulo I}}
-\addcontentsline{toc}{section}{Capítulo I}
+\section*{\makebox[\linewidth][c]{Capítulo \Roman{section}}}
+\addcontentsline{toc}{section}{Capítulo \Roman{section}}
 
 
 
@@ -237,33 +240,155 @@ Al ser una aplicación accesible desde cualquier navegador web con conexión a i
 
 Al digitalizar todas las actividades de la gestión del almacén, se evitará el uso de cuadernos, hojas, impresiones y materiales de oficina. Por lo que, se logrará reducir la producción de residuos sólidos y la huella asociada a la produccion de papel y consumibles.
 
-\section*{\makebox[\linewidth][c]{Capítulo II}}
-\addcontentsline{toc}{section}{Capítulo II}
+\refstepcounter{section}
+\section*{\makebox[\linewidth][c]{Capítulo \Roman{section}}}
+\addcontentsline{toc}{section}{Capítulo \Roman{section}}
 
 \subsection{Antecedentes}
 
 \subsubsection{Antecedentes Internacionales}
 
-el documento titulado  \textbf{\string"Optimización de inventario de reactivos en laboratorio fisicoquímico de control de calidad"}, desarrollada por Marcela Camila Osorio Farías para optar el grado de Magíster en Ciencias Farmacéuticas en la Universidad de Chile presenta una problemática clara: la gestión del inventario se realizaba con planillas Excel centralizadas y manuales, generando demoras, errores y riesgo de quiebres de stock; por ello, se planteó un proyecto de 12 meses para modernizar el sistema, protegiendo la integridad de los datos, reduciendo uso de papel y simplificando flujos operativos en un laboratorio farmacéutico. frente esto, el estudio adopta Mejora Continua con Kaizen y el ciclo PDCA (Plan–Do–Check–Act) para planificar, probar, verificar y ajustar la solución; además, define indicadores de desempeño mediante el esquema “Meta–Pregunta–(Indicador)–Medida en 10 pasos”. En concreto, se ejecutaron pruebas alfa y beta de la aplicación con usuarios finales (analistas de control de calidad), y se robusteció la base de control REG-CC-054: se estandarizaron nombres, lotes y fechas de vencimiento, y se corrigieron errores acumulados en aproximadamente 650 de 1084 reactivos (~60\%). Paralelamente, se actualizaron flujos operativos y se integraron Hojas de Seguridad (HDS) y Certificados de Análisis (CoA) al registro. En consecuencia, La transición de un control manual a un sistema automatizado y validado internamente permitió una gestión más precisa y ágil del inventario; se redujeron tiempos, se disminuyeron errores, y se fortaleció la trazabilidad. Además, el etiquetado con código de barras agilizó ingresos mensuales y minimizó fallas; y la alineación con DS-43 mejoró la seguridad del almacenamiento.
+\paragraph{Fuente 1 Internacional}
+
+el documento titulado  \textbf{\string"Optimización de inventario de reactivos en laboratorio fisicoquímico de control de calidad"}, desarrollada por Marcela Camila Osorio Farías, en marzo del 2025, para optar el grado de Magíster en Ciencias Farmacéuticas en la Universidad de Chile presenta una problemática clara: el laboratorio físico químico de control de calidad de Milab, realiza la gestión del inventario con planillas Excel centralizadas y manuales, generando demoras, errores y riesgo de quiebres de stock. Por ello, se planteó un proyecto de 12 meses para modernizar el sistema, protegiendo la integridad de los datos, reduciendo uso de papel y simplificando flujos operativos en un laboratorio farmacéutico. frente esto, el estudio adopta la estrategia de la Mejora Continua con el método kaizen (mínima inversión y máximo impacto). Así mismo, para la producción de la aplicación se utilizo la herramienta creada por Microsoft Power Platform y sus derivados como Dataverse, PowerAutomate, SharePoint y finalmente Power Apps. En consecuencia, La transición de un control manual a un sistema automatizado y validado internamente permitió una gestión más precisa y ágil del inventario; se redujeron tiempos, se disminuyeron errores, y se fortaleció la trazabilidad. Además, el etiquetado con código de barras agilizó ingresos mensuales y minimizó fallas; y la alineación con DS-43 mejoró la seguridad del almacenamiento.
+
+\paragraph{Fuente 2 Internacional}
 
 el documento titulado \textbf{"Sistema informático para gestión de inventarios de reactivos y facturación de análisis en el laboratorio clínico ‘IN VITRO’ del cantón Paján"} elaborada por Jahaira Beatriz Rivera Silva presenta un estudio que parte de una situación frecuente en laboratorios pequeños: los procesos se manejaban con Word/Excel, sin una base de datos central ni alertas de quiebre o vencimiento, lo que dificultaba la trazabilidad de pacientes, insumos y facturación. asi mismo, la metodologia implementada adopto un enfoque mixto (cualitativo–cuantitativo), de tipo descriptiva, correlacional y de campo, con diseño no experimental. Se aplicaron los métodos deductivo, estadístico y bibliográfico; y como técnicas se utilizaron observación, encuestas a pacientes y entrevista al administrador. En consecuencia, fue posible sistematizar los procesos críticos del laboratorio (pacientes, inventario, facturación) y almacenar la información en una base de datos para consultas, modificaciones y auditoría. Segundo, que la automatización reduce carga operativa y mejora los tiempos de registro/atención; además, las alertas de stock y vencimiento ofrecen continuidad operativa y mejor planificación de compras. Tercero, que el despliegue web con respados (backups) y control de accesos fortalece la seguridad y disponibilidad de la información.
+
+\paragraph{Fuente 3 Internacional}
 
 el documento titulado \textbf{“Implementación de sistema de control para inventario, venta, aplicación web y móvil para consulta de resultados en el laboratorio clínico HCLabs”} fue desarrollado por Andrés Alexander León Doylet, como tesis de grado de la Universidad Católica de Santiago de Guayaquil. El estudio presenta una metodología cualitativa con un desarrollo de software siguiendo la metodología en cascada, por ser secuencial y ajustarse al cumplimiento ordenado de requisitos y verificaciones por etapas. Frente a esto, el estudio partió de problemáticas concretas: ausencia de control formal de inventario de reactivos, procesos de ventas dispersos en hojas de cálculo y demoras en la entrega de resultados. De ahí que la propuesta SmartLab buscara automatizar y centralizar los procesos de inventario y ventas, además de habilitar la consulta de resultados por web y app móvil. En conclusione, el autor señala que la implementación de los módulos de inventario y ventas permitió automatizar procesos manuales, optimizar el control de reactivos y centralizar la información institucional. A la vez, los pacientes pasaron a consultar resultados sin volver al laboratorio.
 
 \subsubsection{Antecedentes Nacionales}
 
+\paragraph{Fuente 1 Nacional}
+
 El documento titulado \textbf{“Sistema web para control de inventario en la empresa Biotec Lab”}, desarrollado por Henderson Miguel Alvarado Leyva presenta un estudio realizado en el laboratorio Biotec Lab, Pucallpa, y surge porque el sistema existente no tenía módulo de inventarios, lo que impedía conocer el stock real, proyectar compras y conocer el último reabastecimiento, generando desatención a clientes. frente a esto, El autor adoptó Scrum como marco de trabajo para el desarrollo ágil del software y planteó objetivos como incrementar la localización de materiales, el control de cantidades y la precisión del reabastecimiento. Además, la evaluación de efectividad se realizó durante 30 días con una población de 80 búsquedas, estableciendo criterios medibles de desempeño. En conclusion, El sistema elevó la efectividad de búsqueda de reactivos al 100\% (frente al 10\% manual), reduciendo el tiempo de consulta a segundos; mejoró la exactitud del reabastecimiento (hasta 100\% en la tarea y +50\% según conclusiones); permitió localizar el stock general con efectividad 100\% mediante reportes PDF; y facilitó identificar en segundos la fecha del último reabastecimiento. En conjunto, el aporte repercutió positivamente en lo financiero, la imagen institucional, la fidelización de pacientes, la mejora de procesos internos y la eficiencia en la atención.
+
+\paragraph{Fuente 2 Nacional}
 
 el documento titulado \textbf{\string"Evaluación de cumplimiento de buenas prácticas de almacenamiento para la recertificación de 5 droguerías en lima-2023"}, desarrollado por Fabricio Ismael Huarca Vivero y Carla Meylin Inocente Cantu presentan su estudio donde plantean determinar en qué medida las droguerías cumplen las BPA exigidas para recertificarse, dado el rol crítico de estas prácticas en la seguridad, calidad y eficacia de los productos farmacéuticos que abastecen al sistema de salud. Asi mismo, se utilizó un enfoque cuantitativo, básico, de diseño no experimental, corte transversal y nivel descriptivo, aplicándose a una muestra censal de 5 droguerías. En consecuencia, los resultados mostraron un nivel alto de cumplimiento (100\%) en todas las dimensiones evaluadas y en el cómputo global: sistema de aseguramiento de la calidad, personal, instalaciones-equipos-instrumentos, almacén, documentación, reclamos, retiro del mercado y autoinspección y por lo tanto se confirmo que las 5 droguerías cumplen las BPA requeridas para su recertificación, recomendándose mantener formación continua, auditorías periódicas y programas preventivos de mantenimiento y documentación.
 
+\paragraph{Fuente 3 Nacional}
+
 el documento titulado \textbf{“Gestión de inventarios: retos para las empresas farmacéuticas”}, presentado por Mileny de los Ángeles Saucedo Alarcón en la Universidad Católica Santo Toribio de Mogrovejo propone analizar la gestión de inventarios en el sector farmacéutico y explicar por qué es crítica para contar con información inmediata, ordenada y actualizada, especialmente ante debilidades frecuentes como desorganización, bajo control de almacén y ausencia de procedimientos. Frente a esto, la documentacion compila marcos teóricos y políticas de gestión (conteo físico, supervisión de compras y almacenamiento), procesos clave (recepción, almacenamiento, distribución, seguridad) y costos asociados (adquisición, mantenimiento y faltantes, siguiendo a Ballou). Además, explica control de inventarios como verificación y corrección de desvíos y muestra un modelo de control que integra producción, compras, finanzas y almacenes. En consecuencia, se logro deducir que la gestión de inventarios es vital para el control integral de procesos y la mitigación de riesgos; segundo, que un sistema de gestión bien implementado optimiza actividades, reduce tiempos, entrega datos exactos y evita quiebres u obsolescencias; y tercero, que la falta de gestión conlleva desafíos organizacionales, mermas y menor capacidad para satisfacer la demanda.
 
+\subsection{Marco de Referencia del Sistema}
+
+
+\subsubsection{Vision}
+
+Ser el laboratorio líder en análisis clínicos y pruebas especializadas en la región, reconocido por su excelencia operativa, innovación tecnológica y expansión estratégica. Aspiramos a construir una red de sucursales que garantice resultados confiables, trazables y accesibles, contribuyendo activamente a la salud preventiva y al diagnóstico oportuno.
+
+\subsubsection{Mision}
+
+Ofrecer servicios de laboratorio clínico con altos estándares de calidad, precisión y ética profesional, integrando tecnología avanzada, procesos estandarizados y atención personalizada. Nos comprometemos a expandir nuestra cobertura geográfica mediante sucursales que mantengan la misma rigurosidad técnica, asegurando que cada resultado sea útil, verificable y respaldado por un sistema robusto de gestión y control
+
+\subsubsection{Entonrno}
+
+Actualmente la empresa Sermedsa E.I.R.L Cuenta con un local asociado a Sisol Salud VES ubicado en Av. Pastor Sevilla con Av. Modelo. El proceso principal de negocio radica en el proceso de pruebas clínicas donde un tomador técnico realiza la toma de pruebas a un paciente y envían las muestras a un área de proceso donde se ejecutan los procesos necesarios para obtener los resultados del análisis, durante este proceso se realiza el consumo de reactivo clínicos y materiales. Cada semana el laboratorio se reabastece de materiales y reactivo de su propio almacén  funcionando con un encargado de almacén que entrega los materiales y registra su salida en cuaderno, este encargado informa al gerente cuando un material o reactivo esta por vencer o tiene poco stock.
+
+\subsubsection{Estrategias}
+
+La empresa se encarga de resguardar y controlan los diferentes insumos y reactivos para su
+posterior uso. dicho almacen debe poder registrar por lotes, fecha de vencimiento y tener
+conservación bajo normas de seguridad. Por lo que, cuando la gestión de inventarios carece de esta estandarización y automatización se producen diferentes problemas
+como el sobrestock, vencimiento de reactivos, diferencia entre los registros en los sistemas y
+lo físico, lo que eleva los costos y compromete la continuidad operativa.
+
+\subsubsection{Planes de la Empresa}
+
+La empresa a futuro se plantea nuevas mejoras para su almacen. Por lo que, a corto plazo se plantea implementar una solucion a la problematica actual con respecto a la gestion actual del almacen. Dicha mejora traera facilidades a los trabajadores y ayudara a que la empresa no se quede atras tecnologicamente.
+
+
+\refstepcounter{section}
+\section*{\makebox[\linewidth][c]{Capítulo \Roman{section}}}
+\addcontentsline{toc}{section}{Capítulo \Roman{section}}
+
+\subsection{Prototipos}
+
+Despues de ralizar las sesiones con los clientes, se llego a un acuerdo de utlizar el segundo prototipo propuesto.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{p21n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Prototipo Elegido por el Cliente}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{p22n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Prototipo Elegido por el Cliente}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{p23n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Prototipo Elegido por el Cliente}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\subsection{Diagrama de Caso de Uso}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{caso uso integrador1.png} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Diagrama de caso de uso del proyecto}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+
+\subsection{Diagrama de Secuencia}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{administrador.png} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Diagrama de Secuencia del administrador}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{empleado.png} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Diagrama de Secuencia del Empleado}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{gerente.png} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Diagrama de Secuencia del Gerente de Almacen}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\subsection{Diagrama de Clases}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{diagrama clase integra.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Diagrama de clases del Proyecto}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\subsection{Modelo de Datos}
+
+\subsubsection{Concentual}
+
+\subsubsection{Logico}
+
+\subsubsection{Fisico}
+
+\subsection{implementación en JAVA}
 
 % Nueva página para referencias
 \newpage
 \nocite{*}  % incluye todas las referencias del archivo .bib aunque no estén citadas
 % Imprime la bibliografía con estilo APA usando biblatex
 \printbibliography
+
 
 
 
@@ -284,6 +409,181 @@ el documento titulado \textbf{“Gestión de inventarios: retos para las empresa
     \caption{Lean Canvas que difine el proyecto}
     \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
 \end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{project character.png} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Project Character que difine el proyecto}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{landscape}
+\begin{figure}[h]
+    \hspace{-1.9cm}
+    \includegraphics[width=1.6\textwidth]{ganttIntegrador.png} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Cronograma de Actividades}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+\end{landscape}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{wbs.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{wbs del proyecto}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{p1n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Primer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{p12n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Primer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{p13n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Primer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{p14n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Primer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{p15n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Primer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{p16n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Primer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{p21n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Segundo Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{p22n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Segundo Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{p23n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Segundo Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{p24n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Segundo Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{p25n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Segundo Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{p31n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Tercer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{p32n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Tercer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{p33n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Tercer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{p34n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Tercer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{p35n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Tercer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{p36n.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Imagen del Tercer Prototipo}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{evide1.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Evidencia del Cliente 1}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{evide2.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Evidencia del Cliente 1}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{evide3.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Evidencia del Cliente 2}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{evide4.jpg} % Imagen de ejemplo que viene con distribuciones LaTeX
+    \caption{Evidencia del Cliente 2}
+    \label{fig:imagen_ejemplo} % Etiqueta para referenciar la imagen en texto
+\end{figure}
+
+
+
+
+
 
 
 

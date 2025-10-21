@@ -1,0 +1,115 @@
+\documentclass[12pt]{article} % Clase de documento, tamaño de letra 12pt
+
+% Paquetes importantes
+\usepackage[utf8]{inputenc}   % Codificación de entrada UTF-8 para caracteres acentuados
+\usepackage[T1]{fontenc}      % Codificación de salida para que el texto se vea bien en PDF
+\usepackage[spanish]{babel}   % Traduce términos automáticos al español (ej. "Figura", "Resumen")
+
+\usepackage{csquotes}         % Recomendado para manejar comillas y citas con biblatex
+\usepackage{graphicx}         % Permite incluir imágenes con \includegraphics
+\usepackage{setspace}         % Para controlar interlineado; APA pide interlineado doble
+\usepackage{geometry}         % Controla los márgenes de la página (APA pide 1 pulgada = 2.54cm)
+\usepackage[hidelinks]{hyperref}        % Habilita enlaces clicables en el PDF (tabla de contenido, referencias)
+\usepackage[style=apa, backend=biber]{biblatex}  % Bibliografía con estilo APA 7 y gestor biber
+\addbibresource{referencias.bib}  % Archivo con las referencias bibliográficas (formato .bib)
+
+% Carga tu paquete personalizado que contiene el comando \imprimircaratula
+\usepackage{caratula}
+
+%para decorar el indice
+\usepackage{tocloft} %Conectar los títulos con los números de página usando puntos
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} %Esto añadirá los "........" entre el título y la página.
+\setcounter{tocdepth}{4}   % incluye paragraph en la ToC
+\setcounter{secnumdepth}{4}% (opcional) numera hasta paragraph
+
+% Define los márgenes recomendados por APA: 1 pulgada en todos lados
+\geometry{letterpaper, margin=1in}
+
+% Permite personalizar el formato de títulos (secciones y subsecciones)
+\usepackage{titlesec}
+% Define estilo para títulos de sección: tamaño grande y negrita
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+% Define estilo para títulos de subsección: tamaño normal y negrita
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Define interlineado doble, que es requerido por APA
+\doublespacing
+
+%para la tabla
+\usepackage{pdflscape} %Para rotar la página
+\usepackage{adjustbox} %Para redimensionar automáticamente el contenido
+\usepackage{tabularx} %Para hacer que la tabla ocupe todo el ancho de la página usando columnas flexibles
+\usepackage{array} % Para usar >{\centering\arraybackslash}
+\usepackage[table,xcdraw]{xcolor} %Para darle color al encabezado
+\definecolor{headerbg}{HTML}{D9E1F2} % Para definir un color de encabezado
+\usepackage{multirow}      % Para combinar filas
+
+%para personalizar el header
+\usepackage{fancyhdr}           % Para encabezados y pies personalizados
+\pagestyle{fancy}               % Activar fancyhdr para todas las páginas
+\fancyhf{}                      % Limpia encabezados y pies por defecto
+\fancyhead[L]{J. Aulla; M. Millan} % Encabezado a la izquierda con las siglas
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt} %quita la linea debajo de los nombres y numero de pagina
+
+%para anexo
+\usepackage{tocloft}
+
+%espaciado
+%\usepackage{setspace}
+%\doublespacing  % interlineado doble
+\setlength{\parskip}{1em}
+
+
+
+
+
+
+
+% Datos para título, autor y fecha (aunque no se usan porque tienes portada personalizada)
+\title{Título del Documento en Formato APA 7}
+\author{Nombre del Autor}
+\date{\today}
+
+%-----------------------------------------------------------------------------------
+%inicio del documento
+%-----------------------------------------------------------------------------------
+
+
+
+\begin{document}
+
+% Imprime la portada con el comando definido en tu paquete caratula.sty
+\imprimircaratula
+\newpage
+
+\section*{Pruebas Unitarias}
+
+Son las más pequeñas y básicas dentro del desarrollo guiado por pruebas. Su objetivo principal es verificar que una función, clase o método cumpla exactamente con lo que se espera de ella de manera aislada, sin depender de otros componentes. Al enfocarse en piezas individuales del código, permiten detectar errores de forma temprana y facilitan la refactorización, ya que cualquier cambio se puede validar rápidamente ejecutando las pruebas. Normalmente se utilizan frameworks de testing que automatizan este proceso.
+
+\section*{Pruebas de Integración}
+
+Validan la interacción entre distintos módulos, componentes o servicios del sistema. Aunque cada módulo haya sido probado individualmente mediante pruebas unitarias, es posible que al comunicarse entre ellos surjan errores de compatibilidad, formatos de datos incorrectos o fallos de lógica. Las pruebas de integración buscan garantizar que las partes funcionen de manera conjunta y coordinada, asegurando que la aplicación avance de forma estable al combinar diferentes capas como la lógica de negocio, la base de datos y servicios externos.
+
+\section*{Pruebas de Aceptación}
+
+Comprueban que el sistema cumpla los requisitos definidos por el cliente o usuario final. Estas pruebas se centran en el comportamiento global de la aplicación desde la perspectiva de negocio, más que en los detalles técnicos. A menudo se basan en escenarios reales descritos en historias de usuario, por ejemplo: “Un usuario debe poder registrarse, recibir un correo de confirmación e iniciar sesión correctamente”. Suelen automatizarse con herramientas de BDD (Behavior Driven Development) como Cucumber o Behave, y permiten validar que el software realmente cumple con las expectativas del producto.
+
+\section*{Pruebas de Regresión}
+
+Detectan si un cambio nuevo rompe funcionalidades que antes funcionaban correctamente. Son fundamentales en proyectos en evolución, ya que cada actualización de código puede introducir fallos inesperados en áreas que parecían estables. Estas pruebas se apoyan en la suite de pruebas existentes (unitarias, de integración y aceptación), que actúan como una red de seguridad. En el enfoque TDD, las pruebas de regresión aparecen de forma natural, porque cada nueva prueba que se agrega se mantiene en el sistema y se ejecuta continuamente para asegurar que los cambios no dañen el comportamiento previo.
+
+\section*{Pruebas End-to-End (E2E)}
+
+Simulan el recorrido completo de un usuario a través del sistema, desde la interfaz hasta la base de datos y los servicios externos. A diferencia de las pruebas unitarias o de integración, aquí se busca validar la experiencia real, comprobando que todos los componentes interactúan correctamente en conjunto. Son especialmente útiles para garantizar que los procesos críticos de negocio, como un flujo de compra o de inicio de sesión, funcionen sin errores en un entorno lo más parecido posible al de producción. Aunque suelen ser más lentas de ejecutar, aportan una gran seguridad al probar escenarios reales de extremo a extremo.
+
+\section*{Pruebas con Mocks, Stubs y Fakes}
+
+Se basan en el uso de objetos simulados que reemplazan dependencias externas del sistema, como servicios de terceros, APIs o bases de datos. Su objetivo es aislar la lógica que se desea probar y evitar factores externos que puedan ralentizar o complicar la ejecución de las pruebas. 
+\begin{itemize}
+  \item \textbf{Mocks:} Simulan objetos y permiten verificar si ciertos métodos fueron llamados con los parámetros correctos.
+  \item \textbf{Stubs:} Devuelven respuestas predefinidas a llamadas específicas, sin lógica interna compleja.
+  \item \textbf{Fakes:} Implementaciones ligeras y simplificadas que sustituyen a componentes reales, como una base de datos en memoria.
+\end{itemize}
+
+\end{document}

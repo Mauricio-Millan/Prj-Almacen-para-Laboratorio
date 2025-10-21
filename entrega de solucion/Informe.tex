@@ -1,0 +1,107 @@
+\documentclass[12pt]{article} % Clase de documento, tamaño de letra 12pt
+
+% Paquetes importantes
+\usepackage[utf8]{inputenc}   % Codificación de entrada UTF-8 para caracteres acentuados
+\usepackage[T1]{fontenc}      % Codificación de salida para que el texto se vea bien en PDF
+\usepackage[spanish]{babel}   % Traduce términos automáticos al español (ej. "Figura", "Resumen")
+
+\usepackage{csquotes}         % Recomendado para manejar comillas y citas con biblatex
+\usepackage{graphicx}         % Permite incluir imágenes con \includegraphics
+\usepackage{setspace}         % Para controlar interlineado; APA pide interlineado doble
+\usepackage{geometry}         % Controla los márgenes de la página (APA pide 1 pulgada = 2.54cm)
+\usepackage[hidelinks]{hyperref}        % Habilita enlaces clicables en el PDF (tabla de contenido, referencias)
+\usepackage[style=apa, backend=biber]{biblatex}  % Bibliografía con estilo APA 7 y gestor biber
+\addbibresource{referencias.bib}  % Archivo con las referencias bibliográficas (formato .bib)
+
+% Carga tu paquete personalizado que contiene el comando \imprimircaratula
+\usepackage{caratula}
+
+%para decorar el indice
+\usepackage{tocloft} %Conectar los títulos con los números de página usando puntos
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} %Esto añadirá los "........" entre el título y la página.
+\setcounter{tocdepth}{4}   % incluye paragraph en la ToC
+\setcounter{secnumdepth}{4}% (opcional) numera hasta paragraph
+
+% Define los márgenes recomendados por APA: 1 pulgada en todos lados
+\geometry{letterpaper, margin=1in}
+
+% Permite personalizar el formato de títulos (secciones y subsecciones)
+\usepackage{titlesec}
+% Define estilo para títulos de sección: tamaño grande y negrita
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+% Define estilo para títulos de subsección: tamaño normal y negrita
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Define interlineado doble, que es requerido por APA
+\doublespacing
+
+%para la tabla
+\usepackage{pdflscape} %Para rotar la página
+\usepackage{adjustbox} %Para redimensionar automáticamente el contenido
+\usepackage{tabularx} %Para hacer que la tabla ocupe todo el ancho de la página usando columnas flexibles
+\usepackage{array} % Para usar >{\centering\arraybackslash}
+\usepackage[table,xcdraw]{xcolor} %Para darle color al encabezado
+\definecolor{headerbg}{HTML}{D9E1F2} % Para definir un color de encabezado
+\usepackage{multirow}      % Para combinar filas
+
+%para personalizar el header
+\usepackage{fancyhdr}           % Para encabezados y pies personalizados
+\pagestyle{fancy}               % Activar fancyhdr para todas las páginas
+\fancyhf{}                      % Limpia encabezados y pies por defecto
+\fancyhead[L]{J. Aulla; M. Millan} % Encabezado a la izquierda con las siglas
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt} %quita la linea debajo de los nombres y numero de pagina
+
+%para anexo
+\usepackage{tocloft}
+
+%espaciado
+%\usepackage{setspace}
+%\doublespacing  % interlineado doble
+\setlength{\parskip}{1em}
+
+
+
+
+
+
+
+% Datos para título, autor y fecha (aunque no se usan porque tienes portada personalizada)
+\title{Título del Documento en Formato APA 7}
+\author{Nombre del Autor}
+\date{\today}
+
+%-----------------------------------------------------------------------------------
+%inicio del documento
+%-----------------------------------------------------------------------------------
+
+
+
+\begin{document}
+
+% Imprime la portada con el comando definido en tu paquete caratula.sty
+\imprimircaratula
+\newpage
+
+\section*{Primer Protopiro}
+
+\subsection{Antecedentes}
+
+\subsubsection{Antecedentes Internacionales}
+
+el documento titulado  \textbf{\string"Optimización de inventario de reactivos en laboratorio fisicoquímico de control de calidad"}, desarrollada por Marcela Camila Osorio Farías para optar el grado de Magíster en Ciencias Farmacéuticas en la Universidad de Chile presenta una problemática clara: la gestión del inventario se realizaba con planillas Excel centralizadas y manuales, generando demoras, errores y riesgo de quiebres de stock; por ello, se planteó un proyecto de 12 meses para modernizar el sistema, protegiendo la integridad de los datos, reduciendo uso de papel y simplificando flujos operativos en un laboratorio farmacéutico. frente esto, el estudio adopta Mejora Continua con Kaizen y el ciclo PDCA (Plan–Do–Check–Act) para planificar, probar, verificar y ajustar la solución; además, define indicadores de desempeño mediante el esquema “Meta–Pregunta–(Indicador)–Medida en 10 pasos”. En concreto, se ejecutaron pruebas alfa y beta de la aplicación con usuarios finales (analistas de control de calidad), y se robusteció la base de control REG-CC-054: se estandarizaron nombres, lotes y fechas de vencimiento, y se corrigieron errores acumulados en aproximadamente 650 de 1084 reactivos (~60\%). Paralelamente, se actualizaron flujos operativos y se integraron Hojas de Seguridad (HDS) y Certificados de Análisis (CoA) al registro. En consecuencia, La transición de un control manual a un sistema automatizado y validado internamente permitió una gestión más precisa y ágil del inventario; se redujeron tiempos, se disminuyeron errores, y se fortaleció la trazabilidad. Además, el etiquetado con código de barras agilizó ingresos mensuales y minimizó fallas; y la alineación con DS-43 mejoró la seguridad del almacenamiento.
+
+el documento titulado \textbf{"Sistema informático para gestión de inventarios de reactivos y facturación de análisis en el laboratorio clínico ‘IN VITRO’ del cantón Paján"} elaborada por Jahaira Beatriz Rivera Silva presenta un estudio que parte de una situación frecuente en laboratorios pequeños: los procesos se manejaban con Word/Excel, sin una base de datos central ni alertas de quiebre o vencimiento, lo que dificultaba la trazabilidad de pacientes, insumos y facturación. asi mismo, la metodologia implementada adopto un enfoque mixto (cualitativo–cuantitativo), de tipo descriptiva, correlacional y de campo, con diseño no experimental. Se aplicaron los métodos deductivo, estadístico y bibliográfico; y como técnicas se utilizaron observación, encuestas a pacientes y entrevista al administrador. En consecuencia, fue posible sistematizar los procesos críticos del laboratorio (pacientes, inventario, facturación) y almacenar la información en una base de datos para consultas, modificaciones y auditoría. Segundo, que la automatización reduce carga operativa y mejora los tiempos de registro/atención; además, las alertas de stock y vencimiento ofrecen continuidad operativa y mejor planificación de compras. Tercero, que el despliegue web con respados (backups) y control de accesos fortalece la seguridad y disponibilidad de la información.
+
+el documento titulado \textbf{“Implementación de sistema de control para inventario, venta, aplicación web y móvil para consulta de resultados en el laboratorio clínico HCLabs”} fue desarrollado por Andrés Alexander León Doylet, como tesis de grado de la Universidad Católica de Santiago de Guayaquil. El estudio presenta una metodología cualitativa con un desarrollo de software siguiendo la metodología en cascada, por ser secuencial y ajustarse al cumplimiento ordenado de requisitos y verificaciones por etapas. Frente a esto, el estudio partió de problemáticas concretas: ausencia de control formal de inventario de reactivos, procesos de ventas dispersos en hojas de cálculo y demoras en la entrega de resultados. De ahí que la propuesta SmartLab buscara automatizar y centralizar los procesos de inventario y ventas, además de habilitar la consulta de resultados por web y app móvil. En conclusione, el autor señala que la implementación de los módulos de inventario y ventas permitió automatizar procesos manuales, optimizar el control de reactivos y centralizar la información institucional. A la vez, los pacientes pasaron a consultar resultados sin volver al laboratorio.
+
+\subsubsection{Antecedentes Nacionales}
+
+El documento titulado \textbf{“Sistema web para control de inventario en la empresa Biotec Lab”}, desarrollado por Henderson Miguel Alvarado Leyva presenta un estudio realizado en el laboratorio Biotec Lab, Pucallpa, y surge porque el sistema existente no tenía módulo de inventarios, lo que impedía conocer el stock real, proyectar compras y conocer el último reabastecimiento, generando desatención a clientes. frente a esto, El autor adoptó Scrum como marco de trabajo para el desarrollo ágil del software y planteó objetivos como incrementar la localización de materiales, el control de cantidades y la precisión del reabastecimiento. Además, la evaluación de efectividad se realizó durante 30 días con una población de 80 búsquedas, estableciendo criterios medibles de desempeño. En conclusion, El sistema elevó la efectividad de búsqueda de reactivos al 100\% (frente al 10\% manual), reduciendo el tiempo de consulta a segundos; mejoró la exactitud del reabastecimiento (hasta 100\% en la tarea y +50\% según conclusiones); permitió localizar el stock general con efectividad 100\% mediante reportes PDF; y facilitó identificar en segundos la fecha del último reabastecimiento. En conjunto, el aporte repercutió positivamente en lo financiero, la imagen institucional, la fidelización de pacientes, la mejora de procesos internos y la eficiencia en la atención.
+
+el documento titulado \textbf{\string"Evaluación de cumplimiento de buenas prácticas de almacenamiento para la recertificación de 5 droguerías en lima-2023"}, desarrollado por Fabricio Ismael Huarca Vivero y Carla Meylin Inocente Cantu presentan su estudio donde plantean determinar en qué medida las droguerías cumplen las BPA exigidas para recertificarse, dado el rol crítico de estas prácticas en la seguridad, calidad y eficacia de los productos farmacéuticos que abastecen al sistema de salud. Asi mismo, se utilizó un enfoque cuantitativo, básico, de diseño no experimental, corte transversal y nivel descriptivo, aplicándose a una muestra censal de 5 droguerías. En consecuencia, los resultados mostraron un nivel alto de cumplimiento (100\%) en todas las dimensiones evaluadas y en el cómputo global: sistema de aseguramiento de la calidad, personal, instalaciones-equipos-instrumentos, almacén, documentación, reclamos, retiro del mercado y autoinspección y por lo tanto se confirmo que las 5 droguerías cumplen las BPA requeridas para su recertificación, recomendándose mantener formación continua, auditorías periódicas y programas preventivos de mantenimiento y documentación.
+
+el documento titulado \textbf{“Gestión de inventarios: retos para las empresas farmacéuticas”}, presentado por Mileny de los Ángeles Saucedo Alarcón en la Universidad Católica Santo Toribio de Mogrovejo propone analizar la gestión de inventarios en el sector farmacéutico y explicar por qué es crítica para contar con información inmediata, ordenada y actualizada, especialmente ante debilidades frecuentes como desorganización, bajo control de almacén y ausencia de procedimientos. Frente a esto, la documentacion compila marcos teóricos y políticas de gestión (conteo físico, supervisión de compras y almacenamiento), procesos clave (recepción, almacenamiento, distribución, seguridad) y costos asociados (adquisición, mantenimiento y faltantes, siguiendo a Ballou). Además, explica control de inventarios como verificación y corrección de desvíos y muestra un modelo de control que integra producción, compras, finanzas y almacenes. En consecuencia, se logro deducir que la gestión de inventarios es vital para el control integral de procesos y la mitigación de riesgos; segundo, que un sistema de gestión bien implementado optimiza actividades, reduce tiempos, entrega datos exactos y evita quiebres u obsolescencias; y tercero, que la falta de gestión conlleva desafíos organizacionales, mermas y menor capacidad para satisfacer la demanda.
+
+
+\end{document}
