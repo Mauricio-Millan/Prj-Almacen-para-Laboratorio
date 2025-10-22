@@ -1,0 +1,185 @@
+CREATE OR ALTER PROCEDURE PA_ObtenerLineaTiempoUsuario
+    @id_usuario INT,
+    @fecha_inicio DATETIME = NULL,
+    @fecha_fin DATETIME = NULL,
+    @limite INT = 50
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Validar usuario
+    IF NOT EXISTS (SELECT 1 FROM Usuario WHERE id = @id_usuario)
+    BEGIN
+        RAISERROR(N'El usuario con ID %d no existe.', 16, 1, @id_usuario);
+        RETURN;
+    END
+
+    -- Establecer fechas por defecto (últimos 6 meses)
+    IF @fecha_inicio IS NULL
+        SET @fecha_inicio = DATEADD(MONTH, -6, GETDATE());
+
+    IF @fecha_fin IS NULL
+        SET @fecha_fin = GETDATE();
+
+    -- ========================================================================
+    -- RESULTSET 1: Información del Usuario
+    -- ========================================================================
+    SELECT
+        u.id AS ID_Usuario,
+        u.nombre AS Nombre_Usuario,
+        u.dni AS DNI,
+        r.nombre AS Rol,
+        u.fecha_nacimiento AS Fecha_Nacimiento
+    FROM Usuario u
+    INNER JOIN Roles r ON u.id_rol = r.id
+    WHERE u.id = @id_usuario;
+
+    -- ========================================================================
+    -- RESULTSET 2: Línea de Tiempo de Actividades
+    -- ========================================================================
+    SELECT TOP (@limite)
+        m.id AS ID_Movimiento,
+        m.fecha AS Fecha_Hora,
+        CONVERT(VARCHAR(10), m.fecha, 103) AS Fecha,
+        CONVERT(VARCHAR(8), m.fecha, 108) AS Hora,
+        ta.nombre AS Tipo_Accion,
+        m.referencia AS Referencia,
+        m.comentario AS Comentario,
+
+        -- Detalles específicos por tipo de acción
+        CASE ta.id
+            WHEN 1 THEN CONCAT('Proveedor: ', p.nombre)
+            WHEN 2 THEN CONCAT('Departamento: ', d.nombre)
+            WHEN 3 THEN 'Traslado entre almacenes'
+            WHEN 4 THEN 'Ajuste de inventario'
+            ELSE 'N/A'
+        END AS Detalle_Operacion,
+
+        -- Resumen de ítems
+        COUNT(DISTINCT ml.id) AS Total_Items,
+        SUM(ABS(ml.cantidad_delta)) AS Total_Unidades,
+
+        -- Almacenes involucrados (sin DISTINCT en STRING_AGG)
+        STRING_AGG(ISNULL(ao.nombre, '(Sin origen)'), ', ') AS Almacenes_Origen,
+        STRING_AGG(ISNULL(ad.nombre, '(Sin destino)'), ', ') AS Almacenes_Destino,
+
+        -- Reactivos involucrados
+        STRING_AGG(r.nombre, ', ') AS Reactivos_Involucrados,
+
+        COUNT(DISTINCT r.id) AS Cantidad_Reactivos_Diferentes,
+
+        -- Valor total
+        SUM(ABS(ml.cantidad_delta) * ISNULL(ml.precio_venta, l.precio_unitario)) AS Valor_Total,
+
+        -- Tiempo transcurrido
+        DATEDIFF(DAY, m.fecha, GETDATE()) AS Dias_Transcurridos
+
+    FROM Movimiento m
+    INNER JOIN TipoAccion ta ON m.id_tipo_accion = ta.id
+    LEFT JOIN MovimientoLinea ml ON m.id = ml.id_movimiento
+    LEFT JOIN Lote l ON ml.id_lote = l.id
+    LEFT JOIN Reactivo r ON l.id_reactivo = r.id
+    LEFT JOIN Almacen ao ON ml.id_almacen_origen = ao.id
+    LEFT JOIN Almacen ad ON ml.id_almacen_destino = ad.id
+    LEFT JOIN Compra c ON m.id = c.id_movimiento
+    LEFT JOIN Proveedor p ON c.id_proveedor = p.id
+    LEFT JOIN Consumo co ON m.id = co.id_movimiento
+    LEFT JOIN Departamento d ON co.id_departamento = d.id
+
+    WHERE
+        m.id_usuario = @id_usuario
+        AND m.fecha BETWEEN @fecha_inicio AND @fecha_fin
+
+    GROUP BY
+        m.id, m.fecha, ta.id, ta.nombre, m.referencia, m.comentario,
+        p.nombre, d.nombre
+
+    ORDER BY m.fecha DESC;
+
+    -- ========================================================================
+    -- RESULTSET 3: Resumen Estadístico del Período
+    -- ========================================================================
+    SELECT
+        COUNT(DISTINCT m.id) AS Total_Movimientos,
+
+        -- Totales por tipo de acción
+        SUM(CASE WHEN ta.id = 1 THEN 1 ELSE 0 END) AS Total_Ingresos,
+        SUM(CASE WHEN ta.id = 2 THEN 1 ELSE 0 END) AS Total_Consumos,
+        SUM(CASE WHEN ta.id = 3 THEN 1 ELSE 0 END) AS Total_Traslados,
+        SUM(CASE WHEN ta.id = 4 THEN 1 ELSE 0 END) AS Total_Ajustes,
+
+        -- Estadísticas de lotes y reactivos
+        COUNT(DISTINCT ml.id_lote) AS Total_Lotes_Movidos,
+        COUNT(DISTINCT r.id) AS Total_Reactivos_Diferentes,
+        COUNT(DISTINCT COALESCE(ml.id_almacen_origen, ml.id_almacen_destino)) AS Total_Almacenes_Usados,
+
+        -- Unidades y valores
+        SUM(ABS(ml.cantidad_delta)) AS Total_Unidades_Movidas,
+        AVG(ABS(ml.cantidad_delta)) AS Promedio_Unidades_Por_Movimiento,
+        SUM(ABS(ml.cantidad_delta) * ISNULL(ml.precio_venta, l.precio_unitario)) AS Valor_Total_Movimientos,
+
+        -- Rangos de fechas
+        MIN(m.fecha) AS Primera_Actividad,
+        MAX(m.fecha) AS Ultima_Actividad,
+        DATEDIFF(DAY, MIN(m.fecha), MAX(m.fecha)) AS Dias_Activo,
+
+        -- Promedio de actividad
+        CAST(COUNT(DISTINCT m.id) * 1.0 / NULLIF(DATEDIFF(DAY, @fecha_inicio, @fecha_fin), 0) AS DECIMAL(10,2)) AS Promedio_Movimientos_Por_Dia
+
+    FROM Movimiento m
+    INNER JOIN TipoAccion ta ON m.id_tipo_accion = ta.id
+    LEFT JOIN MovimientoLinea ml ON m.id = ml.id_movimiento
+    LEFT JOIN Lote l ON ml.id_lote = l.id
+    LEFT JOIN Reactivo r ON l.id_reactivo = r.id
+
+    WHERE
+        m.id_usuario = @id_usuario
+        AND m.fecha BETWEEN @fecha_inicio AND @fecha_fin;
+
+    -- ========================================================================
+    -- RESULTSET 4: Distribución por Tipo de Acción
+    -- ========================================================================
+    SELECT
+        ta.id AS ID_Tipo,
+        ta.nombre AS Tipo_Accion,
+        COUNT(m.id) AS Cantidad_Movimientos,
+        SUM(ABS(ml.cantidad_delta)) AS Total_Unidades,
+        SUM(ABS(ml.cantidad_delta) * ISNULL(ml.precio_venta, l.precio_unitario)) AS Valor_Total,
+        CAST(COUNT(m.id) * 100.0 / SUM(COUNT(m.id)) OVER() AS DECIMAL(5,2)) AS Porcentaje_Movimientos,
+        CAST(SUM(ABS(ml.cantidad_delta)) * 100.0 / SUM(SUM(ABS(ml.cantidad_delta))) OVER() AS DECIMAL(5,2)) AS Porcentaje_Unidades
+    FROM Movimiento m
+    INNER JOIN TipoAccion ta ON m.id_tipo_accion = ta.id
+    LEFT JOIN MovimientoLinea ml ON m.id = ml.id_movimiento
+    LEFT JOIN Lote l ON ml.id_lote = l.id
+    WHERE
+        m.id_usuario = @id_usuario
+        AND m.fecha BETWEEN @fecha_inicio AND @fecha_fin
+    GROUP BY ta.id, ta.nombre
+    ORDER BY Cantidad_Movimientos DESC;
+
+    -- ========================================================================
+    -- RESULTSET 5: Top 10 Reactivos Más Movidos por el Usuario
+    -- ========================================================================
+    SELECT TOP 10
+        r.id AS ID_Reactivo,
+        r.nombre AS Nombre_Reactivo,
+        ma.nombre AS Marca,
+        COUNT(DISTINCT mov.id) AS Veces_Movido,
+        SUM(ABS(ml.cantidad_delta)) AS Total_Unidades,
+        AVG(ABS(ml.cantidad_delta)) AS Promedio_Unidades_Por_Movimiento,
+        SUM(ABS(ml.cantidad_delta) * ISNULL(ml.precio_venta, l.precio_unitario)) AS Valor_Total,
+        MIN(mov.fecha) AS Primera_Vez,
+        MAX(mov.fecha) AS Ultima_Vez,
+        DATEDIFF(DAY, MIN(mov.fecha), MAX(mov.fecha)) AS Dias_Entre_Primera_Y_Ultima
+    FROM Movimiento mov
+    INNER JOIN MovimientoLinea ml ON mov.id = ml.id_movimiento
+    INNER JOIN Lote l ON ml.id_lote = l.id
+    INNER JOIN Reactivo r ON l.id_reactivo = r.id
+    LEFT JOIN Marca ma ON r.id_marca = ma.id
+    WHERE
+        mov.id_usuario = @id_usuario
+        AND mov.fecha BETWEEN @fecha_inicio AND @fecha_fin
+    GROUP BY r.id, r.nombre, ma.nombre
+    ORDER BY Veces_Movido DESC, Total_Unidades DESC;
+END
+GO
