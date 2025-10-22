@@ -22,7 +22,8 @@ import { forkJoin } from 'rxjs';
   imports: [
     CommonModule,
     SideBarComponent,
-    NavbarComponent
+    NavbarComponent,
+    RouterOutlet
   ],
   templateUrl: './inicio-component.html',
   styleUrls: ['./inicio-component.css'],
@@ -104,8 +105,8 @@ export class InicioComponent implements OnInit {
     movimientolineas: Movimientolinea[];
   }): void {
     const ahora = new Date();
-    const treintaDiasAdelante = new Date();
-    treintaDiasAdelante.setDate(ahora.getDate() + 30);
+    const sesentaDiasAdelante = new Date();
+    sesentaDiasAdelante.setDate(ahora.getDate() + 60);
 
     // Total de reactivos
     const totalReactivos = datos.reactivos.length;
@@ -119,10 +120,10 @@ export class InicioComponent implements OnInit {
     const lotesPorVencer = datos.lotes.filter(lote => {
       if (!lote.estado) return false;
       const fechaExpiracion = new Date(lote.fechaExpiracion);
-      return fechaExpiracion >= ahora && fechaExpiracion <= treintaDiasAdelante;
+      return fechaExpiracion >= ahora && fechaExpiracion <= sesentaDiasAdelante;
     }).length;
 
-    // Stock bajo (reactivos con menos de 10 unidades totales)
+    // Stock bajo (reactivos con menos de 50 unidades totales)
     const reactivosConStockBajo = new Set<number>();
     const stockPorReactivo = new Map<number, number>();
 
@@ -135,7 +136,7 @@ export class InicioComponent implements OnInit {
     });
 
     stockPorReactivo.forEach((cantidad, reactivoId) => {
-      if (cantidad < 10) {
+      if (cantidad < 50) {
         reactivosConStockBajo.add(reactivoId);
       }
     });

@@ -1,0 +1,25 @@
+/* Estilos personalizados para el componente de inventario */
+
+/* Animación para las tarjetas */
+.hover\:shadow-lg:hover {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Scroll personalizado para la lista de lotes */
+.space-y-3.max-h-64.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.space-y-3.max-h-64.overflow-y-auto::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.space-y-3.max-h-64.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.space-y-3.max-h-64.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

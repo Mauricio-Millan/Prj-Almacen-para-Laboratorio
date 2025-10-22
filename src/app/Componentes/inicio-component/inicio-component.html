@@ -13,8 +13,13 @@
     <!-- Content Area -->
     <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
       
-      <!-- Loading State -->
-      @if (cargando()) {
+      <!-- Router Outlet para subrutas -->
+      @if (!isRootPath()) {
+        <router-outlet></router-outlet>
+      }
+
+      <!-- Dashboard cuando está en la ruta raíz -->
+      @else if (cargando()) {
         <div class="flex items-center justify-center h-full">
           <div class="text-center">
             <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>

@@ -1,0 +1,315 @@
+<div class="p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">Gestión de Usuarios</h1>
+    <p class="text-gray-600">Administra los usuarios del sistema</p>
+  </div>
+
+  <!-- Mensajes de éxito/error -->
+  @if (exito()) {
+    <div class="mb-4 bg-green-50 border-l-4 border-green-500 p-4 rounded">
+      <div class="flex items-center">
+        <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <p class="text-sm font-medium text-green-800">{{ exito() }}</p>
+      </div>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="mb-4 bg-red-50 border-l-4 border-red-500 p-4 rounded">
+      <div class="flex items-center">
+        <svg class="w-5 h-5 text-red-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+        </svg>
+        <p class="text-sm font-medium text-red-800">{{ error() }}</p>
+      </div>
+    </div>
+  }
+
+  <!-- Barra de acciones -->
+  <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+    <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+      <!-- Buscador -->
+      <div class="flex-1 w-full md:max-w-md">
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input
+            type="text"
+            [value]="busqueda()"
+            (input)="busqueda.set($any($event.target).value); buscarUsuarios()"
+            class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Buscar por nombre o DNI...">
+        </div>
+      </div>
+
+      <!-- Botón nuevo usuario -->
+      <button
+        (click)="abrirModalNuevo()"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+        Nuevo Usuario
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabla de usuarios -->
+  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    @if (cargando() && usuarios().length === 0) {
+      <div class="flex items-center justify-center py-12">
+        <div class="text-center">
+          <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <p class="mt-4 text-gray-600">Cargando usuarios...</p>
+        </div>
+      </div>
+    } @else {
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">DNI</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Nacimiento</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            @for (usuario of usuariosFiltrados(); track usuario.id) {
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ usuario.id }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="flex items-center">
+                    <div class="flex-shrink-0 h-10 w-10 bg-blue-500 rounded-full flex items-center justify-center">
+                      <span class="text-white font-semibold text-sm">{{ usuario.nombre.substring(0, 2).toUpperCase() }}</span>
+                    </div>
+                    <div class="ml-4">
+                      <div class="text-sm font-medium text-gray-900">{{ usuario.nombre }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ usuario.dni }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ formatearFecha(usuario.fechaNacimiento) }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {{ getRolBadgeClass(usuario.idRol.nombre) }}">
+                    {{ usuario.idRol.nombre }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                  <button
+                    (click)="abrirModalEditar(usuario)"
+                    class="text-blue-600 hover:text-blue-900 transition-colors"
+                    title="Editar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                  </button>
+                  <button
+                    (click)="eliminarUsuario(usuario)"
+                    [disabled]="usuarioActual()?.id === usuario.id"
+                    [class]="usuarioActual()?.id === usuario.id ? 
+                      'text-gray-400 cursor-not-allowed' : 
+                      'text-red-600 hover:text-red-900 transition-colors'"
+                    title="Eliminar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                  @if (busqueda()) {
+                    No se encontraron usuarios con el término "{{ busqueda() }}"
+                  } @else {
+                    No hay usuarios registrados
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Paginación info -->
+      <div class="bg-gray-50 px-6 py-3 border-t border-gray-200">
+        <p class="text-sm text-gray-700">
+          Mostrando <span class="font-medium">{{ usuariosFiltrados().length }}</span> de <span class="font-medium">{{ usuarios().length }}</span> usuarios
+        </p>
+      </div>
+    }
+  </div>
+
+  <!-- Modal de Crear/Editar Usuario -->
+  @if (mostrarModal()) {
+    <div class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <!-- Overlay con transparencia para ver el fondo -->
+      <div class="fixed inset-0 bg-gray-500/30 backdrop-blur-sm transition-opacity" (click)="cerrarModal()"></div>
+
+      <!-- Modal Container -->
+      <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Spacer element to center modal -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+        <!-- Modal content con z-index mayor que el overlay -->
+        <div class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full z-[60]">
+          <form [formGroup]="usuarioForm" (ngSubmit)="guardarUsuario()">
+            <!-- Header -->
+            <div class="bg-blue-600 px-6 py-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-white" id="modal-title">
+                  {{ modoEdicion() ? 'Editar Usuario' : 'Nuevo Usuario' }}
+                </h3>
+                <button type="button" (click)="cerrarModal()" class="text-white hover:text-gray-200">
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Body -->
+            <div class="px-6 py-4 space-y-4">
+              <!-- Nombre -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Nombre <span class="text-red-500">*</span>
+                </label>
+                <input
+                  formControlName="nombre"
+                  type="text"
+                  class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  [class.border-red-300]="nombreControl?.invalid && nombreControl?.touched"
+                  placeholder="Nombre completo">
+                @if (nombreControl?.invalid && nombreControl?.touched) {
+                  <p class="mt-1 text-sm text-red-600">
+                    @if (nombreControl?.errors?.['required']) {
+                      El nombre es requerido
+                    } @else if (nombreControl?.errors?.['minlength']) {
+                      Mínimo 3 caracteres
+                    }
+                  </p>
+                }
+              </div>
+
+              <!-- DNI -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  DNI <span class="text-red-500">*</span>
+                </label>
+                <input
+                  formControlName="dni"
+                  type="text"
+                  maxlength="8"
+                  class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  [class.border-red-300]="dniControl?.invalid && dniControl?.touched"
+                  placeholder="12345678">
+                @if (dniControl?.invalid && dniControl?.touched) {
+                  <p class="mt-1 text-sm text-red-600">
+                    @if (dniControl?.errors?.['required']) {
+                      El DNI es requerido
+                    } @else if (dniControl?.errors?.['pattern']) {
+                      Debe tener 8 dígitos
+                    }
+                  </p>
+                }
+              </div>
+
+              <!-- Fecha de Nacimiento -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Fecha de Nacimiento <span class="text-red-500">*</span>
+                </label>
+                <input
+                  formControlName="fechaNacimiento"
+                  type="date"
+                  class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  [class.border-red-300]="fechaNacimientoControl?.invalid && fechaNacimientoControl?.touched">
+                @if (fechaNacimientoControl?.invalid && fechaNacimientoControl?.touched) {
+                  <p class="mt-1 text-sm text-red-600">
+                    La fecha de nacimiento es requerida
+                  </p>
+                }
+              </div>
+
+              <!-- Contraseña -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Contraseña 
+                  @if (modoEdicion()) {
+                    <span class="text-gray-500">(dejar vacío para mantener actual)</span>
+                  } @else {
+                    <span class="text-red-500">*</span>
+                  }
+                </label>
+                <input
+                  formControlName="clave"
+                  type="password"
+                  class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  [class.border-red-300]="claveControl?.invalid && claveControl?.touched"
+                  placeholder="••••••••">
+                @if (claveControl?.invalid && claveControl?.touched) {
+                  <p class="mt-1 text-sm text-red-600">
+                    @if (claveControl?.errors?.['required']) {
+                      La contraseña es requerida
+                    } @else if (claveControl?.errors?.['minlength']) {
+                      Mínimo 4 caracteres
+                    }
+                  </p>
+                }
+              </div>
+
+              <!-- Rol -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Rol <span class="text-red-500">*</span>
+                </label>
+                <select
+                  formControlName="idRol"
+                  class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  [class.border-red-300]="rolControl?.invalid && rolControl?.touched">
+                  <option [value]="null">Seleccione un rol</option>
+                  @for (rol of roles(); track rol.id) {
+                    <option [value]="rol.id">{{ rol.nombre }}</option>
+                  }
+                </select>
+                @if (rolControl?.invalid && rolControl?.touched) {
+                  <p class="mt-1 text-sm text-red-600">
+                    El rol es requerido
+                  </p>
+                }
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="bg-gray-50 px-6 py-4 flex justify-end gap-3">
+              <button
+                type="button"
+                (click)="cerrarModal()"
+                class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                [disabled]="cargando()"
+                [class]="cargando() ? 
+                  'px-4 py-2 bg-blue-400 text-white rounded-lg cursor-not-allowed' : 
+                  'px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors'">
+                {{ cargando() ? 'Guardando...' : 'Guardar' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  }
+</div>

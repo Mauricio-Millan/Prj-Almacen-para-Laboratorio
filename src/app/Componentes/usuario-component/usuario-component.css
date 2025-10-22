@@ -1,0 +1,90 @@
+/* Estilos para el componente de gestión de usuarios */
+
+/* Animación para el modal */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Efecto hover en las filas de la tabla */
+tbody tr {
+  transition: background-color 0.15s ease-in-out;
+}
+
+/* Animación de carga */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Avatar circular con iniciales */
+.flex-shrink-0 {
+  transition: transform 0.2s ease-in-out;
+}
+
+tbody tr:hover .flex-shrink-0 {
+  transform: scale(1.1);
+}
+
+/* Estilos para botones de acción */
+button svg {
+  transition: transform 0.2s ease-in-out;
+}
+
+button:hover:not(:disabled) svg {
+  transform: scale(1.1);
+}
+
+/* Estilos para inputs con error */
+input.border-red-300,
+select.border-red-300 {
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Overlay del modal */
+.fixed.inset-0.bg-gray-500 {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Contenido del modal */
+.inline-block.align-bottom {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  table {
+    font-size: 0.875rem;
+  }
+  
+  .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

@@ -47,6 +47,14 @@ export interface Almacen {
   telefono: string;
 }
 
+// Interfaz para la información del almacén en la respuesta de inventario
+export interface AlmacenInfo {
+  idAlmacen: number;
+  nombreAlmacen: string;
+  direccion: string;
+  telefono: string;
+}
+
 export interface Tipoaccion {
   id: number;
   nombre: string;
@@ -219,6 +227,23 @@ export interface Alerta {
   mensaje: string;
 }
 
+// Interfaz para el item de inventario que retorna el backend
+export interface InventarioItem {
+  idInventario: number;
+  idReactivo: number;
+  nombreReactivo: string;
+  marca: string;
+  numeroLote: number;
+  cantidadInicialLote: number;
+  stockActual: number;
+  precioUnitario: number;
+  fechaExpiracion: string;
+  diasParaExpiracion: number;
+  estadoExpiracion: string;
+  estadoStock: string;
+}
+
+// Interfaz para el agrupamiento de reactivos con sus lotes
 export interface InventarioDetallado {
   idReactivo: number;
   nombreReactivo: string;
