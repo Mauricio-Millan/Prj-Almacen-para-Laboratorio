@@ -1,0 +1,131 @@
+<div class="flex h-screen bg-gray-100">
+  <!-- Sidebar Component -->
+  <app-side-bar-component 
+    [collapsed]="sidebarCollapsed()" 
+    (toggleSidebarEvent)="toggleSidebar()">
+  </app-side-bar-component>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- Navbar Component -->
+    <app-navbar-component (toggleSidebarEvent)="toggleSidebar()"></app-navbar-component>
+
+    <!-- Content Area -->
+    <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+      
+      <!-- Loading State -->
+      @if (cargando()) {
+        <div class="flex items-center justify-center h-full">
+          <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <p class="mt-4 text-gray-600">Cargando datos del dashboard...</p>
+          </div>
+        </div>
+      }
+
+      <!-- Error State -->
+      @else if (error()) {
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+          <p class="text-red-800">{{ error() }}</p>
+        </div>
+      }
+
+      <!-- Dashboard Content -->
+      @else {
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          @for (card of statsCards(); track card.titulo) {
+            <div class="rounded-xl shadow-md text-white p-6 flex items-center justify-between {{ getColorClass(card.color) }}">
+              <div>
+                <h3 class="text-lg font-semibold opacity-90">{{ card.titulo }}</h3>
+                <p class="text-4xl font-bold mt-2">{{ card.valor }}</p>
+              </div>
+              <div class="text-6xl opacity-30">{{ card.icono }}</div>
+            </div>
+          }
+        </div>
+
+        <!-- Movimientos y Alertas -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Movimientos Recientes -->
+          <div class="lg:col-span-2 bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                <span>📊</span>
+                Movimientos Recientes
+              </h2>
+            </div>
+            
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reactivo</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  @for (mov of movimientosRecientes(); track mov.id) {
+                    <tr class="hover:bg-gray-50 transition-colors">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ mov.fecha }}</td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {{ getTipoClass(mov.colorTipo) }}">
+                          {{ mov.tipo }}
+                        </span>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ mov.reactivo }}</td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold" 
+                          [class.text-green-600]="mov.colorTipo === 'green'"
+                          [class.text-red-600]="mov.colorTipo === 'red'"
+                          [class.text-blue-600]="mov.colorTipo === 'blue'">
+                        {{ mov.cantidad }}
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ mov.usuario }}</td>
+                    </tr>
+                  }
+                  @empty {
+                    <tr>
+                      <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                        No hay movimientos registrados
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Alertas -->
+          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                <span>🔔</span>
+                Alertas
+              </h2>
+            </div>
+            
+            <div class="p-6 space-y-4">
+              @for (alerta of alertas(); track $index) {
+                <div class="border rounded-lg p-4 {{ getAlertaClass(alerta.tipo) }}">
+                  <p class="font-semibold text-sm mb-1">{{ alerta.titulo }}</p>
+                  <p class="text-sm">{{ alerta.mensaje }}</p>
+                </div>
+              }
+              @empty {
+                <div class="text-center py-8 text-gray-500">
+                  <p>No hay alertas pendientes</p>
+                </div>
+              }
+            </div>
+          </div>
+
+        </div>
+      }
+
+    </main>
+  </div>
+</div>

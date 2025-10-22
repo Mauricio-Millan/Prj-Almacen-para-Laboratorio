@@ -1,0 +1,50 @@
+/* Estilos adicionales para el dashboard de inicio */
+
+/* Animación de carga */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Efecto hover en las tarjetas de estadísticas */
+.rounded-xl {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.rounded-xl:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Efecto de las filas de la tabla */
+tbody tr {
+  transition: background-color 0.15s ease-in-out;
+}
+
+/* Animación de entrada para alertas */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.border.rounded-lg {
+  animation: slideInRight 0.3s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .text-4xl {
+    font-size: 2rem;
+  }
+  
+  .text-6xl {
+    font-size: 3rem;
+  }
+}

@@ -1,0 +1,115 @@
+<header class="bg-white shadow">
+  <div class="flex items-center justify-between p-4">
+    <div class="flex items-center">
+      <button (click)="toggleSidebar()" class="text-gray-500 focus:outline-none">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+      <h2 class="text-xl font-semibold text-gray-800 ml-4">Dashboard</h2>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <!-- Search -->
+      <div class="relative">
+        <input type="text" placeholder="Buscar..." class="w-64 pr-8 pl-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <div class="absolute right-3 top-2.5">
+          <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
+            <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="relative notifications-container">
+        <button (click)="toggleNotifications()" class="flex items-center text-gray-500 focus:outline-none">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <span class="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center absolute -top-1 -right-1">3</span>
+        </button>
+        
+        <!-- Notifications Dropdown -->
+        <div *ngIf="showNotifications" class="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg z-50 overflow-hidden">
+          <div class="py-2 px-3 bg-blue-700 text-white font-semibold flex justify-between items-center">
+            <span>Notificaciones</span>
+            <span class="bg-white text-blue-700 rounded-full h-6 w-6 flex items-center justify-center text-sm">3</span>
+          </div>
+          
+          <div class="max-h-96 overflow-y-auto">
+            <!-- Notification Item 1 -->
+            <div class="px-4 py-3 border-b hover:bg-blue-50 flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="h-8 w-8 rounded-full bg-red-100 flex items-center justify-center">
+                  <svg class="h-5 w-5 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">Vencimiento próximo</p>
+                <p class="text-xs text-gray-600">Peróxido de Hidrógeno 30% vence en 5 días.</p>
+                <p class="text-xs text-gray-500 mt-1">Hace 10 minutos</p>
+              </div>
+            </div>
+            
+            <!-- Notification Item 2 -->
+            <div class="px-4 py-3 border-b hover:bg-blue-50 flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="h-8 w-8 rounded-full bg-yellow-100 flex items-center justify-center">
+                  <svg class="h-5 w-5 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">Nivel bajo de inventario</p>
+                <p class="text-xs text-gray-600">Ácido Sulfúrico por debajo del nivel mínimo.</p>
+                <p class="text-xs text-gray-500 mt-1">Hace 2 horas</p>
+              </div>
+            </div>
+            
+            <!-- Notification Item 3 -->
+            <div class="px-4 py-3 border-b hover:bg-blue-50 flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                  <svg class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">Nueva solicitud</p>
+                <p class="text-xs text-gray-600">María Gómez ha solicitado 250ml de Etanol 96%.</p>
+                <p class="text-xs text-gray-500 mt-1">Hace 45 minutos</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="py-2 px-4 bg-gray-50 text-center">
+            <button class="text-sm text-blue-600 hover:text-blue-800 font-medium">Ver todas las notificaciones</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- User -->
+      <div class="relative">
+        <button class="flex items-center focus:outline-none">
+          <div class="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-semibold">JD</div>
+          <span class="ml-2 font-medium text-gray-800">Juan Díaz</span>
+          <svg class="ml-1 h-4 w-4 text-gray-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Logout Button -->
+      <button class="flex items-center text-red-500 hover:text-red-600 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+        Salir
+      </button>
+    </div>
+  </div>
+</header>
