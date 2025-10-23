@@ -56,11 +56,16 @@ BEGIN
             ELSE 'Stock Normal'
         END AS Estado_Stock,
         CASE
-            WHEN l.fecha_expiracion < GETDATE() THEN 'Expirado'
-            WHEN l.fecha_expiracion <= DATEADD(MONTH, 3, GETDATE()) THEN 'Próximo a Expirar'
+            WHEN l.fecha_expiracion IS NULL THEN 'Vencido'
+            WHEN l.fecha_expiracion < GETDATE() THEN 'Vencido'
+            WHEN DATEDIFF(DAY, GETDATE(), l.fecha_expiracion) <= 0 THEN 'Vencido'
+            WHEN DATEDIFF(DAY, GETDATE(), l.fecha_expiracion) < 90 THEN 'Advertencia'
             ELSE 'Vigente'
         END AS Estado_Expiracion,
-        DATEDIFF(DAY, GETDATE(), l.fecha_expiracion) AS Dias_Para_Expiracion
+        CASE
+            WHEN l.fecha_expiracion IS NULL THEN NULL
+            ELSE DATEDIFF(DAY, GETDATE(), l.fecha_expiracion)
+        END AS Dias_Para_Expiracion
     FROM
         Inventario_Almacen ia
         INNER JOIN Lote l ON ia.id_lote = l.id
