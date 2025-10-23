@@ -64,7 +64,7 @@ export class Rest {
   }
 
   eliminarUsuario(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/usuarios/${id}`);
+    return this.http.delete(`${this.apiUrl}/usuarios/${id}`, { responseType: 'text' });
   }
 
   // ==================== REACTIVOS ====================
@@ -97,7 +97,7 @@ export class Rest {
   }
 
   eliminarReactivo(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/reactivos/${id}`);
+    return this.http.delete(`${this.apiUrl}/reactivos/${id}`, { responseType: 'text' });
   }
 
   // ==================== LOTES ====================
@@ -150,7 +150,7 @@ export class Rest {
   }
 
   eliminarLote(id: number): Observable<any> {
-    return this.http.delete(`${this.restUrl}/lotes/${id}`);
+    return this.http.delete(`${this.restUrl}/lotes/${id}`, { responseType: 'text' });
   }
 
   // ==================== MOVIMIENTOS ====================
@@ -190,7 +190,7 @@ export class Rest {
   }
 
   eliminarMovimiento(id: number): Observable<any> {
-    return this.http.delete(`${this.restUrl}/movimientos/${id}`);
+    return this.http.delete(`${this.restUrl}/movimientos/${id}`, { responseType: 'text' });
   }
 
   // ==================== MOVIMIENTO LINEAS ====================
@@ -227,7 +227,7 @@ export class Rest {
   }
 
   eliminarMovimientolinea(id: number): Observable<any> {
-    return this.http.delete(`${this.restUrl}/movimientolineas/${id}`);
+    return this.http.delete(`${this.restUrl}/movimientolineas/${id}`, { responseType: 'text' });
   }
 
   // ==================== CONSUMOS ====================
@@ -260,7 +260,7 @@ export class Rest {
   }
 
   eliminarConsumo(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/consumos/${id}`);
+    return this.http.delete(`${this.apiUrl}/consumos/${id}`, { responseType: 'text' });
   }
 
   // ==================== COMPRAS ====================
@@ -293,7 +293,7 @@ export class Rest {
   }
 
   eliminarCompra(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/compras/${id}`);
+    return this.http.delete(`${this.apiUrl}/compras/${id}`, { responseType: 'text' });
   }
 
   // ==================== ALMACENES ====================
@@ -318,7 +318,7 @@ export class Rest {
   }
 
   eliminarAlmacen(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/almacenes/${id}`);
+    return this.http.delete(`${this.apiUrl}/almacenes/${id}`, { responseType: 'text' });
   }
 
   // ==================== PROVEEDORES ====================
@@ -347,7 +347,7 @@ export class Rest {
   }
 
   eliminarProveedor(id: number): Observable<any> {
-    return this.http.delete(`${this.restUrl}/proveedores/${id}`);
+    return this.http.delete(`${this.restUrl}/proveedores/${id}`, { responseType: 'text' });
   }
 
   // ==================== DEPARTAMENTOS ====================
@@ -372,7 +372,7 @@ export class Rest {
   }
 
   eliminarDepartamento(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/departamentos/${id}`);
+    return this.http.delete(`${this.apiUrl}/departamentos/${id}`, { responseType: 'text' });
   }
 
   // ==================== MARCAS ====================
@@ -401,7 +401,7 @@ export class Rest {
   }
 
   eliminarMarca(id: number): Observable<any> {
-    return this.http.delete(`${this.restUrl}/marcas/${id}`);
+    return this.http.delete(`${this.restUrl}/marcas/${id}`, { responseType: 'text' });
   }
 
   // ==================== TIPO ACCIONES ====================

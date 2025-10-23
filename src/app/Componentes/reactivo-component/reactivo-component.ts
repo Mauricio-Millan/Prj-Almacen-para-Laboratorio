@@ -50,7 +50,7 @@ export class ReactivoComponent implements OnInit {
   cargarMarcas(): void {
     this.restService.obtenerMarcas().subscribe({
       next: (data) => {
-        this.marcas.set(data);
+        this.marcas.set([...data]); // Crear nueva referencia
         // Filtrar solo marcas activas para el formulario
         this.marcasActivas.set(data.filter(m => m.estado));
       },
@@ -64,8 +64,9 @@ export class ReactivoComponent implements OnInit {
     this.cargando.set(true);
     this.restService.obtenerReactivos().subscribe({
       next: (data) => {
-        this.reactivos.set(data);
-        this.reactivosFiltrados.set(data);
+        console.log('Reactivos cargados:', data);
+        this.reactivos.set([...data]); // Crear nueva referencia
+        this.buscar(); // Aplicar filtro actual
         this.cargando.set(false);
       },
       error: (error) => {
@@ -79,7 +80,7 @@ export class ReactivoComponent implements OnInit {
   buscar(): void {
     const termino = this.busqueda().toLowerCase().trim();
     if (!termino) {
-      this.reactivosFiltrados.set(this.reactivos());
+      this.reactivosFiltrados.set([...this.reactivos()]); // Crear nueva referencia
       return;
     }
 
@@ -92,7 +93,7 @@ export class ReactivoComponent implements OnInit {
 
   limpiarBusqueda(): void {
     this.busqueda.set('');
-    this.reactivosFiltrados.set(this.reactivos());
+    this.reactivosFiltrados.set([...this.reactivos()]); // Crear nueva referencia
   }
 
   abrirModalNuevo(): void {
@@ -130,16 +131,25 @@ export class ReactivoComponent implements OnInit {
     const formValue = this.reactivoForm.value;
     
     // Encontrar la marca seleccionada
-    const marcaSeleccionada = this.marcas().find(m => m.id === formValue.idMarca);
+    const idMarcaSeleccionada = Number(formValue.idMarca);
+    const marcaSeleccionada = this.marcas().find(m => m.id === idMarcaSeleccionada);
     
-    const reactivo: Reactivo = {
-      id: formValue.id,
-      nombre: formValue.nombre,
-      idMarca: marcaSeleccionada!
-    };
+    if (!marcaSeleccionada) {
+      this.mostrarMensajeError('No se encontró la marca seleccionada');
+      this.cargando.set(false);
+      return;
+    }
+
+    console.log('Marca seleccionada:', marcaSeleccionada);
 
     if (this.modoEdicion()) {
-      // Actualizar
+      // Actualizar - enviar con id completo
+      const reactivo: Reactivo = {
+        id: formValue.id,
+        nombre: formValue.nombre,
+        idMarca: marcaSeleccionada
+      };
+      
       this.restService.actualizarReactivo(reactivo.id, reactivo).subscribe({
         next: () => {
           this.mostrarMensajeExito('Reactivo actualizado exitosamente');
@@ -153,10 +163,17 @@ export class ReactivoComponent implements OnInit {
         }
       });
     } else {
-      // Crear (sin enviar el id)
-      const { id, ...reactivoSinId } = reactivo;
-      this.restService.crearReactivo(reactivoSinId as Reactivo).subscribe({
-        next: () => {
+      // Crear - enviar sin id del reactivo, pero con objeto marca completo
+      const nuevoReactivo = {
+        nombre: formValue.nombre,
+        idMarca: marcaSeleccionada
+      };
+      
+      console.log('Creando reactivo:', nuevoReactivo);
+      
+      this.restService.crearReactivo(nuevoReactivo as any).subscribe({
+        next: (response) => {
+          console.log('Reactivo creado:', response);
           this.mostrarMensajeExito('Reactivo creado exitosamente');
           this.cerrarModal();
           this.cargarReactivos();

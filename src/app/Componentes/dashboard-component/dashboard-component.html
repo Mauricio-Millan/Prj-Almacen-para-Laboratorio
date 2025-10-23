@@ -1,269 +1,217 @@
-<!-- Main Content -->
-<main class="flex-1 overflow-y-auto p-5 bg-gray-100">
-  
-  @if (cargando()) {
-    <!-- Loading State -->
-    <div class="flex items-center justify-center h-96">
-      <div class="text-center">
-        <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-        <p class="mt-4 text-gray-600">Cargando datos del dashboard...</p>
-      </div>
-    </div>
-  } @else if (error()) {
-    <!-- Error State -->
-    <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-      <div class="flex">
-        <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-        </svg>
-        <div class="ml-3">
-          <h3 class="text-sm font-medium text-red-800">Error al cargar los datos</h3>
-          <p class="mt-2 text-sm text-red-700">{{ error() }}</p>
-          <button (click)="cargarDatos()" class="mt-3 text-sm font-medium text-red-600 hover:text-red-500">
-            Reintentar
-          </button>
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-5 bg-gray-100">
+      <!-- Header with Almacen Selector -->
+      <div class="mb-6 bg-white rounded-lg shadow p-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-2xl font-bold text-gray-800">Dashboard</h1>
+            @if (almacenInfo()) {
+              <p class="text-sm text-gray-600 mt-1">
+                {{ almacenInfo()!.nombreAlmacen }} - {{ almacenInfo()!.direccion }}
+              </p>
+            }
+          </div>
+          <div class="flex items-center gap-3">
+            <label for="almacenSelector" class="text-sm font-medium text-gray-700">
+              Seleccionar Almacén:
+            </label>
+            <select 
+              id="almacenSelector"
+              [value]="almacenSeleccionado()"
+              (change)="onAlmacenChange($event)"
+              class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              @for (almacen of almacenes(); track almacen.id) {
+                <option [value]="almacen.id">{{ almacen.nombre }}</option>
+              }
+            </select>
+          </div>
         </div>
       </div>
-    </div>
-  } @else {
-    <!-- Dashboard Content -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
-      @for (card of statsCards(); track card.title) {
-        <div class="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow duration-200">
-          <div class="flex justify-between">
-            <div>
-              <h3 class="text-gray-500 font-medium">{{ card.title }}</h3>
-              <p class="text-2xl font-bold text-gray-800">{{ card.value }}</p>
+
+      <!-- Loading State -->
+      @if (cargando()) {
+        <div class="flex items-center justify-center py-12">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        </div>
+      }
+
+      <!-- Error State -->
+      @if (error() && !cargando()) {
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+          <p class="text-red-800">{{ error() }}</p>
+        </div>
+      }
+
+      <!-- Dashboard Content -->
+      @if (!cargando() && !error()) {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+          <!-- Reactivos Totales -->
+          <div class="bg-white rounded-lg shadow p-5">
+            <div class="flex justify-between">
+              <div>
+                <h3 class="text-gray-500 font-medium">Reactivos Totales</h3>
+                <p class="text-2xl font-bold text-gray-800">{{ totalReactivos() }}</p>
+              </div>
+              <div class="rounded-full bg-blue-100 p-3">
+                <svg class="h-6 w-6 text-blue-700" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                </svg>
+              </div>
             </div>
-            <div [class]="'rounded-full p-3 ' + card.bgColor">
-              @switch (card.icon) {
-                @case ('search') {
-                  <svg class="h-6 w-6" [class]="card.textColor" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                  </svg>
-                }
-                @case ('clock') {
-                  <svg class="h-6 w-6" [class]="card.textColor" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                }
-                @case ('activity') {
-                  <svg class="h-6 w-6" [class]="card.textColor" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                  </svg>
-                }
-                @case ('alert') {
-                  <svg class="h-6 w-6" [class]="card.textColor" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                  </svg>
-                }
+            <div class="flex items-center mt-4">
+              <span class="text-gray-500 text-sm">Total de items en inventario</span>
+            </div>
+          </div>
+
+          <!-- Por Vencer -->
+          <div class="bg-white rounded-lg shadow p-5">
+            <div class="flex justify-between">
+              <div>
+                <h3 class="text-gray-500 font-medium">Por Vencer</h3>
+                <p class="text-2xl font-bold text-gray-800">{{ reactivosPorVencer() }}</p>
+              </div>
+              <div class="rounded-full bg-yellow-100 p-3">
+                <svg class="h-6 w-6 text-yellow-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-yellow-600 text-sm">Vencen en 30 días o menos</span>
+            </div>
+          </div>
+
+          <!-- Bajo Stock -->
+          <div class="bg-white rounded-lg shadow p-5">
+            <div class="flex justify-between">
+              <div>
+                <h3 class="text-gray-500 font-medium">Bajo Stock</h3>
+                <p class="text-2xl font-bold text-gray-800">{{ reactivosBajoStock() }}</p>
+              </div>
+              <div class="rounded-full bg-orange-100 p-3">
+                <svg class="h-6 w-6 text-orange-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              </div>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-orange-600 text-sm">Stock bajo o crítico</span>
+            </div>
+          </div>
+
+          <!-- Valor Total -->
+          <div class="bg-white rounded-lg shadow p-5">
+            <div class="flex justify-between">
+              <div>
+                <h3 class="text-gray-500 font-medium">Valor Total</h3>
+                <p class="text-2xl font-bold text-gray-800">{{ formatearPrecio(valorTotalInventario()) }}</p>
+              </div>
+              <div class="rounded-full bg-green-100 p-3">
+                <svg class="h-6 w-6 text-green-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-green-600 text-sm">Valorización del inventario</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity & Inventory Status -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- Reactivos Recientes -->
+          <div class="bg-white rounded-lg shadow">
+            <div class="px-5 py-4 border-b border-gray-200">
+              <h2 class="font-semibold text-gray-800">Reactivos Recientes</h2>
+            </div>
+            <div class="p-5">
+              @if (reactivosRecientes().length > 0) {
+                <div class="space-y-4">
+                  @for (item of reactivosRecientes(); track item.idInventario) {
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0">
+                        <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                          <svg class="h-5 w-5 text-blue-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="ml-4 flex-1">
+                        <div class="flex items-center justify-between">
+                          <p class="text-sm font-medium text-gray-900">{{ item.nombreReactivo }}</p>
+                          <span [class]="getEstadoClass(item.estadoStock)" class="px-2 py-1 text-xs font-semibold rounded-full">
+                            {{ item.estadoStock }}
+                          </span>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1">Marca: {{ item.marca }}</p>
+                        <div class="flex items-center gap-4 mt-1">
+                          <p class="text-xs text-gray-500">Stock: {{ item.stockActual }}</p>
+                          <p class="text-xs text-gray-500">{{ formatearPrecio(item.precioUnitario) }}</p>
+                          @if (item.diasParaExpiracion !== null) {
+                            <p class="text-xs" [class.text-red-600]="item.diasParaExpiracion <= 30" [class.text-gray-500]="item.diasParaExpiracion > 30">
+                              Vence en {{ item.diasParaExpiracion }} días
+                            </p>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </div>
+              } @else {
+                <p class="text-gray-500 text-center py-8">No hay reactivos para mostrar</p>
               }
             </div>
           </div>
-          <div class="flex items-center mt-4">
-            <span [class]="card.trendPositive ? 'text-green-500' : 'text-red-500'" class="flex items-center">
-              @if (card.trendPositive) {
-                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
+
+          <!-- Estado del Inventario -->
+          <div class="bg-white rounded-lg shadow">
+            <div class="px-5 py-4 border-b border-gray-200">
+              <h2 class="font-semibold text-gray-800">Estado del Inventario</h2>
+            </div>
+            <div class="p-5">
+              @if (inventario().length > 0) {
+                <div class="overflow-x-auto">
+                  <table class="min-w-full">
+                    <thead>
+                      <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Reactivo
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Cantidad
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Estado
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                      @for (item of inventario().slice(0, 8); track item.idInventario) {
+                        <tr>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-gray-900">{{ item.nombreReactivo }}</div>
+                            <div class="text-xs text-gray-500">{{ item.marca }}</div>
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900">{{ item.stockActual }}</div>
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            <span [class]="getEstadoClass(item.estadoStock)" class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+                              {{ item.estadoStock }}
+                            </span>
+                          </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
               } @else {
-                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 13L12 18L17 13M12 6V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
+                <p class="text-gray-500 text-center py-8">No hay datos de inventario</p>
               }
-              <span class="ml-1">{{ card.trend }}%</span>
-            </span>
-            <span class="text-gray-500 text-sm ml-2">{{ card.trendText }}</span>
+            </div>
           </div>
         </div>
       }
-    </div>
-
-    <!-- Recent Activity & Inventory Status -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-      
-      <!-- Reactivos Recientes -->
-      <div class="bg-white rounded-lg shadow">
-        <div class="px-5 py-4 border-b border-gray-200 flex justify-between items-center">
-          <h2 class="font-semibold text-gray-800">Reactivos Recientes</h2>
-          <span class="text-xs text-gray-500">{{ reactivosRecientes().length }} de {{ reactivosTotales() }}</span>
-        </div>
-        <div class="p-5">
-          @if (reactivosRecientes().length === 0) {
-            <div class="text-center py-8 text-gray-500">
-              <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-              </svg>
-              <p class="mt-2">No hay reactivos registrados</p>
-            </div>
-          } @else {
-            <div class="space-y-4">
-              @for (reactivo of reactivosRecientes(); track reactivo.id) {
-                <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                  <div class="flex-shrink-0">
-                    <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">
-                      {{ reactivo.nombre.charAt(0).toUpperCase() }}
-                    </div>
-                  </div>
-                  <div class="ml-4 flex-1">
-                    <p class="text-sm font-medium text-gray-900">{{ reactivo.nombre }}</p>
-                    <p class="text-xs text-gray-500">Marca: {{ reactivo.idMarca.nombre }}</p>
-                  </div>
-                  <div>
-                    @if (reactivo.idMarca.estado) {
-                      <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Activo</span>
-                    } @else {
-                      <span class="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800">Inactivo</span>
-                    }
-                  </div>
-                </div>
-              }
-            </div>
-            <button class="mt-5 w-full py-2 text-sm text-blue-600 hover:text-blue-800 font-medium">
-              Ver todos los reactivos
-            </button>
-          }
-        </div>
-      </div>
-
-      <!-- Lotes Próximos a Vencer -->
-      <div class="bg-white rounded-lg shadow">
-        <div class="px-5 py-4 border-b border-gray-200 flex justify-between items-center">
-          <h2 class="font-semibold text-gray-800">Lotes Próximos a Vencer</h2>
-          <span class="text-xs text-gray-500">{{ lotesProximosVencer() }} lotes</span>
-        </div>
-        <div class="p-5">
-          @if (lotesVencimientoProximo().length === 0) {
-            <div class="text-center py-8 text-gray-500">
-              <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <p class="mt-2">No hay lotes próximos a vencer</p>
-            </div>
-          } @else {
-            <div class="overflow-x-auto">
-              <table class="min-w-full">
-                <thead>
-                  <tr>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Reactivo
-                    </th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Cantidad
-                    </th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Vencimiento
-                    </th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Estado
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200">
-                  @for (lote of lotesVencimientoProximo(); track lote.id) {
-                    <tr class="hover:bg-gray-50">
-                      <td class="px-4 py-3 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">{{ lote.idReactivo.nombre }}</div>
-                        <div class="text-xs text-gray-500">{{ lote.idReactivo.idMarca.nombre }}</div>
-                      </td>
-                      <td class="px-4 py-3 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">{{ lote.cantidadInicial }}</div>
-                      </td>
-                      <td class="px-4 py-3 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">{{ formatearFecha(lote.fechaExpiracion) }}</div>
-                        <div class="text-xs" [class]="getColorEstadoLote(diasParaVencer(lote.fechaExpiracion))">
-                          @if (diasParaVencer(lote.fechaExpiracion) < 0) {
-                            Vencido
-                          } @else {
-                            {{ diasParaVencer(lote.fechaExpiracion) }} días restantes
-                          }
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 whitespace-nowrap">
-                        @if (diasParaVencer(lote.fechaExpiracion) < 0) {
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                            Vencido
-                          </span>
-                        } @else if (diasParaVencer(lote.fechaExpiracion) <= 7) {
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                            Crítico
-                          </span>
-                        } @else if (diasParaVencer(lote.fechaExpiracion) <= 30) {
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                            Advertencia
-                          </span>
-                        } @else {
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            Normal
-                          </span>
-                        }
-                      </td>
-                    </tr>
-                  }
-                </tbody>
-              </table>
-            </div>
-            <button class="mt-5 w-full py-2 text-sm text-blue-600 hover:text-blue-800 font-medium">
-              Ver todos los lotes
-            </button>
-          }
-        </div>
-      </div>
-      
-    </div>
-
-    <!-- Movimientos del Día -->
-    <div class="mt-5 bg-white rounded-lg shadow">
-      <div class="px-5 py-4 border-b border-gray-200 flex justify-between items-center">
-        <h2 class="font-semibold text-gray-800">Movimientos del Día</h2>
-        <span class="text-xs text-gray-500">{{ movimientosHoy() }} movimientos</span>
-      </div>
-      <div class="p-5">
-        @if (movimientos().length === 0) {
-          <div class="text-center py-8 text-gray-500">
-            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-            </svg>
-            <p class="mt-2">No hay movimientos registrados hoy</p>
-          </div>
-        } @else {
-          <div class="space-y-3">
-            @for (movimiento of movimientos().slice(0, 5); track movimiento.id) {
-              <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition-colors duration-150">
-                <div class="flex-shrink-0">
-                  <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
-                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="ml-4 flex-1">
-                  <div class="flex items-start justify-between">
-                    <div>
-                      <p class="text-sm font-medium text-gray-900">{{ movimiento.idTipoAccion.nombre }}</p>
-                      <p class="text-xs text-gray-500 mt-1">
-                        Usuario: {{ movimiento.idUsuario.nombre }}
-                      </p>
-                      @if (movimiento.referencia) {
-                        <p class="text-xs text-gray-500">Ref: {{ movimiento.referencia }}</p>
-                      }
-                    </div>
-                    <span class="text-xs text-gray-400">{{ formatearFecha(movimiento.fecha) }}</span>
-                  </div>
-                  @if (movimiento.comentario) {
-                    <p class="text-xs text-gray-600 mt-2">{{ movimiento.comentario }}</p>
-                  }
-                </div>
-              </div>
-            }
-          </div>
-          @if (movimientos().length > 5) {
-            <button class="mt-5 w-full py-2 text-sm text-blue-600 hover:text-blue-800 font-medium">
-              Ver todos los movimientos ({{ movimientos().length }})
-            </button>
-          }
-        }
-      </div>
-    </div>
-  }
-</main>
+    </main>

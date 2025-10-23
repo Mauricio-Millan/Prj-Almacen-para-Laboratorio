@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SideBarComponent } from '../side-bar-component/side-bar-component';
 import { NavbarComponent } from '../navbar-component/navbar-component';
@@ -8,13 +8,8 @@ import { AuthService } from '../../Servicios/auth.service';
 import { 
   StatsCard, 
   MovimientoResumen, 
-  Alerta,
-  Reactivo,
-  Lote,
-  Movimiento,
-  Movimientolinea
+  Alerta
 } from '../../Modelos/interfaces';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-inicio',
@@ -63,15 +58,11 @@ export class InicioComponent implements OnInit {
     this.cargando.set(true);
     this.error.set(null);
 
-    // Cargar todos los datos en paralelo
-    forkJoin({
-      reactivos: this.restService.obtenerReactivos(),
-      lotes: this.restService.obtenerLotes(),
-      movimientos: this.restService.obtenerMovimientos(),
-      movimientolineas: this.restService.obtenerMovimientolineas()
-    }).subscribe({
-      next: (datos) => {
-        this.procesarDatos(datos);
+    // Cargar datos del inventario del almacén 1
+    this.restService.obtenerInventarioDetallado(1).subscribe({
+      next: (data: any) => {
+        console.log('Datos de inventario recibidos:', data);
+        this.procesarDatosInventario(data);
         this.cargando.set(false);
       },
       error: (err) => {
@@ -82,200 +73,115 @@ export class InicioComponent implements OnInit {
     });
   }
 
-  private procesarDatos(datos: {
-    reactivos: Reactivo[];
-    lotes: Lote[];
-    movimientos: Movimiento[];
-    movimientolineas: Movimientolinea[];
-  }): void {
-    // Procesar estadísticas
-    this.calcularEstadisticas(datos);
-
-    // Procesar movimientos recientes
-    this.procesarMovimientosRecientes(datos.movimientos, datos.movimientolineas);
-
-    // Generar alertas
-    this.generarAlertas(datos.lotes, datos.reactivos);
+  private procesarDatosInventario(data: any): void {
+    const inventario = data?.inventarioDetallado || [];
+    
+    // Calcular estadísticas desde el inventario
+    this.calcularEstadisticasInventario(inventario);
+    
+    // Generar movimientos recientes simulados (ya que no vienen en esta API)
+    this.generarMovimientosRecientes(inventario);
+    
+    // Generar alertas desde el inventario
+    this.generarAlertasInventario(inventario);
   }
 
-  private calcularEstadisticas(datos: {
-    reactivos: Reactivo[];
-    lotes: Lote[];
-    movimientos: Movimiento[];
-    movimientolineas: Movimientolinea[];
-  }): void {
-    const ahora = new Date();
-    const sesentaDiasAdelante = new Date();
-    sesentaDiasAdelante.setDate(ahora.getDate() + 60);
+  private calcularEstadisticasInventario(inventario: any[]): void {
+    // Total de reactivos únicos
+    const totalReactivos = inventario.length;
 
-    // Total de reactivos
-    const totalReactivos = datos.reactivos.length;
+    // Items con stock bajo (estadoStock = 'Bajo' o 'Crítico')
+    const stockBajo = inventario.filter(item => 
+      item.estadoStock === 'Bajo' || item.estadoStock === 'Crítico'
+    ).length;
 
-    // Stock disponible (suma de cantidades iniciales de lotes activos)
-    const stockDisponible = datos.lotes
-      .filter(lote => lote.estado)
-      .reduce((sum, lote) => sum + lote.cantidadInicial, 0);
+    // Items por vencer (estadoExpiracion != 'Óptimo')
+    const porVencer = inventario.filter(item => 
+      item.estadoExpiracion === 'Por Vencer' || 
+      item.estadoExpiracion === 'Próximo a Vencer' ||
+      item.estadoExpiracion === 'Vencido'
+    ).length;
 
-    // Lotes por vencer (en los próximos 30 días)
-    const lotesPorVencer = datos.lotes.filter(lote => {
-      if (!lote.estado) return false;
-      const fechaExpiracion = new Date(lote.fechaExpiracion);
-      return fechaExpiracion >= ahora && fechaExpiracion <= sesentaDiasAdelante;
-    }).length;
+    // Movimientos del día (simulado, ya que no viene en esta API)
+    const movimientosHoy = 0; // Placeholder
 
-    // Stock bajo (reactivos con menos de 50 unidades totales)
-    const reactivosConStockBajo = new Set<number>();
-    const stockPorReactivo = new Map<number, number>();
-
-    datos.lotes.forEach(lote => {
-      if (lote.estado) {
-        const reactivoId = lote.idReactivo.id;
-        const stockActual = stockPorReactivo.get(reactivoId) || 0;
-        stockPorReactivo.set(reactivoId, stockActual + lote.cantidadInicial);
-      }
-    });
-
-    stockPorReactivo.forEach((cantidad, reactivoId) => {
-      if (cantidad < 50) {
-        reactivosConStockBajo.add(reactivoId);
-      }
-    });
-
-    const stockBajo = reactivosConStockBajo.size;
-
-    this.statsCards.set([
+    const cards: StatsCard[] = [
       {
-        titulo: 'Total Reactivos',
+        titulo: 'Reactivos Totales',
         valor: totalReactivos,
         color: 'blue',
         icono: '🧪'
       },
       {
-        titulo: 'Stock Disponible',
-        valor: Math.round(stockDisponible),
-        color: 'green',
-        icono: '📦'
-      },
-      {
-        titulo: 'Por Vencer',
-        valor: lotesPorVencer,
+        titulo: 'Stock Bajo',
+        valor: stockBajo,
         color: 'yellow',
         icono: '⚠️'
       },
       {
-        titulo: 'Stock Bajo',
-        valor: stockBajo,
+        titulo: 'Por Vencer',
+        valor: porVencer,
         color: 'red',
-        icono: '⬇️'
+        icono: '⏰'
+      },
+      {
+        titulo: 'Movimientos Hoy',
+        valor: movimientosHoy,
+        color: 'green',
+        icono: '📊'
       }
-    ]);
+    ];
+
+    this.statsCards.set(cards);
   }
 
-  private procesarMovimientosRecientes(
-    movimientos: Movimiento[],
-    movimientolineas: Movimientolinea[]
-  ): void {
-    // Ordenar movimientos por fecha (más recientes primero)
-    const movimientosOrdenados = [...movimientos]
-      .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
-      .slice(0, 10); // Tomar los 10 más recientes
+  private generarMovimientosRecientes(inventario: any[]): void {
+    // Generar movimientos basados en los últimos items del inventario
+    const movimientos: MovimientoResumen[] = inventario
+      .slice(0, 5)
+      .map((item, index) => ({
+        id: index + 1,
+        fecha: new Date().toLocaleDateString('es-PE'),
+        tipo: 'Inventario',
+        reactivo: item.nombreReactivo || 'Sin nombre',
+        cantidad: `${item.stockActual} unidades`,
+        usuario: 'Sistema',
+        colorTipo: 'blue' as const
+      }));
 
-    const movimientosResumen: MovimientoResumen[] = movimientosOrdenados.map(mov => {
-      // Buscar líneas de movimiento asociadas
-      const lineas = movimientolineas.filter(l => l.idMovimiento.id === mov.id);
-      
-      // Calcular cantidad total del movimiento
-      const cantidadTotal = lineas.reduce((sum, linea) => sum + Math.abs(linea.cantidadDelta), 0);
-      
-      // Obtener nombre del reactivo de la primera línea
-      const primerLinea = lineas[0];
-      const nombreReactivo = primerLinea?.idLote?.idReactivo?.nombre || 'N/A';
-
-      // Determinar color según tipo de acción
-      let colorTipo: 'green' | 'red' | 'blue' = 'blue';
-      const tipoAccion = mov.idTipoAccion.nombre.toLowerCase();
-      
-      if (tipoAccion.includes('compra') || tipoAccion.includes('ingreso')) {
-        colorTipo = 'green';
-      } else if (tipoAccion.includes('consumo') || tipoAccion.includes('salida')) {
-        colorTipo = 'red';
-      } else if (tipoAccion.includes('traslado') || tipoAccion.includes('transferencia')) {
-        colorTipo = 'blue';
-      }
-
-      // Formatear cantidad con signo
-      const signo = colorTipo === 'green' ? '+' : colorTipo === 'red' ? '-' : '';
-      const cantidadFormateada = `${signo}${cantidadTotal.toFixed(2)}L`;
-
-      return {
-        id: mov.id,
-        fecha: this.formatearFecha(mov.fecha),
-        tipo: mov.idTipoAccion.nombre,
-        reactivo: nombreReactivo,
-        cantidad: cantidadFormateada,
-        usuario: mov.idUsuario.nombre,
-        colorTipo
-      };
-    });
-
-    this.movimientosRecientes.set(movimientosResumen);
+    this.movimientosRecientes.set(movimientos);
   }
 
-  private generarAlertas(lotes: Lote[], reactivos: Reactivo[]): void {
-    const ahora = new Date();
-    const treintaDiasAdelante = new Date();
-    treintaDiasAdelante.setDate(ahora.getDate() + 30);
+  private generarAlertasInventario(inventario: any[]): void {
+    const alertas: Alerta[] = [];
 
-    const alertasGeneradas: Alerta[] = [];
-
-    // Alerta de vencimiento
-    const lotesProximosVencer = lotes.filter(lote => {
-      if (!lote.estado) return false;
-      const fechaExpiracion = new Date(lote.fechaExpiracion);
-      return fechaExpiracion >= ahora && fechaExpiracion <= treintaDiasAdelante;
-    }).length;
-
-    if (lotesProximosVencer > 0) {
-      alertasGeneradas.push({
+    // Alertas de stock bajo
+    const itemsBajoStock = inventario.filter(item => 
+      item.estadoStock === 'Bajo' || item.estadoStock === 'Crítico'
+    );
+    
+    if (itemsBajoStock.length > 0) {
+      alertas.push({
         tipo: 'warning',
-        titulo: 'Vencimiento:',
-        mensaje: `${lotesProximosVencer} lotes vencen en 30 días`
+        titulo: 'Stock Bajo',
+        mensaje: `${itemsBajoStock.length} reactivos con stock bajo o crítico`
       });
     }
 
-    // Alerta de stock crítico
-    const stockPorReactivo = new Map<number, number>();
-    lotes.forEach(lote => {
-      if (lote.estado) {
-        const reactivoId = lote.idReactivo.id;
-        const stockActual = stockPorReactivo.get(reactivoId) || 0;
-        stockPorReactivo.set(reactivoId, stockActual + lote.cantidadInicial);
-      }
-    });
-
-    let reactivosStockBajo = 0;
-    stockPorReactivo.forEach((cantidad) => {
-      if (cantidad < 10) {
-        reactivosStockBajo++;
-      }
-    });
-
-    if (reactivosStockBajo > 0) {
-      alertasGeneradas.push({
+    // Alertas de vencimiento
+    const itemsPorVencer = inventario.filter(item => 
+      item.estadoExpiracion === 'Por Vencer' || item.estadoExpiracion === 'Vencido'
+    );
+    
+    if (itemsPorVencer.length > 0) {
+      alertas.push({
         tipo: 'danger',
-        titulo: 'Stock crítico:',
-        mensaje: `${reactivosStockBajo} reactivos bajo stock mínimo`
+        titulo: 'Vencimiento',
+        mensaje: `${itemsPorVencer.length} reactivos por vencer o vencidos`
       });
     }
 
-    // Alerta recordatoria (ejemplo)
-    alertasGeneradas.push({
-      tipo: 'info',
-      titulo: 'Recordatorio:',
-      mensaje: 'Revisión mensual pendiente'
-    });
-
-    this.alertas.set(alertasGeneradas);
+    this.alertas.set(alertas);
   }
 
   private formatearFecha(fecha: string): string {

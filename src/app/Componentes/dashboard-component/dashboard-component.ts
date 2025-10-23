@@ -1,23 +1,13 @@
-import { Component, inject, signal, computed, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Rest } from '../../Servicios/rest';
-import { Reactivo, Lote, Movimiento, DashboardStats } from '../../Modelos/interfaces';
-
-interface StatsCard {
-  title: string;
-  value: number;
-  icon: string;
-  bgColor: string;
-  textColor: string;
-  trend: number;
-  trendText: string;
-  trendPositive: boolean;
-}
+import { Almacen, InventarioItem, AlmacenInfo } from '../../Modelos/interfaces';
 
 @Component({
   selector: 'app-dashboard-component',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './dashboard-component.html',
   styleUrls: ['./dashboard-component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -25,163 +15,135 @@ interface StatsCard {
 export class DashboardComponent implements OnInit {
   private readonly restService = inject(Rest);
 
-  // Signals para el estado del componente
-  readonly reactivos = signal<Reactivo[]>([]);
-  readonly lotes = signal<Lote[]>([]);
-  readonly movimientos = signal<Movimiento[]>([]);
-  readonly cargando = signal(true);
-  readonly error = signal<string | null>(null);
+  // Signals
+  almacenes = signal<Almacen[]>([]);
+  almacenSeleccionado = signal<number>(1); // Default to almacén ID 1
+  almacenInfo = signal<AlmacenInfo | null>(null);
+  inventario = signal<InventarioItem[]>([]);
+  resumen = signal<any>(null);
+  cargando = signal<boolean>(false);
+  error = signal<string>('');
 
-  // Computed signals para estadísticas derivadas
-  readonly reactivosTotales = computed(() => this.reactivos().length);
-  
-  readonly lotesProximosVencer = computed(() => {
-    const hoy = new Date();
-    const treintaDias = new Date();
-    treintaDias.setDate(treintaDias.getDate() + 30);
+  // Computed properties for dashboard statistics
+  totalReactivos = computed(() => {
+    const inv = this.inventario();
+    return Array.isArray(inv) ? inv.length : 0;
+  });
+
+  reactivosPorVencer = computed(() => {
+    const inv = this.inventario();
+    if (!Array.isArray(inv)) return 0;
     
-    return this.lotes().filter(lote => {
-      if (!lote.fechaExpiracion || !lote.estado) return false;
-      const fechaExp = new Date(lote.fechaExpiracion);
-      return fechaExp >= hoy && fechaExp <= treintaDias;
-    }).length;
-  });
-
-  readonly movimientosHoy = computed(() => {
-    const hoy = new Date().toISOString().split('T')[0];
-    return this.movimientos().filter(mov => {
-      const fechaMov = new Date(mov.fecha).toISOString().split('T')[0];
-      return fechaMov === hoy;
-    }).length;
-  });
-
-  readonly stockBajo = computed(() => {
-    // Lotes con cantidad inicial menor a 10 unidades (lógica de ejemplo)
-    return this.lotes().filter(lote => 
-      lote.estado && lote.cantidadInicial < 10
+    // Filtrar por items con diasParaExpiracion <= 30
+    return inv.filter(item => 
+      item.diasParaExpiracion !== null && 
+      item.diasParaExpiracion >= 0 && 
+      item.diasParaExpiracion <= 30
     ).length;
   });
 
-  readonly statsCards = computed<StatsCard[]>(() => [
-    {
-      title: 'Reactivos Totales',
-      value: this.reactivosTotales(),
-      icon: 'search',
-      bgColor: 'bg-blue-100',
-      textColor: 'text-blue-700',
-      trend: 3.5,
-      trendText: 'Desde el último mes',
-      trendPositive: true
-    },
-    {
-      title: 'Por Vencer',
-      value: this.lotesProximosVencer(),
-      icon: 'clock',
-      bgColor: 'bg-yellow-100',
-      textColor: 'text-yellow-700',
-      trend: -2.1,
-      trendText: 'Desde el último mes',
-      trendPositive: false
-    },
-    {
-      title: 'Movimientos Hoy',
-      value: this.movimientosHoy(),
-      icon: 'activity',
-      bgColor: 'bg-green-100',
-      textColor: 'text-green-700',
-      trend: 12.5,
-      trendText: 'Desde ayer',
-      trendPositive: true
-    },
-    {
-      title: 'Stock Bajo',
-      value: this.stockBajo(),
-      icon: 'alert',
-      bgColor: 'bg-red-100',
-      textColor: 'text-red-700',
-      trend: -5.3,
-      trendText: 'Desde la semana pasada',
-      trendPositive: true
-    }
-  ]);
-
-  readonly reactivosRecientes = computed(() => {
-    return this.reactivos().slice(0, 5);
+  reactivosBajoStock = computed(() => {
+    const inv = this.inventario();
+    if (!Array.isArray(inv)) return 0;
+    
+    // Filtrar por items con estadoStock 'Bajo' o 'Crítico'
+    return inv.filter(item => 
+      item.estadoStock === 'Bajo' || item.estadoStock === 'Crítico'
+    ).length;
   });
 
-  readonly lotesVencimientoProximo = computed(() => {
-    return this.lotes()
-      .filter(lote => lote.estado && lote.fechaExpiracion)
-      .sort((a, b) => {
-        const fechaA = new Date(a.fechaExpiracion).getTime();
-        const fechaB = new Date(b.fechaExpiracion).getTime();
-        return fechaA - fechaB;
-      })
+  valorTotalInventario = computed(() => {
+    const inv = this.inventario();
+    if (!Array.isArray(inv)) return 0;
+    
+    return inv.reduce((total, item) => 
+      total + (item.stockActual * item.precioUnitario), 0
+    );
+  });
+
+  // Reactivos recientes (últimos 5 items)
+  reactivosRecientes = computed(() => {
+    const inv = this.inventario();
+    if (!Array.isArray(inv)) return [];
+    
+    // Ordenar por ID descendente (asumiendo que IDs más altos son más recientes)
+    return [...inv]
+      .sort((a, b) => (b.idInventario || 0) - (a.idInventario || 0))
       .slice(0, 5);
   });
 
   ngOnInit(): void {
-    this.cargarDatos();
+    this.cargarAlmacenes();
+    this.cargarDatosAlmacen();
   }
 
-  cargarDatos(): void {
+  cargarAlmacenes(): void {
+    this.restService.obtenerAlmacenes().subscribe({
+      next: (almacenes) => {
+        this.almacenes.set(almacenes);
+      },
+      error: (err) => {
+        console.error('Error al cargar almacenes:', err);
+        this.error.set('Error al cargar los almacenes');
+      }
+    });
+  }
+
+  cargarDatosAlmacen(): void {
+    const idAlmacen = this.almacenSeleccionado();
+    
+    if (!idAlmacen) {
+      return;
+    }
+
     this.cargando.set(true);
-    this.error.set(null);
+    this.error.set('');
 
-    // Cargar reactivos
-    this.restService.obtenerReactivos().subscribe({
-      next: (data) => this.reactivos.set(data),
-      error: (err) => {
-        console.error('Error al cargar reactivos:', err);
-        this.error.set('Error al cargar los datos de reactivos');
-      }
-    });
-
-    // Cargar lotes
-    this.restService.obtenerLotes().subscribe({
-      next: (data) => this.lotes.set(data),
-      error: (err) => {
-        console.error('Error al cargar lotes:', err);
-        this.error.set('Error al cargar los datos de lotes');
-      }
-    });
-
-    // Cargar movimientos
-    this.restService.obtenerMovimientos().subscribe({
-      next: (data) => {
-        this.movimientos.set(data);
+    this.restService.obtenerInventarioDetallado(idAlmacen).subscribe({
+      next: (data: any) => {
+        console.log('Datos del almacén recibidos:', data);
+        
+        // El backend retorna: { almacenInfo, inventarioDetallado, resumen }
+        const almacenInfoData: AlmacenInfo | null = data?.almacenInfo || null;
+        const inventarioArray: InventarioItem[] = data?.inventarioDetallado || [];
+        const resumenData = data?.resumen || null;
+        
+        this.almacenInfo.set(almacenInfoData);
+        this.inventario.set(inventarioArray);
+        this.resumen.set(resumenData);
         this.cargando.set(false);
       },
       error: (err) => {
-        console.error('Error al cargar movimientos:', err);
-        this.error.set('Error al cargar los datos de movimientos');
+        console.error('Error al cargar datos del almacén:', err);
+        this.error.set('Error al cargar los datos del almacén');
         this.cargando.set(false);
       }
     });
   }
 
-  formatearFecha(fecha: string): string {
-    if (!fecha) return 'N/A';
-    const date = new Date(fecha);
-    return date.toLocaleDateString('es-ES', { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
-    });
+  onAlmacenChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const idAlmacen = parseInt(select.value, 10);
+    this.almacenSeleccionado.set(idAlmacen);
+    this.cargarDatosAlmacen();
   }
 
-  diasParaVencer(fechaExpiracion: string): number {
-    if (!fechaExpiracion) return 0;
-    const hoy = new Date();
-    const fechaExp = new Date(fechaExpiracion);
-    const diferencia = fechaExp.getTime() - hoy.getTime();
-    return Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+  getEstadoClass(estado: string): string {
+    const clases: { [key: string]: string } = {
+      'Óptimo': 'bg-green-100 text-green-800',
+      'Bueno': 'bg-blue-100 text-blue-800',
+      'Bajo': 'bg-yellow-100 text-yellow-800',
+      'Crítico': 'bg-red-100 text-red-800'
+    };
+    return clases[estado] || 'bg-gray-100 text-gray-800';
   }
 
-  getColorEstadoLote(dias: number): string {
-    if (dias < 0) return 'text-red-600';
-    if (dias <= 7) return 'text-red-500';
-    if (dias <= 30) return 'text-yellow-500';
-    return 'text-green-500';
+  formatearPrecio(precio: number): string {
+    return new Intl.NumberFormat('es-PE', {
+      style: 'currency',
+      currency: 'PEN'
+    }).format(precio);
   }
 }
+
+

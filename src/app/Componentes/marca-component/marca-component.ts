@@ -50,8 +50,9 @@ export class MarcaComponent implements OnInit {
     this.cargando.set(true);
     this.restService.obtenerMarcas().subscribe({
       next: (data) => {
-        this.marcas.set(data);
-        this.marcasFiltradas.set(data);
+        console.log('Marcas cargadas:', data);
+        this.marcas.set([...data]); // Crear nueva referencia
+        this.buscar(); // Aplicar filtro actual
         this.cargando.set(false);
       },
       error: (error) => {
@@ -65,7 +66,7 @@ export class MarcaComponent implements OnInit {
   buscar(): void {
     const termino = this.busqueda().toLowerCase().trim();
     if (!termino) {
-      this.marcasFiltradas.set(this.marcas());
+      this.marcasFiltradas.set([...this.marcas()]); // Crear nueva referencia
       return;
     }
 
@@ -78,7 +79,7 @@ export class MarcaComponent implements OnInit {
 
   limpiarBusqueda(): void {
     this.busqueda.set('');
-    this.marcasFiltradas.set(this.marcas());
+    this.marcasFiltradas.set([...this.marcas()]); // Crear nueva referencia
   }
 
   abrirModalNuevo(): void {
@@ -109,10 +110,16 @@ export class MarcaComponent implements OnInit {
     }
 
     this.cargando.set(true);
-    const marca: Marca = this.marcaForm.value;
+    const formValue = this.marcaForm.value;
 
     if (this.modoEdicion()) {
-      // Actualizar
+      // Actualizar - enviar con id
+      const marca: Marca = {
+        id: formValue.id,
+        nombre: formValue.nombre,
+        estado: formValue.estado
+      };
+      
       this.restService.actualizarMarca(marca.id, marca).subscribe({
         next: () => {
           this.mostrarMensajeExito('Marca actualizada exitosamente');
@@ -126,9 +133,13 @@ export class MarcaComponent implements OnInit {
         }
       });
     } else {
-      // Crear (sin enviar el id)
-      const { id, ...marcaSinId } = marca;
-      this.restService.crearMarca(marcaSinId as Marca).subscribe({
+      // Crear - enviar sin id (solo nombre y estado)
+      const nuevaMarca = {
+        nombre: formValue.nombre,
+        estado: formValue.estado
+      };
+      
+      this.restService.crearMarca(nuevaMarca as any).subscribe({
         next: () => {
           this.mostrarMensajeExito('Marca creada exitosamente');
           this.cerrarModal();

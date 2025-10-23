@@ -49,8 +49,9 @@ export class ProveedorComponent implements OnInit {
     this.cargando.set(true);
     this.restService.obtenerProveedores().subscribe({
       next: (data) => {
-        this.proveedores.set(data);
-        this.proveedoresFiltrados.set(data);
+        console.log('Proveedores cargados:', data);
+        this.proveedores.set([...data]); // Crear nueva referencia
+        this.buscar(); // Aplicar filtro actual
         this.cargando.set(false);
       },
       error: (error) => {
@@ -64,7 +65,7 @@ export class ProveedorComponent implements OnInit {
   buscar(): void {
     const termino = this.busqueda().toLowerCase().trim();
     if (!termino) {
-      this.proveedoresFiltrados.set(this.proveedores());
+      this.proveedoresFiltrados.set([...this.proveedores()]); // Crear nueva referencia
       return;
     }
 
@@ -78,7 +79,7 @@ export class ProveedorComponent implements OnInit {
 
   limpiarBusqueda(): void {
     this.busqueda.set('');
-    this.proveedoresFiltrados.set(this.proveedores());
+    this.proveedoresFiltrados.set([...this.proveedores()]); // Crear nueva referencia
   }
 
   abrirModalNuevo(): void {
@@ -110,10 +111,17 @@ export class ProveedorComponent implements OnInit {
     }
 
     this.cargando.set(true);
-    const proveedor: Proveedor = this.proveedorForm.value;
+    const formValue = this.proveedorForm.value;
 
     if (this.modoEdicion()) {
-      // Actualizar
+      // Actualizar - enviar con id
+      const proveedor: Proveedor = {
+        id: formValue.id,
+        nombre: formValue.nombre,
+        ruc: formValue.ruc,
+        telefono: formValue.telefono
+      };
+      
       this.restService.actualizarProveedor(proveedor.id, proveedor).subscribe({
         next: () => {
           this.mostrarMensajeExito('Proveedor actualizado exitosamente');
@@ -127,9 +135,14 @@ export class ProveedorComponent implements OnInit {
         }
       });
     } else {
-      // Crear (sin enviar el id)
-      const { id, ...proveedorSinId } = proveedor;
-      this.restService.crearProveedor(proveedorSinId as Proveedor).subscribe({
+      // Crear - enviar sin id
+      const nuevoProveedor = {
+        nombre: formValue.nombre,
+        ruc: formValue.ruc,
+        telefono: formValue.telefono
+      };
+      
+      this.restService.crearProveedor(nuevoProveedor as any).subscribe({
         next: () => {
           this.mostrarMensajeExito('Proveedor creado exitosamente');
           this.cerrarModal();
