@@ -187,5 +187,5 @@ SELECT * FROM TipoAccion;
 GO
 
 
-
+select * from Usuario
 

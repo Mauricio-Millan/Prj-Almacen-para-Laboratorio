@@ -263,7 +263,7 @@ BEGIN
         WHERE ISNULL(ia.stock, 0) < j.cantidad;
 
         IF EXISTS (SELECT 1 FROM @stock_invalido)
-            RAISERROR(N'Stock insuficiente en almacén origen', 16, 1);
+            RAISERROR(N'Stock insuficiente in almacén origen', 16, 1);
 
         -- 3. Crear MovimientoLinea
         INSERT INTO MovimientoLinea (id_movimiento, id_almacen_origen, id_almacen_destino, id_lote, cantidad_delta, precio_venta)
@@ -282,6 +282,153 @@ BEGIN
             @id_movimiento AS ID_Movimiento,
             COUNT(*) AS Total_Lotes_Trasladados,
             SUM(cantidad_delta) AS Total_Unidades
+        FROM MovimientoLinea
+        WHERE id_movimiento = @id_movimiento;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        DECLARE @ErrorSeverity INT;
+        DECLARE @ErrorState INT;
+
+        SELECT
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+
+        RAISERROR(@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH
+END
+GO
+
+-- ============================================================================
+-- PA_RegistrarAjusteMultiple
+-- Descripción: Registra ajustes de inventario de múltiples lotes en una sola transacción
+--              Permite ajustes positivos (incrementos) o negativos (decrementos)
+-- Parámetros:
+--   @id_usuario: ID del usuario que realiza el ajuste
+--   @id_almacen_origen: ID del almacén donde se realizará el ajuste
+--   @referencia: Referencia del movimiento
+--   @comentario: Comentario opcional que justifica el ajuste
+--   @ajustes_json: JSON con array de ajustes
+-- Ejemplo JSON:
+--   [{"id_lote":1,"cantidad_delta":5.5},{"id_lote":2,"cantidad_delta":-3.0},...]
+--   Nota: cantidad_delta positivo = incremento, negativo = decremento
+-- ============================================================================
+CREATE OR ALTER PROCEDURE PA_RegistrarAjusteMultiple
+    @id_usuario INT,
+    @id_almacen_origen INT,
+    @referencia NVARCHAR(255),
+    @comentario NVARCHAR(255) = NULL,
+    @ajustes_json NVARCHAR(MAX)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Validaciones básicas
+        IF NOT EXISTS (SELECT 1 FROM Usuario WHERE id = @id_usuario)
+            RAISERROR(N'Usuario no existe', 16, 1);
+
+        IF NOT EXISTS (SELECT 1 FROM Almacen WHERE id = @id_almacen_origen)
+            RAISERROR(N'Almacén no existe', 16, 1);
+
+        -- 1. Crear Movimiento
+        INSERT INTO Movimiento (fecha, id_usuario, id_tipo_accion, referencia, comentario, created_at)
+        VALUES (GETDATE(), @id_usuario, 4, @referencia, @comentario, GETDATE());
+
+        DECLARE @id_movimiento INT = SCOPE_IDENTITY();
+
+        -- 2. Validar stock suficiente para ajustes negativos
+        DECLARE @stock_invalido TABLE (id_lote INT, stock_actual DECIMAL(10,2), cantidad_solicitada DECIMAL(10,2));
+
+        INSERT INTO @stock_invalido
+        SELECT
+            j.id_lote,
+            ISNULL(ia.stock, 0),
+            ABS(j.cantidad_delta)
+        FROM OPENJSON(@ajustes_json)
+        WITH (
+            id_lote INT '$.id_lote',
+            cantidad_delta DECIMAL(10,2) '$.cantidad_delta'
+        ) j
+        LEFT JOIN Inventario_Almacen ia ON ia.id_lote = j.id_lote AND ia.id_almacen = @id_almacen_origen
+        WHERE j.cantidad_delta < 0  -- Solo validar ajustes negativos (decrementos)
+          AND ABS(j.cantidad_delta) > ISNULL(ia.stock, 0);
+
+        IF EXISTS (SELECT 1 FROM @stock_invalido)
+        BEGIN
+            SELECT
+                'Stock insuficiente para ajuste negativo' AS Error,
+                id_lote,
+                stock_actual,
+                cantidad_solicitada
+            FROM @stock_invalido;
+
+            RAISERROR(N'Stock insuficiente para realizar uno o más ajustes negativos', 16, 1);
+        END
+
+        -- 3. Validar que ajustes positivos no superen la cantidad inicial del lote
+        DECLARE @limite_excedido TABLE (id_lote INT, cantidad_inicial DECIMAL(10,2), stock_actual DECIMAL(10,2), nuevo_stock DECIMAL(10,2));
+
+        INSERT INTO @limite_excedido
+        SELECT
+            j.id_lote,
+            l.cantidad_inicial,
+            ISNULL(ia.stock, 0),
+            ISNULL(ia.stock, 0) + j.cantidad_delta
+        FROM OPENJSON(@ajustes_json)
+        WITH (
+            id_lote INT '$.id_lote',
+            cantidad_delta DECIMAL(10,2) '$.cantidad_delta'
+        ) j
+        INNER JOIN Lote l ON j.id_lote = l.id
+        LEFT JOIN Inventario_Almacen ia ON ia.id_lote = j.id_lote AND ia.id_almacen = @id_almacen_origen
+        WHERE j.cantidad_delta > 0  -- Solo validar ajustes positivos
+          AND (ISNULL(ia.stock, 0) + j.cantidad_delta) > l.cantidad_inicial;
+
+        IF EXISTS (SELECT 1 FROM @limite_excedido)
+        BEGIN
+            SELECT
+                'Ajuste positivo supera cantidad inicial del lote' AS Error,
+                id_lote,
+                cantidad_inicial,
+                stock_actual,
+                nuevo_stock
+            FROM @limite_excedido;
+
+            RAISERROR(N'Uno o más ajustes positivos superarían la cantidad inicial establecida en el lote', 16, 1);
+        END
+
+        -- 4. Crear MovimientoLinea para cada ajuste
+        INSERT INTO MovimientoLinea (id_movimiento, id_almacen_origen, id_almacen_destino, id_lote, cantidad_delta, precio_venta)
+        SELECT
+            @id_movimiento,
+            @id_almacen_origen,
+            NULL,
+            id_lote,
+            cantidad_delta,
+            NULL
+        FROM OPENJSON(@ajustes_json)
+        WITH (
+            id_lote INT '$.id_lote',
+            cantidad_delta DECIMAL(10,2) '$.cantidad_delta'
+        );
+
+        -- 5. Retornar información del ajuste
+        SELECT
+            @id_movimiento AS ID_Movimiento,
+            COUNT(*) AS Total_Lotes_Ajustados,
+            SUM(CASE WHEN cantidad_delta > 0 THEN 1 ELSE 0 END) AS Ajustes_Positivos,
+            SUM(CASE WHEN cantidad_delta < 0 THEN 1 ELSE 0 END) AS Ajustes_Negativos,
+            SUM(CASE WHEN cantidad_delta > 0 THEN cantidad_delta ELSE 0 END) AS Total_Incrementos,
+            SUM(CASE WHEN cantidad_delta < 0 THEN ABS(cantidad_delta) ELSE 0 END) AS Total_Decrementos,
+            SUM(cantidad_delta) AS Delta_Neto
         FROM MovimientoLinea
         WHERE id_movimiento = @id_movimiento;
 
@@ -536,7 +683,12 @@ PRINT '   - Registra un traslado de múltiples lotes entre almacenes';
 PRINT '   - Parámetros: @id_usuario, @id_almacen_origen, @id_almacen_destino,';
 PRINT '                 @referencia, @comentario, @traslados_json';
 PRINT '';
-PRINT '4. PA_ObtenerLineaTiempoUsuario (TRAZABILIDAD)';
+PRINT '4. PA_RegistrarAjusteMultiple';
+PRINT '   - Registra ajustes de inventario de múltiples lotes';
+PRINT '   - Parámetros: @id_usuario, @id_almacen_origen, @referencia,';
+PRINT '                 @comentario, @ajustes_json';
+PRINT '';
+PRINT '5. PA_ObtenerLineaTiempoUsuario (TRAZABILIDAD)';
 PRINT '   - Obtiene la línea de tiempo completa de actividades de un usuario';
 PRINT '   - Parámetros: @id_usuario, @fecha_inicio (opcional),';
 PRINT '                 @fecha_fin (opcional), @limite (opcional, default 50)';

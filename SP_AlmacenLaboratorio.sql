@@ -76,7 +76,7 @@ BEGIN
         AND (@nombre_reactivo IS NULL OR r.nombre LIKE '%' + @nombre_reactivo + '%')
         AND l.estado = 1
     ORDER BY
-        r.nombre, l.id;
+        l.fecha_expiracion ASC, r.nombre, l.id;
 
     -- 3. Resumen del almacén
     SELECT
@@ -491,3 +491,4 @@ PRINT '========================================================================'
 GO
 EXEC PA_ConsultarInventarioAlmacenDetallado @id_almacen = 1;
 
+exec PA_ConsultarHistorialMovimientos @id_almacen = 1
