@@ -237,5 +237,164 @@ public class Movimiento_Controller {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
         }
     }
+
+    /**
+     * Registra un ajuste múltiple de inventario de lotes
+     *
+     * Endpoint: POST /Rest_AlmacenLaboratorio/api/movimientos/ajuste-multiple
+     *
+     * Body ejemplo:
+     * {
+     *   "idUsuario": 1,
+     *   "idAlmacenOrigen": 1,
+     *   "referencia": "AJUSTE-2025-001",
+     *   "comentario": "Ajuste por inventario físico",
+     *   "ajustes": [
+     *     {
+     *       "id_lote": 5,
+     *       "cantidad_delta": 10.5
+     *     },
+     *     {
+     *       "id_lote": 8,
+     *       "cantidad_delta": -5.0
+     *     }
+     *   ]
+     * }
+     *
+     * Nota: cantidad_delta puede ser:
+     * - Positivo: Incrementa el stock (ejemplo: 10.5 agrega 10.5 unidades)
+     * - Negativo: Decrementa el stock (ejemplo: -5.0 resta 5.0 unidades)
+     *
+     * Validaciones del procedimiento:
+     * - Para ajustes negativos: valida que haya stock suficiente
+     * - Para ajustes positivos: valida que no supere la cantidad inicial del lote
+     *
+     * Response ejemplo:
+     * {
+     *   "idMovimiento": 18,
+     *   "totalLotesAjustados": 2,
+     *   "ajustesPositivos": 1,
+     *   "ajustesNegativos": 1,
+     *   "totalIncrementos": 10.5,
+     *   "totalDecrementos": 5.0,
+     *   "deltaNeto": 5.5
+     * }
+     */
+    @PostMapping("/ajuste-multiple")
+    public ResponseEntity<?> registrarAjusteMultiple(@RequestBody AjusteMultipleRequestDTO request) {
+        try {
+            AjusteMultipleResponseDTO response = movimientoService.registrarAjusteMultiple(request);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (Exception e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Error al registrar ajuste múltiple");
+            error.put("mensaje", e.getMessage());
+            error.put("detalle", "Verifique que: 1) Haya stock suficiente para ajustes negativos, " +
+                    "2) Los ajustes positivos no superen la cantidad inicial del lote, " +
+                    "3) El usuario y almacén existan en la base de datos");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
+    }
+
+    /**
+     * Consulta el historial de movimientos con múltiples filtros opcionales
+     *
+     * Endpoint: GET /Rest_AlmacenLaboratorio/api/movimientos/historial
+     *
+     * Parámetros opcionales:
+     * - idReactivo: Filtrar por reactivo específico
+     * - idAlmacen: Filtrar por almacén (origen o destino)
+     * - fechaInicio: Fecha inicio del rango (formato ISO 8601, por defecto: hace 3 meses)
+     * - fechaFin: Fecha fin del rango (formato ISO 8601, por defecto: hoy)
+     * - idTipoAccion: Filtrar por tipo de acción (1=Ingreso, 2=Consumo, 3=Traslado, 4=Ajuste)
+     *
+     * Ejemplo de uso:
+     * GET /api/movimientos/historial
+     * GET /api/movimientos/historial?idReactivo=5
+     * GET /api/movimientos/historial?idAlmacen=1&idTipoAccion=1
+     * GET /api/movimientos/historial?fechaInicio=2025-01-01T00:00:00Z&fechaFin=2025-12-31T23:59:59Z
+     *
+     * Response:
+     * {
+     *   "detalleMovimientos": [
+     *     {
+     *       "idMovimiento": 1,
+     *       "fecha": "2025-11-18T10:30:00Z",
+     *       "tipoAccion": "Ingreso",
+     *       "usuario": "Juan Pérez",
+     *       "referencia": "COMPRA-2025-001",
+     *       "comentario": "Compra mensual",
+     *       "nombreReactivo": "Ácido Sulfúrico",
+     *       "marca": "Merck",
+     *       "numeroLote": 5,
+     *       "almacenOrigen": null,
+     *       "almacenDestino": "Almacén Principal",
+     *       "cantidad": 100.0,
+     *       "precioVenta": null,
+     *       "valorTotal": 4500.00
+     *     }
+     *   ],
+     *   "resumenPorTipo": [
+     *     {
+     *       "tipoAccion": "Ingreso",
+     *       "totalMovimientos": 5,
+     *       "totalUnidades": 500.0,
+     *       "valorTotal": 22500.00
+     *     },
+     *     {
+     *       "tipoAccion": "Consumo",
+     *       "totalMovimientos": 3,
+     *       "totalUnidades": 150.0,
+     *       "valorTotal": 6750.00
+     *     }
+     *   ]
+     * }
+     */
+    @GetMapping("/historial")
+    public ResponseEntity<?> consultarHistorialMovimientos(
+            @RequestParam(required = false) Integer idReactivo,
+            @RequestParam(required = false) Integer idAlmacen,
+            @RequestParam(required = false) String fechaInicio,
+            @RequestParam(required = false) String fechaFin,
+            @RequestParam(required = false) Integer idTipoAccion) {
+        try {
+            Instant inicio = null;
+            Instant fin = null;
+
+            // Parsear fechas si se proporcionan
+            if (fechaInicio != null && !fechaInicio.trim().isEmpty()) {
+                try {
+                    inicio = Instant.parse(fechaInicio);
+                } catch (Exception e) {
+                    Map<String, String> error = new HashMap<>();
+                    error.put("error", "Formato de fecha inválido");
+                    error.put("mensaje", "fechaInicio debe estar en formato ISO 8601 (ejemplo: 2025-11-18T00:00:00Z)");
+                    return ResponseEntity.badRequest().body(error);
+                }
+            }
+
+            if (fechaFin != null && !fechaFin.trim().isEmpty()) {
+                try {
+                    fin = Instant.parse(fechaFin);
+                } catch (Exception e) {
+                    Map<String, String> error = new HashMap<>();
+                    error.put("error", "Formato de fecha inválido");
+                    error.put("mensaje", "fechaFin debe estar en formato ISO 8601 (ejemplo: 2025-11-18T23:59:59Z)");
+                    return ResponseEntity.badRequest().body(error);
+                }
+            }
+
+            HistorialMovimientosResponseDTO response = movimientoService.consultarHistorialMovimientos(
+                    idReactivo, idAlmacen, inicio, fin, idTipoAccion);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Error al consultar historial de movimientos");
+            error.put("mensaje", e.getMessage());
+            error.put("detalle", "Verifique los parámetros proporcionados");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
+    }
 }
 

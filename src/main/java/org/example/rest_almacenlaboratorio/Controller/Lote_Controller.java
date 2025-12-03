@@ -51,6 +51,17 @@ public class Lote_Controller {
         return ResponseEntity.ok(loteService.obtenerPorCompra(idCompra));
     }
 
+    // Obtener lotes por almacén (ordenados por fecha de vencimiento)
+    @GetMapping("/almacen/{idAlmacen}")
+    public ResponseEntity<List<Lote_Entity>> obtenerPorAlmacen(@PathVariable Integer idAlmacen) {
+        try {
+            List<Lote_Entity> lotes = loteService.obtenerPorAlmacen(idAlmacen);
+            return ResponseEntity.ok(lotes);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     // Obtener lotes próximos a vencer (antes de una fecha específica)
     @GetMapping("/proximos-vencer")
     public ResponseEntity<List<Lote_Entity>> obtenerLotesProximosAVencer(@RequestParam String fecha) {

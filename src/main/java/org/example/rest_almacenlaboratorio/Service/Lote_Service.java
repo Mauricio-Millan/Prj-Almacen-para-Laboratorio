@@ -1,7 +1,6 @@
 package org.example.rest_almacenlaboratorio.Service;
 
 import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.StringUtils;
 import org.example.rest_almacenlaboratorio.Mapper.Lote_Entity;
 import org.example.rest_almacenlaboratorio.Repository.Lote_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,12 @@ public class Lote_Service {
     private Lote_Repository loteRepository;
 
     // ✅ Métodos originales sin modificar
+    /**
+     * Obtiene todos los lotes ordenados por fecha de vencimiento (ascendente)
+     * Los lotes próximos a vencer aparecen primero
+     */
     public List<Lote_Entity> obtenerTodos() {
-        return loteRepository.findAll();
+        return loteRepository.findAllByOrderByFechaExpiracionAsc();
     }
 
     public Optional<Lote_Entity> obtenerPorId(Integer id) {
@@ -37,6 +40,17 @@ public class Lote_Service {
 
     public List<Lote_Entity> obtenerPorCompra(Integer idCompra) {
         return loteRepository.findByIdCompra_Id(idCompra);
+    }
+
+    /**
+     * Obtiene los lotes que están en un almacén específico
+     * Los resultados vienen ordenados por fecha de vencimiento (ascendente)
+     * @param idAlmacen ID del almacén
+     * @return Lista de lotes en el almacén ordenados por fecha de vencimiento
+     */
+    public List<Lote_Entity> obtenerPorAlmacen(Integer idAlmacen) {
+        Validate.notNull(idAlmacen, "El ID del almacén no puede ser nulo");
+        return loteRepository.findLotesByAlmacenIdOrderByFechaExpiracion(idAlmacen);
     }
 
     public List<Lote_Entity> obtenerLotesProximosAVencer(Date fecha) {
