@@ -238,6 +238,7 @@ export interface Alerta {
   tipo: 'warning' | 'danger' | 'info';
   titulo: string;
   mensaje: string;
+  conteo?: number;
 }
 
 // Interfaz para el item de inventario que retorna el backend

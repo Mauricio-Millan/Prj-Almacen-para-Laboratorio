@@ -40,3 +40,31 @@ export const loginGuard: CanActivateFn = (route, state) => {
   router.navigate(['/inicio']);
   return false;
 };
+
+/**
+ * Guard para validar accesos según el rol del usuario
+ */
+export const roleGuard: CanActivateFn = (route, state) => {
+  if (!validarAcceso(state.url)) {
+    return false;
+  }
+
+  const router = inject(Router);
+  const authService = inject(AuthService);
+  const rolActual = (authService.obtenerRolActual() ?? '').toUpperCase();
+
+  const normalizar = (valor: string) => valor.toUpperCase();
+  const rolesPermitidos = (route.data?.['rolesPermitidos'] as string[] | undefined)?.map(normalizar);
+  const rolesDenegados = (route.data?.['rolesDenegados'] as string[] | undefined)?.map(normalizar);
+
+  const permitidoPorLista = !rolesPermitidos || rolesPermitidos.includes(rolActual);
+  const noDenegado = !rolesDenegados || !rolesDenegados.includes(rolActual);
+
+  if (permitidoPorLista && noDenegado) {
+    return true;
+  }
+
+  console.warn('Rol sin permisos para la ruta solicitada');
+  router.navigate(['/inicio']);
+  return false;
+};

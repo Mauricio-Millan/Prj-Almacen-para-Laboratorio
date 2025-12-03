@@ -78,6 +78,13 @@ export class AuthService {
   }
 
   /**
+   * Obtiene el nombre del rol actual (o null si no existe)
+   */
+  obtenerRolActual(): string | null {
+    return this._usuario()?.idRol?.nombre ?? null;
+  }
+
+  /**
    * Indica si existe una sesión activa en memoria o en localStorage
    */
   tieneSesionActiva(): boolean {

@@ -50,84 +50,88 @@
           }
         </div>
 
-        <!-- Movimientos y Alertas -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          
-          <!-- Movimientos Recientes -->
-          <div class="lg:col-span-2 bg-white rounded-xl shadow-md overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-200">
-              <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                <span>📊</span>
-                Estado Almacen
-              </h2>
-            </div>
-            
-            <div class="overflow-x-auto">
-              <table class="w-full">
-                <thead class="bg-gray-50">
-                  <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reactivo</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                  @for (mov of movimientosRecientes(); track mov.id) {
-                    <tr class="hover:bg-gray-50 transition-colors">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ mov.fecha }}</td>
-                      <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {{ getTipoClass(mov.colorTipo) }}">
-                          {{ mov.tipo }}
-                        </span>
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ mov.reactivo }}</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold" 
-                          [class.text-green-600]="mov.colorTipo === 'green'"
-                          [class.text-red-600]="mov.colorTipo === 'red'"
-                          [class.text-blue-600]="mov.colorTipo === 'blue'">
-                        {{ mov.cantidad }}
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ mov.usuario }}</td>
-                    </tr>
-                  }
-                  @empty {
-                    <tr>
-                      <td colspan="5" class="px-6 py-8 text-center text-gray-500">
-                        No hay movimientos registrados
-                      </td>
-                    </tr>
-                  }
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Alertas -->
+        <!-- Alertas -->
+        <div class="grid grid-cols-1 gap-6">
           <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-200">
-              <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                <span>🔔</span>
-                Alertas
-              </h2>
+            <div class="px-6 py-4 border-b border-gray-200 flex items-center gap-2">
+              <span>🔔</span>
+              <h2 class="text-xl font-bold text-gray-800">Alertas</h2>
             </div>
-            
+
             <div class="p-6 space-y-4">
-              @for (alerta of alertas(); track $index) {
-                <div class="border rounded-lg p-4 {{ getAlertaClass(alerta.tipo) }}">
-                  <p class="font-semibold text-sm mb-1">{{ alerta.titulo }}</p>
-                  <p class="text-sm">{{ alerta.mensaje }}</p>
-                </div>
-              }
-              @empty {
-                <div class="text-center py-8 text-gray-500">
-                  <p>No hay alertas pendientes</p>
+              @for (alerta of alertas(); track alerta.titulo) {
+                <div class="border rounded-xl p-4 flex items-center justify-between {{ getAlertaClass(alerta.tipo) }}">
+                  <div>
+                    <p class="font-semibold text-sm mb-1">{{ alerta.titulo }}</p>
+                    <p class="text-sm text-gray-700">{{ alerta.mensaje }}</p>
+                  </div>
+                  <span class="text-3xl font-bold text-gray-800">{{ alerta.conteo ?? 0 }}</span>
                 </div>
               }
             </div>
           </div>
+        </div>
 
+        <!-- Lotes críticos -->
+        <div class="mt-6 bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="px-6 py-4 border-b border-gray-200 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                <span>🧪</span>
+                Lotes en seguimiento
+              </h2>
+              <p class="text-sm text-gray-500">Almacenes 1, 2 y 3 · Vencimiento &lt;= 30 días o stock menor al 25%</p>
+            </div>
+            <span class="text-sm font-semibold text-gray-600">{{ lotesCriticos().length }} lotes críticos</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Almacén</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reactivo y lote</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock restante</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Expiración</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Riesgo</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                @for (lote of lotesCriticos(); track lote.idInventario) {
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{{ lote.almacen }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900">
+                      <p class="font-semibold">{{ lote.nombreReactivo }}</p>
+                      <p class="text-xs text-gray-500">Lote #{{ lote.numeroLote }} · Vence {{ formatearFecha(lote.fechaExpiracion) }}</p>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                      <p class="font-semibold">{{ lote.stockActual }} / {{ lote.cantidadInicialLote }} uds</p>
+                      <p class="text-xs text-gray-500">{{ formatearPorcentajeStock(lote.porcentajeStock) }} disponible</p>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                      <span class="px-3 py-1 rounded-full text-xs font-semibold"
+                            [class]="getExpiracionBadgeClass(lote.diasParaExpiracion)">
+                        {{ formatearDiasRestantes(lote.diasParaExpiracion) }}
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                      <span class="px-3 py-1 rounded-full text-xs font-semibold"
+                            [class]="getMotivoClass(lote.motivo)">
+                        {{ getMotivoLabel(lote.motivo) }}
+                      </span>
+                    </td>
+                  </tr>
+                }
+                @empty {
+                  <tr>
+                    <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                      Todos los lotes de los almacenes monitoreados se encuentran en niveles seguros.
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
       }
 

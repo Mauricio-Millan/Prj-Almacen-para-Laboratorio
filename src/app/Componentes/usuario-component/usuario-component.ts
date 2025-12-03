@@ -65,6 +65,10 @@ export class UsuarioComponent implements OnInit {
 
   // Usuario actual
   readonly usuarioActual = this.authService.usuario;
+  readonly rolActual = computed(() => (this.usuarioActual()?.idRol?.nombre ?? '').toUpperCase());
+  readonly esGerente = computed(() => this.rolActual() === 'GERENTE');
+  readonly esUsuarioBasico = computed(() => this.rolActual() === 'USUARIO');
+  readonly puedeEditarUsuarios = computed(() => !this.esGerente() && !this.esUsuarioBasico());
 
   // Formulario de usuario
   usuarioForm: FormGroup = this.fb.group({
@@ -84,31 +88,55 @@ export class UsuarioComponent implements OnInit {
     this.cargando.set(true);
     this.error.set(null);
 
-    // Cargar usuarios y roles en paralelo
+    if (this.puedeEditarUsuarios()) {
+      this.cargarRoles();
+    } else {
+      this.roles.set([]);
+    }
+
+    if (this.esUsuarioBasico()) {
+      const usuario = this.usuarioActual();
+      if (!usuario) {
+        this.actualizarListas([]);
+        this.cargando.set(false);
+        return;
+      }
+
+      this.restService.obtenerUsuarioPorId(usuario.id).subscribe({
+        next: (detalle) => {
+          this.actualizarListas(detalle ? [detalle] : []);
+          this.cargando.set(false);
+        },
+        error: (err) => {
+          console.error('Error al cargar el usuario actual:', err);
+          this.error.set('No se pudo cargar tu información de usuario');
+          this.actualizarListas([]);
+          this.cargando.set(false);
+        }
+      });
+      return;
+    }
+
     this.restService.obtenerUsuarios().subscribe({
       next: (usuarios) => {
-        this.usuarios.set(usuarios);
-        this.usuariosFiltrados.set(usuarios);
+        this.actualizarListas(usuarios);
         this.cargando.set(false);
       },
       error: (err) => {
         console.error('Error al cargar usuarios:', err);
         this.error.set('Error al cargar la lista de usuarios');
+        this.actualizarListas([]);
         this.cargando.set(false);
-      }
-    });
-
-    this.restService.obtenerRoles().subscribe({
-      next: (roles) => {
-        this.roles.set(roles);
-      },
-      error: (err) => {
-        console.error('Error al cargar roles:', err);
       }
     });
   }
 
   buscarUsuarios(): void {
+    if (this.esUsuarioBasico()) {
+      this.usuariosFiltrados.set(this.usuarios());
+      return;
+    }
+
     const termino = this.busqueda().toLowerCase().trim();
     
     if (!termino) {
@@ -125,6 +153,10 @@ export class UsuarioComponent implements OnInit {
   }
 
   abrirModalNuevo(): void {
+    if (!this.verificarPermisosEdicion()) {
+      return;
+    }
+
     this.modoEdicion.set(false);
     this.usuarioSeleccionado.set(null);
     this.usuarioForm.reset();
@@ -136,6 +168,10 @@ export class UsuarioComponent implements OnInit {
   }
 
   abrirModalEditar(usuario: Usuario): void {
+    if (!this.verificarPermisosEdicion()) {
+      return;
+    }
+
     this.modoEdicion.set(true);
     this.usuarioSeleccionado.set(usuario);
     
@@ -165,6 +201,10 @@ export class UsuarioComponent implements OnInit {
   }
 
   guardarUsuario(): void {
+    if (!this.verificarPermisosEdicion()) {
+      return;
+    }
+
     console.log('=== Iniciando guardarUsuario ===');
     console.log('Formulario válido:', this.usuarioForm.valid);
     console.log('Valores del formulario:', this.usuarioForm.value);
@@ -259,6 +299,10 @@ export class UsuarioComponent implements OnInit {
   }
 
   eliminarUsuario(usuario: Usuario): void {
+    if (!this.verificarPermisosEdicion()) {
+      return;
+    }
+
     // Verificar que no se elimine a sí mismo
     if (this.usuarioActual()?.id === usuario.id) {
       this.error.set('No puedes eliminar tu propio usuario');
@@ -286,6 +330,40 @@ export class UsuarioComponent implements OnInit {
         setTimeout(() => this.error.set(null), 3000);
       }
     });
+  }
+
+  private cargarRoles(): void {
+    this.restService.obtenerRoles().subscribe({
+      next: (roles) => {
+        this.roles.set(roles);
+      },
+      error: (err) => {
+        console.error('Error al cargar roles:', err);
+      }
+    });
+  }
+
+  private actualizarListas(usuarios: Usuario[]): void {
+    if (this.esUsuarioBasico()) {
+      const usuario = this.usuarioActual();
+      const propios = usuario ? usuarios.filter(u => u.id === usuario.id) : [];
+      this.usuarios.set(propios);
+      this.usuariosFiltrados.set(propios);
+      return;
+    }
+
+    this.usuarios.set(usuarios);
+    this.usuariosFiltrados.set(usuarios);
+  }
+
+  private verificarPermisosEdicion(): boolean {
+    if (this.puedeEditarUsuarios()) {
+      return true;
+    }
+
+    this.error.set('No tienes permisos para modificar usuarios');
+    setTimeout(() => this.error.set(null), 3000);
+    return false;
   }
 
   private marcarCamposComoTocados(): void {
