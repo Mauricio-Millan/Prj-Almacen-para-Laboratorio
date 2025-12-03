@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Rest } from '../../Servicios/rest';
 import { AuthService } from '../../Servicios/auth.service';
-import { Usuario, Role } from '../../Modelos/interfaces';
+import { Usuario, Role, LineaTiempoUsuario } from '../../Modelos/interfaces';
 
 @Component({
   selector: 'app-usuario-component',
@@ -29,6 +29,39 @@ export class UsuarioComponent implements OnInit {
   readonly modoEdicion = signal(false);
   readonly usuarioSeleccionado = signal<Usuario | null>(null);
   readonly busqueda = signal('');
+
+  // Signals para el historial
+  readonly mostrarModalHistorial = signal(false);
+  readonly usuarioHistorial = signal<Usuario | null>(null);
+  readonly lineaTiempo = signal<LineaTiempoUsuario | null>(null);
+  readonly cargandoHistorial = signal(false);
+  readonly errorHistorial = signal<string | null>(null);
+  readonly fechaDesde = signal<string>('');
+  readonly fechaHasta = signal<string>('');
+  readonly tipoAccionFiltro = signal<string>('Todos');
+
+  // Computed para actividades filtradas
+  readonly actividadesFiltradas = computed(() => {
+    const timeline = this.lineaTiempo();
+    const filtroTipo = this.tipoAccionFiltro();
+    
+    if (!timeline || !timeline.actividades) return [];
+    
+    if (filtroTipo === 'Todos') {
+      return timeline.actividades;
+    }
+    
+    return timeline.actividades.filter(a => a.tipoAccion === filtroTipo);
+  });
+
+  // Computed para obtener tipos únicos de acciones
+  readonly tiposAccionDisponibles = computed(() => {
+    const timeline = this.lineaTiempo();
+    if (!timeline || !timeline.actividades) return ['Todos'];
+    
+    const tipos = new Set(timeline.actividades.map(a => a.tipoAccion));
+    return ['Todos', ...Array.from(tipos).sort()];
+  });
 
   // Usuario actual
   readonly usuarioActual = this.authService.usuario;
@@ -286,6 +319,96 @@ export class UsuarioComponent implements OnInit {
       return 'bg-blue-100 text-blue-800';
     } else {
       return 'bg-gray-100 text-gray-800';
+    }
+  }
+
+  // Métodos para el historial
+  verHistorial(usuario: Usuario): void {
+    this.usuarioHistorial.set(usuario);
+    this.mostrarModalHistorial.set(true);
+    
+    // Calcular fechas por defecto (últimos 30 días)
+    const hoy = new Date();
+    const hace30Dias = new Date();
+    hace30Dias.setDate(hoy.getDate() - 30);
+    
+    this.fechaHasta.set(this.formatearFechaISO(hoy));
+    this.fechaDesde.set(this.formatearFechaISO(hace30Dias));
+    
+    this.cargarHistorial();
+  }
+
+  cargarHistorial(): void {
+    const usuario = this.usuarioHistorial();
+    if (!usuario) return;
+
+    const desde = this.fechaDesde();
+    const hasta = this.fechaHasta();
+
+    // Validar que las fechas estén completas
+    if (!desde || !hasta) {
+      this.errorHistorial.set('Por favor, selecciona ambas fechas');
+      return;
+    }
+
+    this.cargandoHistorial.set(true);
+    this.errorHistorial.set(null);
+    this.tipoAccionFiltro.set('Todos'); // Reset filtro de tipo
+
+    console.log('Cargando historial con fechas:', { desde, hasta });
+
+    this.restService.obtenerLineaTiempoUsuario(
+      usuario.id,
+      desde,
+      hasta
+    ).subscribe({
+      next: (data) => {
+        console.log('Datos recibidos:', data);
+        this.lineaTiempo.set(data);
+        this.cargandoHistorial.set(false);
+      },
+      error: (err) => {
+        console.error('Error al cargar historial:', err);
+        this.errorHistorial.set('Error al cargar el historial del usuario');
+        this.cargandoHistorial.set(false);
+      }
+    });
+  }
+
+  cerrarModalHistorial(): void {
+    this.mostrarModalHistorial.set(false);
+    this.usuarioHistorial.set(null);
+    this.lineaTiempo.set(null);
+    this.errorHistorial.set(null);
+    this.tipoAccionFiltro.set('Todos');
+  }
+
+  formatearFechaISO(fecha: Date): string {
+    return fecha.toISOString().split('T')[0];
+  }
+
+  formatearFechaHora(fecha: string): string {
+    const date = new Date(fecha);
+    const dia = String(date.getDate()).padStart(2, '0');
+    const mes = String(date.getMonth() + 1).padStart(2, '0');
+    const anio = date.getFullYear();
+    const hora = String(date.getHours()).padStart(2, '0');
+    const minuto = String(date.getMinutes()).padStart(2, '0');
+    return `${dia}/${mes}/${anio} ${hora}:${minuto}`;
+  }
+
+  getTipoActividadClass(tipo: string): string {
+    const tipoLower = tipo.toLowerCase();
+    if (tipoLower.includes('creación') || tipoLower.includes('entrada')) {
+      return 'bg-green-100 text-green-800';
+    } else if (tipoLower.includes('actualización') || tipoLower.includes('modificación')) {
+      return 'bg-blue-100 text-blue-800';
+    } else if (tipoLower.includes('eliminación') || tipoLower.includes('salida')) {
+      return 'bg-red-100 text-red-800';
+    } else if (tipoLower.includes('consulta')) {
+      return 'bg-gray-100 text-gray-800';
+    } else {
+      return 'bg-yellow-100 text-yellow-800';
     }
   }
 }

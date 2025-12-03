@@ -1,6 +1,6 @@
 import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Rest } from '../../Servicios/rest';
 import { AuthService } from '../../Servicios/auth.service';
@@ -16,6 +16,7 @@ export class LoginComponent {
   private readonly restService = inject(Rest);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(FormBuilder);
 
   // Signals para el estado del componente
@@ -54,8 +55,8 @@ export class LoginComponent {
           
           this.cargando.set(false);
 
-          // Redireccionar al inicio
-          this.router.navigate(['/inicio']);
+          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/inicio';
+          this.router.navigateByUrl(returnUrl);
         } else {
           // Si no se recibió usuario, mostrar error
           this.cargando.set(false);

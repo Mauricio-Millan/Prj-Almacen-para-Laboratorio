@@ -5,139 +5,67 @@
     <p class="text-gray-600">Visualiza y descarga reportes sobre el estado y movimientos de los reactivos.</p>
   </div>
 
-  <!-- Filtros de Reportes -->
-  <div class="bg-white rounded-lg shadow p-4 mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-    <div class="flex flex-col md:flex-row gap-4">
-      <select class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <option value="">Tipo de reporte</option>
-        <option value="inventario">Inventario actual</option>
-        <option value="movimientos">Movimientos</option>
-        <option value="caducidad">Próximos a vencer</option>
-        <option value="stock-bajo">Stock bajo</option>
-        <option value="peligrosos">Reactivos peligrosos</option>
-      </select>
-      <input type="date" class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      <input type="date" class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-    </div>
-    <button class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-5 py-2 rounded-lg flex items-center">
-      <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M8 17l4 4 4-4m-4-5v9"></path>
-      </svg>
-      Generar Reporte
-    </button>
-  </div>
-
-  <!-- Cards de Resumen -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    <div class="bg-white rounded-lg shadow p-5 flex items-center">
-      <div class="rounded-full bg-blue-100 p-3 mr-4">
-        <svg class="h-6 w-6 text-blue-700" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <div>
-        <h3 class="text-gray-500 font-medium">Reactivos Totales</h3>
-        <p class="text-2xl font-bold text-blue-700">248</p>
-      </div>
-    </div>
-    <div class="bg-white rounded-lg shadow p-5 flex items-center">
-      <div class="rounded-full bg-yellow-100 p-3 mr-4">
-        <svg class="h-6 w-6 text-yellow-700" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <div>
-        <h3 class="text-gray-500 font-medium">Stock Bajo</h3>
-        <p class="text-2xl font-bold text-yellow-700">15</p>
-      </div>
-    </div>
-    <div class="bg-white rounded-lg shadow p-5 flex items-center">
-      <div class="rounded-full bg-red-100 p-3 mr-4">
-        <svg class="h-6 w-6 text-red-700" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <div>
-        <h3 class="text-gray-500 font-medium">Próximos a Vencer</h3>
-        <p class="text-2xl font-bold text-red-700">8</p>
-      </div>
-    </div>
-    <div class="bg-white rounded-lg shadow p-5 flex items-center">
-      <div class="rounded-full bg-purple-100 p-3 mr-4">
-        <svg class="h-6 w-6 text-purple-700" viewBox="0 0 20 20" fill="currentColor">
-          <circle cx="10" cy="10" r="8" />
-          <path d="M10 6v4l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div>
-        <h3 class="text-gray-500 font-medium">Peligrosos</h3>
-        <p class="text-2xl font-bold text-purple-700">45</p>
-      </div>
+  <!-- Alertas -->
+  <div *ngIf="alerta() as alertaMsg" class="mb-6">
+    <div class="border rounded-lg px-4 py-3" [ngClass]="alertaMsg.tipo === 'error' ? 'bg-red-100 border-red-200 text-red-700' : 'bg-green-100 border-green-200 text-green-800'">
+      {{ alertaMsg.mensaje }}
     </div>
   </div>
 
-  <!-- Tabla de Reportes -->
-  <div class="bg-white rounded-lg shadow overflow-x-auto">
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-blue-700">
-        <tr>
-          <th class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Reporte</th>
-          <th class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Fecha</th>
-          <th class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Generado por</th>
-          <th class="px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">Tipo</th>
-          <th class="px-6 py-3 text-right text-xs font-bold text-white uppercase tracking-wider">Acciones</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        <tr class="hover:bg-blue-50">
-          <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Inventario actual</td>
-          <td class="px-6 py-4 whitespace-nowrap text-gray-700">10/09/2025</td>
-          <td class="px-6 py-4 whitespace-nowrap text-gray-700">Juan Díaz</td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <span class="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">Inventario</span>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap text-right">
-            <button class="bg-blue-700 hover:bg-blue-800 text-white px-3 py-1 rounded-lg text-sm font-medium mr-2">Descargar</button>
-            <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm font-medium">Ver</button>
-          </td>
-        </tr>
-        <tr class="hover:bg-yellow-50">
-          <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Stock bajo</td>
-          <td class="px-6 py-4 whitespace-nowrap text-gray-700">09/09/2025</td>
-          <td class="px-6 py-4 whitespace-nowrap text-gray-700">Ana López</td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <span class="px-2 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-semibold">Stock</span>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap text-right">
-            <button class="bg-blue-700 hover:bg-blue-800 text-white px-3 py-1 rounded-lg text-sm font-medium mr-2">Descargar</button>
-            <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm font-medium">Ver</button>
-          </td>
-        </tr>
-        <tr class="hover:bg-red-50">
-          <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Próximos a vencer</td>
-          <td class="px-6 py-4 whitespace-nowrap text-gray-700">08/09/2025</td>
-          <td class="px-6 py-4 whitespace-nowrap text-gray-700">Carlos Ruiz</td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <span class="px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs font-semibold">Caducidad</span>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap text-right">
-            <button class="bg-blue-700 hover:bg-blue-800 text-white px-3 py-1 rounded-lg text-sm font-medium mr-2">Descargar</button>
-            <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm font-medium">Ver</button>
-          </td>
-        </tr>
-        <tr class="hover:bg-purple-50">
-          <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Reactivos peligrosos</td>
-          <td class="px-6 py-4 whitespace-nowrap text-gray-700">07/09/2025</td>
-          <td class="px-6 py-4 whitespace-nowrap text-gray-700">Laura Méndez</td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <span class="px-2 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">Peligrosos</span>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap text-right">
-            <button class="bg-blue-700 hover:bg-blue-800 text-white px-3 py-1 rounded-lg text-sm font-medium mr-2">Descargar</button>
-            <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-lg text-sm font-medium">Ver</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Acciones rápidas de reportes -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div class="bg-white rounded-lg shadow p-6 border border-blue-100">
+      <div class="flex items-start justify-between mb-4">
+        <div>
+          <h2 class="text-xl font-semibold text-blue-700">Reporte de acciones</h2>
+          <p class="text-gray-600 text-sm">Descarga un PDF con el historial detallado del endpoint <code class="bg-gray-100 px-1 rounded text-xs">/movimientos/historial</code>.</p>
+        </div>
+        <span class="rounded-full bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1">API</span>
+      </div>
+      <button (click)="generarReporteAcciones()" [disabled]="reporteEnProceso()==='acciones'" class="w-full bg-blue-700 hover:bg-blue-800 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold px-4 py-2 rounded-lg flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v12m0 0l-4-4m4 4l4-4M6 20h12" />
+        </svg>
+        <span>{{ reporteEnProceso()==='acciones' ? 'Generando...' : 'Generar PDF de acciones' }}</span>
+      </button>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-6 border border-emerald-100">
+      <div class="flex items-start justify-between mb-4">
+        <div>
+          <h2 class="text-xl font-semibold text-emerald-700">Reporte de inventario</h2>
+          <p class="text-gray-600 text-sm">Genera el PDF con la respuesta de <code class="bg-gray-100 px-1 rounded text-xs">/inventario/almacen/{{ almacenSeleccionado() ?? '...' }}/detallado</code>.</p>
+        </div>
+        <span class="rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1">API</span>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Almacén a consultar</label>
+        <ng-container *ngIf="almacenes().length; else sinAlmacenes">
+          <select
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            [value]="almacenSeleccionado() ?? ''"
+            (change)="onAlmacenChange($event)"
+            [disabled]="cargandoAlmacenes() || reporteEnProceso()==='inventario'"
+          >
+            <option value="" disabled>Selecciona un almacén</option>
+            <option *ngFor="let almacen of almacenes()" [value]="almacen.id">
+              {{ almacen.nombre }}
+            </option>
+          </select>
+        </ng-container>
+        <ng-template #sinAlmacenes>
+          <div class="p-3 bg-amber-50 border border-amber-200 text-amber-800 rounded-lg text-sm">
+            No hay almacenes disponibles o no se pudieron cargar.
+          </div>
+        </ng-template>
+      </div>
+      <button (click)="generarReporteInventario()" [disabled]="reporteEnProceso()==='inventario' || !almacenSeleccionado()" class="w-full bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold px-4 py-2 rounded-lg flex items-center justify-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v12m0 0l-4-4m4 4l4-4M6 20h12" />
+        </svg>
+        <span>{{ reporteEnProceso()==='inventario' ? 'Generando...' : 'Generar PDF del inventario' }}</span>
+      </button>
+    </div>
   </div>
+
 </div>

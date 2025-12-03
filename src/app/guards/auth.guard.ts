@@ -1,41 +1,41 @@
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { CanActivateFn } from '@angular/router';
+import { Router, CanActivateFn, CanActivateChildFn } from '@angular/router';
+import { AuthService } from '../Servicios/auth.service';
 
 /**
  * Guard de autenticación para proteger rutas
  * Verifica si el usuario tiene un token de autenticación válido
  */
-export const authGuard: CanActivateFn = (route, state) => {
+const validarAcceso = (stateUrl: string): boolean => {
   const router = inject(Router);
-  const token = localStorage.getItem('auth_token');
+  const authService = inject(AuthService);
 
-  if (token) {
-    // Usuario autenticado, permitir acceso
+  if (authService.tieneSesionActiva()) {
     return true;
   }
 
-  // Usuario no autenticado, redirigir al login
   console.warn('Acceso denegado. Redirigiendo al login...');
-  router.navigate(['/'], { 
-    queryParams: { returnUrl: state.url } 
+  router.navigate(['/'], {
+    queryParams: { returnUrl: stateUrl }
   });
   return false;
 };
+
+export const authGuard: CanActivateFn = (route, state) => validarAcceso(state.url);
+
+export const authChildGuard: CanActivateChildFn = (route, state) => validarAcceso(state.url);
 
 /**
  * Guard para evitar que usuarios autenticados accedan al login
  */
 export const loginGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const token = localStorage.getItem('auth_token');
+  const authService = inject(AuthService);
 
-  if (!token) {
-    // Usuario no autenticado, permitir acceso al login
+  if (!authService.tieneSesionActiva()) {
     return true;
   }
 
-  // Usuario ya autenticado, redirigir al inicio
   console.log('Usuario ya autenticado. Redirigiendo al inicio...');
   router.navigate(['/inicio']);
   return false;

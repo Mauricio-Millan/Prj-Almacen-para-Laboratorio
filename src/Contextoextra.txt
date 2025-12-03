@@ -1,0 +1,177 @@
+--endpoint
+
+--respuesta de endpoint
+{
+  "detalleMovimientos": [
+    {
+      "idMovimiento": 13,
+      "fecha": "2025-11-25T17:40:25.897Z",
+      "tipoAccion": "AJUSTE",
+      "usuario": "Admin Usuario",
+      "referencia": "ajuste1",
+      "comentario": "prueba de ajuste almacen 3",
+      "nombreReactivo": "Agua Destilada",
+      "marca": "J.T.Baker",
+      "numeroLote": 14,
+      "almacenOrigen": "Almacen 3",
+      "almacenDestino": null,
+      "cantidad": -10,
+      "precioVenta": null,
+      "valorTotal": -20
+    },
+    {
+      "idMovimiento": 12,
+      "fecha": "2025-11-25T17:38:20.867Z",
+      "tipoAccion": "CONSUMO",
+      "usuario": "Admin Usuario",
+      "referencia": "consumos de almacen 3",
+      "comentario": "consumo de 10 unidades de agua",
+      "nombreReactivo": "Agua Destilada",
+      "marca": "J.T.Baker",
+      "numeroLote": 14,
+      "almacenOrigen": "Almacen 3",
+      "almacenDestino": null,
+      "cantidad": 5,
+      "precioVenta": null,
+      "valorTotal": 10
+    },
+    {
+      "idMovimiento": 11,
+      "fecha": "2025-11-25T17:36:10.197Z",
+      "tipoAccion": "INGRESO",
+      "usuario": "Admin Usuario",
+      "referencia": "abast05",
+      "comentario": "ingreso de pruebas 2",
+      "nombreReactivo": "Agua Destilada",
+      "marca": "J.T.Baker",
+      "numeroLote": 14,
+      "almacenOrigen": null,
+      "almacenDestino": "Almacen 3",
+      "cantidad": 100,
+      "precioVenta": null,
+      "valorTotal": 200
+    },
+    {
+      "idMovimiento": 10,
+      "fecha": "2025-11-25T17:34:21.263Z",
+      "tipoAccion": "INGRESO",
+      "usuario": "Admin Usuario",
+      "referencia": "abast04",
+      "comentario": "pruebas de abastecimiento 04",
+      "nombreReactivo": "Agua Destilada",
+      "marca": "J.T.Baker",
+      "numeroLote": 12,
+      "almacenOrigen": null,
+      "almacenDestino": "Almacen Secundario",
+      "cantidad": 100,
+      "precioVenta": null,
+      "valorTotal": 2000
+    },
+    {
+      "idMovimiento": 10,
+      "fecha": "2025-11-25T17:34:21.263Z",
+      "tipoAccion": "INGRESO",
+      "usuario": "Admin Usuario",
+      "referencia": "abast04",
+      "comentario": "pruebas de abastecimiento 04",
+      "nombreReactivo": "Acido Sulfurico 98%",
+      "marca": "Merck",
+      "numeroLote": 13,
+      "almacenOrigen": null,
+      "almacenDestino": "Almacen Secundario",
+      "cantidad": 10,
+      "precioVenta": null,
+      "valorTotal": 150
+    },
+    {
+      "idMovimiento": 9,
+      "fecha": "2025-11-25T17:22:15.073Z",
+      "tipoAccion": "AJUSTE",
+      "usuario": "Admin Usuario",
+      "referencia": "AJUS003",
+      "comentario": "AJUSTE PARA ALMACEN 3",
+      "nombreReactivo": "Acido Clorhidrico 37%",
+      "marca": "Sigma-Aldrich",
+      "numeroLote": 11,
+      "almacenOrigen": "Almacen 3",
+      "almacenDestino": null,
+      "cantidad": -9,
+      "precioVenta": null,
+      "valorTotal": -180
+    },
+    {
+      "idMovimiento": 8,
+      "fecha": "2025-11-25T17:19:16.187Z",
+      "tipoAccion": "CONSUMO",
+      "usuario": "Admin Usuario",
+      "referencia": "cons 003",
+      "comentario": "CONSUMO DE PRUEBAS",
+      "nombreReactivo": "Acido Clorhidrico 37%",
+      "marca": "Sigma-Aldrich",
+      "numeroLote": 11,
+      "almacenOrigen": "Almacen 3",
+      "almacenDestino": null,
+      "cantidad": 11,
+      "precioVenta": null,
+      "valorTotal": 220
+    },
+    {
+      "idMovimiento": 7,
+      "fecha": "2025-11-25T17:15:36.313Z",
+      "tipoAccion": "INGRESO",
+      "usuario": "Admin Usuario",
+      "referencia": "Ingreso 003",
+      "comentario": "abastecimiento inicial par almacen 3",
+      "nombreReactivo": "Etanol Absoluto",
+      "marca": "J.T.Baker",
+      "numeroLote": 10,
+      "almacenOrigen": null,
+      "almacenDestino": "Almacen 3",
+      "cantidad": 100,
+      "precioVenta": null,
+      "valorTotal": 1000
+    },
+    {
+      "idMovimiento": 7,
+      "fecha": "2025-11-25T17:15:36.313Z",
+      "tipoAccion": "INGRESO",
+      "usuario": "Admin Usuario",
+      "referencia": "Ingreso 003",
+      "comentario": "abastecimiento inicial par almacen 3",
+      "nombreReactivo": "Acido Clorhidrico 37%",
+      "marca": "Sigma-Aldrich",
+      "numeroLote": 11,
+      "almacenOrigen": null,
+      "almacenDestino": "Almacen 3",
+      "cantidad": 50,
+      "precioVenta": null,
+      "valorTotal": 1000
+    }
+  ],
+  "resumenPorTipo": [
+    {
+      "tipoAccion": "INGRESO",
+      "totalMovimientos": 5,
+      "totalUnidades": 1416,
+      "valorTotal": 38791
+    },
+    {
+      "tipoAccion": "CONSUMO",
+      "totalMovimientos": 4,
+      "totalUnidades": 127,
+      "valorTotal": 4846
+    },
+    {
+      "tipoAccion": "TRASLADO",
+      "totalMovimientos": 1,
+      "totalUnidades": 70,
+      "valorTotal": 3120
+    },
+    {
+      "tipoAccion": "AJUSTE",
+      "totalMovimientos": 3,
+      "totalUnidades": -37,
+      "valorTotal": -700
+    }
+  ]
+}

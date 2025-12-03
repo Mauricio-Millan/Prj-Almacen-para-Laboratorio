@@ -17,7 +17,8 @@ import {
   Movimientolinea,
   LoginRequest,
   LoginResponse,
-  DashboardStats
+  DashboardStats,
+  HistorialMovimientosResponse
 } from '../Modelos/interfaces';
 
 @Injectable({
@@ -67,6 +68,32 @@ export class Rest {
     return this.http.delete(`${this.apiUrl}/usuarios/${id}`, { responseType: 'text' });
   }
 
+  obtenerLineaTiempoUsuario(idUsuario: number, fechaDesde?: string, fechaHasta?: string): Observable<any> {
+    let params = new HttpParams();
+    
+    // Si no se proporcionan fechas, usar últimos 30 días
+    if (!fechaDesde || !fechaHasta) {
+      const hoy = new Date();
+      const hace30Dias = new Date();
+      hace30Dias.setDate(hoy.getDate() - 30);
+      
+      fechaHasta = this.formatearFecha(hoy);
+      fechaDesde = this.formatearFecha(hace30Dias);
+    }
+    
+    params = params.set('fechaDesde', fechaDesde);
+    params = params.set('fechaHasta', fechaHasta);
+    
+    return this.http.get(`${this.apiUrl}/usuarios/${idUsuario}/linea-tiempo`, { params });
+  }
+
+  private formatearFecha(fecha: Date): string {
+    const year = fecha.getFullYear();
+    const month = String(fecha.getMonth() + 1).padStart(2, '0');
+    const day = String(fecha.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   // ==================== REACTIVOS ====================
   obtenerReactivos(): Observable<Reactivo[]> {
     return this.http.get<Reactivo[]>(`${this.apiUrl}/reactivos`);
@@ -111,6 +138,10 @@ export class Rest {
 
   obtenerLotesPorReactivo(idReactivo: number): Observable<Lote[]> {
     return this.http.get<Lote[]>(`${this.restUrl}/lotes/reactivo/${idReactivo}`);
+  }
+
+  obtenerLotesPorAlmacen(idAlmacen: number): Observable<Lote[]> {
+    return this.http.get<Lote[]>(`${this.restUrl}/lotes/almacen/${idAlmacen}`);
   }
 
   obtenerLotesPorCompra(idCompra: number): Observable<Lote[]> {
@@ -179,6 +210,34 @@ export class Rest {
       .set('fechaInicio', fechaInicio)
       .set('fechaFin', fechaFin);
     return this.http.get<Movimiento[]>(`${this.restUrl}/movimientos/rango-fechas`, { params });
+  }
+
+  obtenerHistorialMovimientos(
+    idReactivo?: number,
+    idAlmacen?: number,
+    fechaInicio?: string,
+    fechaFin?: string,
+    idTipoAccion?: number
+  ): Observable<HistorialMovimientosResponse> {
+    let params = new HttpParams();
+    
+    if (idReactivo !== undefined && idReactivo !== null) {
+      params = params.set('idReactivo', idReactivo.toString());
+    }
+    if (idAlmacen !== undefined && idAlmacen !== null) {
+      params = params.set('idAlmacen', idAlmacen.toString());
+    }
+    if (fechaInicio) {
+      params = params.set('fechaInicio', fechaInicio);
+    }
+    if (fechaFin) {
+      params = params.set('fechaFin', fechaFin);
+    }
+    if (idTipoAccion !== undefined && idTipoAccion !== null) {
+      params = params.set('idTipoAccion', idTipoAccion.toString());
+    }
+    
+    return this.http.get<HistorialMovimientosResponse>(`${this.restUrl}/movimientos/historial`, { params });
   }
 
   crearMovimiento(movimiento: Movimiento): Observable<Movimiento> {
@@ -449,15 +508,19 @@ export class Rest {
 
   // ==================== OPERACIONES MÚLTIPLES ====================
   registrarTrasladoMultiple(request: any): Observable<any> {
-    return this.http.post(`${this.restUrl}/trasladomultiple`, request);
+    return this.http.post(`${this.restUrl}/movimientos/traslado-multiple`, request);
   }
 
   registrarIngresoMultiple(request: any): Observable<any> {
-    return this.http.post(`${this.restUrl}/ingresomultiple`, request);
+    return this.http.post(`${this.restUrl}/movimientos/ingreso-multiple`, request);
   }
 
   registrarConsumoMultiple(request: any): Observable<any> {
-    return this.http.post(`${this.restUrl}/consumomultiple`, request);
+    return this.http.post(`${this.restUrl}/movimientos/consumo-multiple`, request);
+  }
+
+  registrarAjusteMultiple(request: any): Observable<any> {
+    return this.http.post(`${this.restUrl}/movimientos/ajuste-multiple`, request);
   }
 
   // ==================== DASHBOARD STATS ====================

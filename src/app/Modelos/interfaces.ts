@@ -200,6 +200,19 @@ export interface ConsumoMultipleRequestDTO {
   consumos: ConsumoItemDTO[];
 }
 
+export interface AjusteItemDTO {
+  id_lote: number;
+  cantidad_delta: number;
+}
+
+export interface AjusteMultipleRequestDTO {
+  idUsuario: number;
+  idAlmacenOrigen: number;
+  referencia: string;
+  comentario: string;
+  ajustes: AjusteItemDTO[];
+}
+
 // ==========================================
 // INTERFACES PARA DASHBOARD E INVENTARIO
 // ==========================================
@@ -261,7 +274,118 @@ export interface LoteInventario {
 }
 
 // ==========================================
+// INTERFACES PARA HISTORIAL DE USUARIO
+// ==========================================
+
+export interface ActividadUsuario {
+  idMovimiento: number;
+  fechaHora: string;
+  fecha: string;
+  hora: string;
+  tipoAccion: string;
+  referencia: string;
+  comentario: string;
+  detalleOperacion: string;
+  totalItems: number;
+  totalUnidades: number;
+  almacenesOrigen: string;
+  almacenesDestino: string;
+  reactivosInvolucrados: string;
+  cantidadReactivosDiferentes: number;
+  valorTotal: number;
+  diasTranscurridos: number;
+}
+
+export interface ResumenEstadistico {
+  totalMovimientos: number;
+  totalIngresos: number;
+  totalConsumos: number;
+  totalTraslados: number;
+  totalAjustes: number;
+  totalLotesMovidos: number;
+  totalReactivosDiferentes: number;
+  totalAlmacenesUsados: number;
+  totalUnidadesMovidas: number;
+  promedioUnidadesPorMovimiento: number;
+  valorTotalMovimientos: number;
+  primeraActividad: string;
+  ultimaActividad: string;
+  diasActivo: number;
+  promedioMovimientosPorDia: number;
+}
+
+export interface DistribucionTipo {
+  idTipo: number;
+  tipoAccion: string;
+  cantidadMovimientos: number;
+  totalUnidades: number;
+  valorTotal: number;
+  porcentajeMovimientos: number;
+  porcentajeUnidades: number;
+}
+
+export interface TopReactivo {
+  idReactivo: number;
+  nombreReactivo: string;
+  marca: string;
+  vecesMovido: number;
+  totalUnidades: number;
+  promedioUnidadesPorMovimiento: number;
+  valorTotal: number;
+  primeraVez: string;
+  ultimaVez: string;
+  diasEntrePrimeraYUltima: number;
+}
+
+export interface LineaTiempoUsuario {
+  usuarioInfo: {
+    idUsuario: number;
+    nombreUsuario: string;
+    dni: string;
+    rol: string;
+    fechaNacimiento: string;
+  };
+  actividades: ActividadUsuario[];
+  resumenEstadistico: ResumenEstadistico;
+  distribucionPorTipo: DistribucionTipo[];
+  topReactivos: TopReactivo[];
+}
+
+// ==========================================
 // ALIAS PARA COMPATIBILIDAD
 // ==========================================
 
 export type LoginCredentials = LoginRequest;
+
+// ==========================================
+// HISTORIAL DE MOVIMIENTOS
+// ==========================================
+
+export interface DetalleMovimiento {
+  idMovimiento: number;
+  fecha: string;
+  tipoAccion: string;
+  usuario: string;
+  referencia: string;
+  comentario: string;
+  nombreReactivo: string;
+  marca: string;
+  numeroLote: number;
+  almacenOrigen: string | null;
+  almacenDestino: string | null;
+  cantidad: number;
+  precioVenta: number | null;
+  valorTotal: number;
+}
+
+export interface ResumenPorTipo {
+  tipoAccion: string;
+  totalMovimientos: number;
+  totalUnidades: number;
+  valorTotal: number;
+}
+
+export interface HistorialMovimientosResponse {
+  detalleMovimientos: DetalleMovimiento[];
+  resumenPorTipo: ResumenPorTipo[];
+}

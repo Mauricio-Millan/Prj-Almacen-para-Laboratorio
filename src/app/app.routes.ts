@@ -7,13 +7,19 @@ import { Reportes } from './Componentes/reportes/reportes';
 import { UsuarioComponent } from './Componentes/usuario-component/usuario-component';
 import { InventarioComponent } from './Componentes/inventario-component/inventario-component';
 import { GestionInformacion } from './Componentes/gestion-informacion/gestion-informacion';
+import { MovimientoComponent } from './Componentes/movimiento-component/movimiento-component';
+import { HistorialComponent } from './Componentes/historial-component/historial-component';
+import { authChildGuard, authGuard, loginGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'paleta-colores', component: PaletaColores },
+  { path: '', component: LoginComponent, canActivate: [loginGuard] },
+  { path: 'login', redirectTo: '', pathMatch: 'full' },
+  { path: 'paleta-colores', component: PaletaColores, canActivate: [authGuard] },
   { 
     path: 'inicio', 
     component: InicioComponent,
+    canActivate: [authGuard],
+    canActivateChild: [authChildGuard],
     children: [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
@@ -21,8 +27,11 @@ export const routes: Routes = [
       { path: 'usuarios', component: UsuarioComponent },
       { path: 'inventario', component: InventarioComponent },
       { path: 'gestion-informacion', component: GestionInformacion },
+      { path: 'movimientos', component: MovimientoComponent },
+      { path: 'historial', component: HistorialComponent },
       // Aquí puedes agregar más rutas hijas para los distintos módulos
       // { path: 'solicitudes', component: SolicitudesComponent },
     ]
-  }
+  },
+  { path: '**', redirectTo: '' }
 ];

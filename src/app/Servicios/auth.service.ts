@@ -76,4 +76,11 @@ export class AuthService {
   obtenerNombreUsuario(): string {
     return this._usuario()?.nombre || 'Usuario';
   }
+
+  /**
+   * Indica si existe una sesión activa en memoria o en localStorage
+   */
+  tieneSesionActiva(): boolean {
+    return !!this._usuario();
+  }
 }

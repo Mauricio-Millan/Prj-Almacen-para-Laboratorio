@@ -1,0 +1,200 @@
+<div class="p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">Historial de Movimientos</h1>
+    <p class="text-gray-600">Consulta el historial completo de movimientos de reactivos</p>
+  </div>
+
+  <!-- Mensaje de Error -->
+  @if (error()) {
+    <div class="mb-4 bg-red-50 border-l-4 border-red-500 p-4 rounded">
+      <div class="flex items-center">
+        <svg class="w-5 h-5 text-red-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+        </svg>
+        <p class="text-sm font-medium text-red-800">{{ error() }}</p>
+      </div>
+    </div>
+  }
+
+  <!-- Panel de Filtros -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+    <h2 class="text-lg font-semibold text-gray-800 mb-4">Filtros de Búsqueda</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
+      <!-- Filtro Reactivo -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Reactivo</label>
+        <select 
+          [(ngModel)]="filtroReactivo"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <option [value]="null">Todos</option>
+          @for (reactivo of reactivos(); track reactivo.id) {
+            <option [value]="reactivo.id">{{ reactivo.nombre }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Filtro Almacén -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Almacén</label>
+        <select 
+          [(ngModel)]="filtroAlmacen"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <option [value]="null">Todos</option>
+          @for (almacen of almacenes(); track almacen.id) {
+            <option [value]="almacen.id">{{ almacen.nombre }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Filtro Fecha Inicio -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Fecha Inicio</label>
+        <input 
+          type="date" 
+          [(ngModel)]="filtroFechaInicio"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+      </div>
+
+      <!-- Filtro Fecha Fin -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Fecha Fin</label>
+        <input 
+          type="date" 
+          [(ngModel)]="filtroFechaFin"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+      </div>
+
+      <!-- Filtro Tipo Acción -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Acción</label>
+        <select 
+          [(ngModel)]="filtroTipoAccion"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <option [value]="null">Todos</option>
+          @for (tipo of tiposAccion(); track tipo.id) {
+            <option [value]="tipo.id">{{ tipo.nombre }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="flex gap-3">
+      <button 
+        (click)="buscarHistorial()"
+        [disabled]="cargando()"
+        class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        {{ cargando() ? 'Buscando...' : 'Buscar' }}
+      </button>
+
+      <button 
+        (click)="limpiarFiltros()"
+        class="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        Limpiar Filtros
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabla de Resultados -->
+  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-semibold text-white">Resultados</h2>
+        <span class="px-3 py-1 bg-white bg-opacity-20 rounded-full text-sm font-medium text-white">
+          {{ movimientos().length }} registros
+        </span>
+      </div>
+    </div>
+
+    @if (cargando()) {
+      <div class="flex items-center justify-center py-12">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    } @else if (movimientos().length === 0) {
+      <div class="text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+        </svg>
+        <p class="mt-4 text-gray-600">No se encontraron movimientos con los filtros seleccionados</p>
+      </div>
+    } @else {
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo Acción</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reactivo</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lote</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Almacén Origen</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Almacén Destino</th>
+              <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Referencia</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            @for (movimiento of movimientos(); track movimiento.idMovimiento) {
+              <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {{ movimiento.idMovimiento }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {{ formatearFechaHora(movimiento.fecha) }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                    [ngClass]="{
+                      'bg-green-100 text-green-800': movimiento.tipoAccion === 'INGRESO',
+                      'bg-blue-100 text-blue-800': movimiento.tipoAccion === 'TRASLADO',
+                      'bg-red-100 text-red-800': movimiento.tipoAccion === 'CONSUMO',
+                      'bg-yellow-100 text-yellow-800': movimiento.tipoAccion === 'AJUSTE'
+                    }">
+                    {{ movimiento.tipoAccion }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class="text-sm font-medium text-gray-900">{{ movimiento.nombreReactivo }}</div>
+                  <div class="text-xs text-gray-500">{{ movimiento.marca }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                    #{{ movimiento.numeroLote }}
+                  </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {{ movimiento.almacenOrigen || '-' }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {{ movimiento.almacenDestino || '-' }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-semibold"
+                  [ngClass]="{
+                    'text-green-600': movimiento.cantidad > 0,
+                    'text-red-600': movimiento.cantidad < 0
+                  }">
+                  {{ movimiento.cantidad > 0 ? '+' : '' }}{{ movimiento.cantidad }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {{ movimiento.usuario }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {{ movimiento.referencia || '-' }}
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</div>
